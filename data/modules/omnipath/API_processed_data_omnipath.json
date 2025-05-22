@@ -1,0 +1,143 @@
+{
+    "omnipath": {
+        "get_about": {
+            "Parameters": [],
+            "Returns": {
+                "type": "str",
+                "description": "Version information of the OmniPath service."
+            },
+            "Docstring": "Get information about the OmniPath service version.\n\nReturns:\n--------\nstr\n    Version information of the OmniPath service.",
+            "api_type": "method",
+            "api_name": "bioservices.OmniPath.get_about",
+            "api_calling": "bioservices.OmniPath.get_about()",
+            "example": "bioservices.OmniPath.get_about()"
+        },
+        "get_info": {
+            "Parameters": [],
+            "Returns": {
+                "type": "str",
+                "description": "HTML content of the OmniPath API page."
+            },
+            "Docstring": "Return the HTML representation of the OmniPath API documentation.\n\nReturns:\n--------\nstr\n    HTML content of the OmniPath API page.",
+            "api_type": "method",
+            "api_name": "bioservices.OmniPath.get_info",
+            "api_calling": "bioservices.OmniPath.get_info()",
+            "example": "bioservices.OmniPath.get_info()"
+        },
+        "get_interactions": {
+            "Parameters": [
+                {
+                    "name": "query",
+                    "type": "str or list",
+                    "default": "",
+                    "optional": true,
+                    "description": "A valid UniProt identifier (e.g., 'P00533'), a list of identifiers, or a comma-separated string. Set to an empty string to download the entire database."
+                },
+                {
+                    "name": "frmt",
+                    "type": "str",
+                    "default": "'json'",
+                    "optional": true,
+                    "description": "Format of the output; 'json' returns a dictionary, 'tsv' returns a TSV table. Defaults to 'json'. Note, there is an issue using 'tsv' currently, so only use 'json'."
+                },
+                {
+                    "name": "fields",
+                    "type": "str or list",
+                    "default": [],
+                    "optional": true,
+                    "description": "Additional fields to include in the output (e.g., 'sources', 'references'). Defaults to an empty list."
+                }
+            ],
+            "Returns": {
+                "type": "dict or str",
+                "description": "A dictionary of interactions if format is 'json', or a TSV-formatted string if format is 'tsv'."
+            },
+            "Docstring": "Fetch interaction data for provided protein identifiers.\n\nParameters:\n-----------\nquery : str or list, optional\n    A valid UniProt identifier (e.g., 'P00533'), a list of identifiers, or a comma-separated string. Set to an empty string to download the entire database.\nfrmt : str, optional\n    Format of the output; 'json' returns a dictionary, 'tsv' returns a TSV table. Defaults to 'json'.\nfields : str or list, optional\n    Additional fields to include in the output (e.g., 'sources', 'references'). Defaults to an empty list.\n\nReturns:\n--------\ndict or str\n    A dictionary of interactions if format is 'json', or a TSV-formatted string if format is 'tsv'.\n\nExamples:\n---------\n>>> o.get_interactions('P00533')\n>>> o.get_interactions(['P00533','O15117'], fields='sources')\n>>> o.get_interactions('', frmt='tsv')",
+            "api_type": "method",
+            "api_name": "bioservices.OmniPath.get_interactions",
+            "api_calling": "bioservices.OmniPath.get_interactions(query=$, frmt=$, fields=$)",
+            "example": "bioservices.OmniPath.get_interactions(query='P00533', frmt='json', fields=['sources'])"
+        },
+        "get_network": {
+            "Parameters": [
+                {
+                    "name": "frmt",
+                    "type": "str",
+                    "default": "'json'",
+                    "optional": true,
+                    "description": "Format of the response; 'json' returns a dictionary, 'tsv' returns a TSV-formatted string. Defaults to 'json'. Note, there is an issue using 'tsv' currently, so only use 'json'."
+                }
+            ],
+            "Returns": {
+                "type": "dict or str",
+                "description": "A dictionary of network statistics if format is 'json', or a TSV-formatted string if format is 'tsv'."
+            },
+            "Docstring": "Get basic statistics about the whole network including sources.\n\nParameters:\n-----------\nfrmt : str, optional\n    Format of the response; 'json' returns a dictionary, 'tsv' returns a TSV-formatted string. Defaults to 'json'.\n\nReturns:\n--------\ndict or str\n    A dictionary of network statistics if format is 'json', or a TSV-formatted string if format is 'tsv'.\n\nExamples:\n---------\n>>> o.get_network()\n>>> o.get_network(frmt='tsv')",
+            "api_type": "method",
+            "api_name": "bioservices.OmniPath.get_network",
+            "api_calling": "bioservices.OmniPath.get_network(frmt=$)",
+            "example": "bioservices.OmniPath.get_network()"
+        },
+        "get_ptms": {
+            "Parameters": [
+                {
+                    "name": "query",
+                    "type": "str or list",
+                    "default": "",
+                    "optional": true,
+                    "description": "A valid UniProt identifier (e.g., 'P00533'), a list of identifiers, or a comma-separated string. Set to an empty string to download the entire database."
+                },
+                {
+                    "name": "ptm_type",
+                    "type": "str",
+                    "default": "None",
+                    "optional": true,
+                    "description": "Restrict the output to this type of PTM (e.g., 'phosphorylation'). Defaults to None."
+                },
+                {
+                    "name": "frmt",
+                    "type": "str",
+                    "default": "'json'",
+                    "optional": true,
+                    "description": "Format of the output; 'json' returns a dictionary, 'tsv' returns a TSV-formatted string. Defaults to 'json'. Note, there is an issue using 'tsv' currently, so only use 'json'."
+                },
+                {
+                    "name": "fields",
+                    "type": "str or list",
+                    "default": [],
+                    "optional": true,
+                    "description": "Additional fields to include in the output (e.g., 'sources', 'references'). Defaults to an empty list."
+                }
+            ],
+            "Returns": {
+                "type": "dict or str",
+                "description": "A dictionary of PTM data if format is 'json', or a TSV-formatted string if format is 'tsv'."
+            },
+            "Docstring": "List enzymes, substrates, and post-translational modifications (PTMs).\n\nParameters:\n-----------\nquery : str or list, optional\n    A valid UniProt identifier (e.g., 'P00533'), a list of identifiers, or a comma-separated string. Set to an empty string to download the entire database.\nptm_type : str, optional\n    Restrict the output to this type of PTM (e.g., 'phosphorylation'). Defaults to None.\nfrmt : str, optional\n    Format of the output; 'json' returns a dictionary, 'tsv' returns a TSV-formatted string. Defaults to 'json'.\nfields : str or list, optional\n    Additional fields to include in the output (e.g., 'sources', 'references'). Defaults to an empty list.\n\nReturns:\n--------\ndict or str\n    A dictionary of PTM data if format is 'json', or a TSV-formatted string if format is 'tsv'.\n\nExamples:\n---------\n>>> o.get_ptms(query='P00533', ptm_type='phosphorylation')\n>>> o.get_ptms(query=['P00533','O15117'], fields=['sources'])\n>>> o.get_ptms(frmt='tsv')",
+            "api_type": "method",
+            "api_name": "bioservices.OmniPath.get_ptms",
+            "api_calling": "bioservices.OmniPath.get_ptms(query=$, ptm_type=$, frmt=$, fields=$)",
+            "example": "bioservices.OmniPath.get_ptms(query='P00533', ptm_type='phosphorylation', fields=['sources'])"
+        },
+        "get_resources": {
+            "Parameters": [
+                {
+                    "name": "frmt",
+                    "type": "str",
+                    "default": "'json'",
+                    "optional": true,
+                    "description": "Format of the response; 'json' returns a dictionary, 'tsv' returns a TSV-formatted string. Defaults to 'json'. Note, there is an issue using 'tsv' currently, so only use 'json'."
+                }
+            ],
+            "Returns": {
+                "type": "dict or str",
+                "description": "A dictionary of resource statistics if format is 'json', or a TSV-formatted string if format is 'tsv'."
+            },
+            "Docstring": "Return statistics about the databases and their contents.\n\nParameters:\n-----------\nfrmt : str, optional\n    Format of the response; 'json' returns a dictionary, 'tsv' returns a TSV-formatted string. Defaults to 'json'.\n\nReturns:\n--------\ndict or str\n    A dictionary of resource statistics if format is 'json', or a TSV-formatted string if format is 'tsv'.\n\nExamples:\n---------\n>>> o.get_resources()\n>>> o.get_resources(frmt='tsv')",
+            "api_type": "method",
+            "api_name": "bioservices.OmniPath.get_resources",
+            "api_calling": "bioservices.OmniPath.get_resources(frmt=$)",
+            "example": "bioservices.OmniPath.get_resources()"
+        }
+    }
+}

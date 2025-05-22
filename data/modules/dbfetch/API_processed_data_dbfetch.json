@@ -1,0 +1,143 @@
+{
+    "dbfetch": {
+        "fetch": {
+            "Parameters": [
+                {
+                    "name": "query",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "The entry identifier in db:id format (e.g. 'UniProtKB:WAP_RAT')."
+                },
+                {
+                    "name": "db",
+                    "type": "str",
+                    "default": "ena_sequence",
+                    "optional": true,
+                    "description": "Database name to search in; defaults to 'ena_sequence'."
+                },
+                {
+                    "name": "format",
+                    "type": "str",
+                    "default": "default",
+                    "optional": true,
+                    "description": "The name of the format required; defaults to 'default' (FASTA)."
+                },
+                {
+                    "name": "style",
+                    "type": "str",
+                    "default": "raw",
+                    "optional": true,
+                    "description": "The name of the style required ('raw', 'default', 'html'); defaults to 'raw'."
+                },
+                {
+                    "name": "pageHtml",
+                    "type": "bool",
+                    "default": false,
+                    "optional": true,
+                    "description": "If True, return the content as an HTML page."
+                }
+            ],
+            "Returns": {
+                "type": "str",
+                "description": "The response content in the requested format and style."
+            },
+            "Docstring": "Fetch an entry in a defined format and style.\n\nParameters:\n-----------\nquery : str\n    The entry identifier in db:id format (e.g. 'UniProtKB:WAP_RAT').\ndb : str, optional\n    Database name to search in; defaults to 'ena_sequence'.\nformat : str, optional\n    The name of the format required; defaults to 'default' (FASTA).\nstyle : str, optional\n    The name of the style required ('raw', 'default', 'html'); defaults to 'raw'.\npageHtml : bool, optional\n    If True, return the content as an HTML page.\n\nReturns:\n--------\nstr\n    The response content in the requested format and style.\n\nExamples:\n--------\n>>> from bioservices import DBFetch\n>>> db = DBFetch()\n>>> db.fetch(query='L12344,L12345', db='ena_sequence', format='fasta')\n>>> db.fetch(query='P53503', db='uniprot', format='fasta')",
+            "api_type": "method",
+            "api_name": "bioservices.DBFetch.fetch",
+            "api_calling": "bioservices.DBFetch.fetch(query=$, db=$, format=$, style=$, pageHtml=$)",
+            "example": "bioservices.DBFetch.fetch(query=\"P53503\", db=\"uniprot\", format=\"fasta\")"
+        },
+        "get_all_database_info": {
+            "Parameters": [],
+            "Returns": {
+                "type": "dict",
+                "description": "A dictionary of data structures describing the available databases, including formats and result styles."
+            },
+            "Docstring": "Get details of all available databases, including formats and result styles.\n\nReturns:\n--------\nlist\n    A list of data structures describing the databases. See get_database_info() for a description of the data structure.\n\nExamples:\n--------\n>>> from bioservices import DBFetch\n>>> db = DBFetch()\n>>> db.get_all_database_info()",
+            "api_type": "method",
+            "api_name": "bioservices.DBFetch.get_all_database_info",
+            "api_calling": "bioservices.DBFetch.get_all_database_info()",
+            "example": "bioservices.DBFetch.get_all_database_info()"
+        },
+        "get_database_format_styles": {
+            "Parameters": [
+                {
+                    "name": "db",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "Database name to get available styles for (e.g. 'uniprotkb')."
+                },
+                {
+                    "name": "format",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "The data format to get available styles for (e.g. 'fasta')."
+                }
+            ],
+            "Returns": {
+                "type": "list[str]",
+                "description": "An array of strings containing the style names available for the specified database and format."
+            },
+            "Docstring": "Get a list of style names available for a given database and format.\n\nParameters:\n-----------\ndb : str\n    Database name to get available styles for (e.g. 'uniprotkb').\nformat : str\n    The data format to get available styles for (e.g. 'fasta').\n\nReturns:\n--------\nlist\n    An array of strings containing the style names available for the specified database and format.\n\nExamples:\n--------\n>>> from bioservices import DBFetch\n>>> db = DBFetch()\n>>> db.get_database_format_styles('uniprotkb', 'fasta')\n['default', 'raw', 'html']",
+            "api_type": "method",
+            "api_name": "bioservices.DBFetch.get_database_format_styles",
+            "api_calling": "bioservices.DBFetch.get_database_format_styles(db=$, format=$)",
+            "example": "bioservices.DBFetch.get_database_format_styles(db='uniprotkb', format='fasta')"
+        },
+        "get_database_formats": {
+            "Parameters": [
+                {
+                    "name": "db",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "Valid database name."
+                }
+            ],
+            "Returns": {
+                "type": "list[str]",
+                "description": "A list of format names available for the specified database."
+            },
+            "Docstring": "Get a list of format names for a given database.\n\nParameters:\n-----------\ndb : str\n    Valid database name.\n\nReturns:\n--------\nlist\n    A list of format names available for the specified database.\n\nExamples:\n--------\n>>> from bioservices import DBFetch\n>>> db = DBFetch()\n>>> db.get_database_formats('uniprotkb')\n['default', 'annot', 'entrysize', 'fasta', 'gff3', 'seqxml', 'uniprot', 'uniprotrdfxml', 'uniprotxml', 'dasgff', 'gff2']",
+            "api_type": "method",
+            "api_name": "bioservices.DBFetch.get_database_formats",
+            "api_calling": "bioservices.DBFetch.get_database_formats(db=$)",
+            "example": "bioservices.DBFetch.get_database_formats(db='uniprotkb')"
+        },
+        "get_database_info": {
+            "Parameters": [
+                {
+                    "name": "db",
+                    "type": "str",
+                    "default": null,
+                    "optional": true,
+                    "description": "A valid database name to retrieve information for."
+                }
+            ],
+            "Returns": {
+                "type": "dict",
+                "description": "A dictionary containing details describing the specified database, including formats and styles."
+            },
+            "Docstring": "Get details describing a specific database, including data formats and available styles.\n\nParameters:\n-----------\ndb : str, optional\n    A valid database name. Defaults to None.\n\nReturns:\n--------\ndict\n    A dictionary containing details describing the specified database, including formats and styles.\n\nExamples:\n--------\n>>> from bioservices import DBFetch\n>>> db = DBFetch()\n>>> res = db.get_database_info('uniprotkb')\n>>> print(res['description'])\n'The UniProt Knowledgebase (UniProtKB) is the central access point for extensive curated protein information, including function, classification, and cross-references.'",
+            "api_type": "method",
+            "api_name": "bioservices.DBFetch.get_database_info",
+            "api_calling": "bioservices.DBFetch.get_database_info(db=$)",
+            "example": "db.get_database_info(db='uniprotkb')"
+        },
+        "supported_databases": {
+            "Parameters": [],
+            "Returns": {
+                "type": "list",
+                "description": "A list of database names available for usage with the DBFetch service."
+            },
+            "Docstring": "Alias to getSupportedDBs property. Returns a list of database names available for usage with the DBFetch service.",
+            "api_type": "property",
+            "api_name": "bioservices.DBFetch.supported_databases",
+            "api_calling": "bioservices.DBFetch.supported_databases",
+            "example": "bioservices.DBFetch.supported_databases"
+        }
+    }
+}

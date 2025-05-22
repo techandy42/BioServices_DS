@@ -1,0 +1,342 @@
+{
+    "eutils": {
+        "EFetch": {
+            "Parameters": [
+                {
+                    "name": "db",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "the database from which to retrieve UIDs."
+                },
+                {
+                    "name": "id",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "list of identifiers to be processed."
+                },
+                {
+                    "name": "retmode",
+                    "type": "str",
+                    "default": "\"text\"",
+                    "optional": true,
+                    "description": "output mode, typically 'text' or 'xml'."
+                },
+                {
+                    "name": "rettype",
+                    "type": "str",
+                    "default": null,
+                    "optional": true,
+                    "description": "[kwarg option] output type, for example, 'fasta', 'summary', or 'docsum'."
+                },
+                {
+                    "name": "kargs",
+                    "type": "dict",
+                    "default": "{}",
+                    "optional": false,
+                    "description": "Optional keyword arguments for configuring the query."
+                }
+            ],
+            "Returns": {
+                "type": "bytes",
+                "description": "output whose type and structure depend on retmode parameter."
+            },
+            "Docstring": "Access the EFetch E-Utilities to retrieve data from NCBI's Entrez databases.\n\nParameters:\n-----------\ndb : str\n    The database from which to retrieve UIDs.\nid : str\n    List of identifiers.\nretmode : str\n    Output mode such as 'text' (default), 'xml', or 'dict'.\nrettype : str\n    Output type such as 'fasta', 'summary', or 'docsum'.\nkargs : dict\n    Optional keyword arguments for configuring the query.\n\nReturns:\n--------\nbytes\n    The fetched data from the specified database whose format and type depend on the selected options.\n\nExamples:\n---------\nfrom bioservices import EUtils\ne = EUtils()\ne.EFetch(db=\"protein\", id=\"34577063\", retmode=\"text\", rettype=\"fasta\")",
+            "api_type": "method",
+            "api_name": "bioservices.EUtils.EFetch",
+            "api_calling": "bioservices.EUtils.EFetch(db=$, id=$, retmode=$, rettype=$)",
+            "example": "bioservices.EUtils.EFetch(db=\"protein\", id=\"34577063\", retmode=\"text\", rettype=\"fasta\")"
+        },
+        "EInfo": {
+            "Parameters": [
+                {
+                    "name": "db",
+                    "type": "str",
+                    "default": "None",
+                    "optional": true,
+                    "description": "Target database about which to gather statistics. Must be a valid Entrez database name."
+                },
+                {
+                    "name": "kargs",
+                    "type": "dict",
+                    "default": "{}",
+                    "optional": false,
+                    "description": "Optional keyword arguments for configuring the query."
+                }
+            ],
+            "Returns": {
+                "type": "list[dict]",
+                "description": "A list of dictionaries containing database information or a list of all valid databases if the `db` parameter is unset."
+            },
+            "Docstring": "Provides information about a database from the Entrez system.\n\nParameters:\n-----------\ndb : str, optional\n    Target database about which to gather statistics. If not provided, returns the list of all databases.\nkargs : dict\n    Optional keyword arguments for configuring the query.\n\nReturns:\n--------\nlist[dict]\n    A list of dictionaries containing database information.\n\nExamples:\n---------\nfrom bioservices import EUtils\ne = EUtils()\nall_database_names = e.EInfo()\nret = e.EInfo(\"taxonomy\")\nprint(ret['count'])",
+            "api_type": "method",
+            "api_name": "bioservices.EUtils.EInfo",
+            "api_calling": "bioservices.EUtils.EInfo(db=$)",
+            "example": "bioservices.EUtils.EInfo(db=\"taxonomy\")"
+        },
+        "ELink": {
+            "Parameters": [
+                {
+                    "name": "db",
+                    "type": "str",
+                    "default": "None",
+                    "optional": true,
+                    "description": "Database to retrieve results from."
+                },
+                {
+                    "name": "dbfrom",
+                    "type": "str",
+                    "default": "None",
+                    "optional": true,
+                    "description": "Database containing the input UIDs."
+                },
+                {
+                    "name": "id",
+                    "type": "str",
+                    "default": "None",
+                    "optional": true,
+                    "description": "UID list as a single string or a comma-delimited list."
+                },
+                {
+                    "name": "cmd",
+                    "type": "str",
+                    "default": null,
+                    "optional": true,
+                    "description": "[kwarg option] Command mode to specify the function ELink will perform; e.g., 'neighbor', 'prlinks'."
+                },
+                {
+                    "name": "kargs",
+                    "type": "dict",
+                    "default": "{}",
+                    "optional": false,
+                    "description": "Optional keyword arguments for configuring the query."
+                }
+            ],
+            "Returns": {
+                "type": "str",
+                "description": "The result of the executed `ELink` query as a response XML or text."
+            },
+            "Docstring": "Responds to a list of UIDs in a given database with related or linked UIDs in Entrez.\n\nParameters:\n-----------\ndb : str, optional\n    Database to retrieve results from.\ndbfrom : str, optional\n    Source database containing the input UIDs.\nid : str, optional\n    UID list as a single string or comma-delimited.\ncmd : str, optional\n    Command mode to specify function, e.g., 'neighbor'.\nkargs : dict\n    Optional keyword arguments.\n\nReturns:\n--------\nstr\n    XML or text response from the ELink query.\n\nExamples:\n---------\nfrom bioservices import EUtils\ne = EUtils()\ne.ELink(db='pubmed', dbfrom='nucleotide', id='12345,67890', cmd='neighbor')",
+            "api_type": "method",
+            "api_name": "bioservices.EUtils.ELink",
+            "api_calling": "bioservices.EUtils.ELink(db=$, dbfrom=$, id=$, cmd=$)",
+            "example": "bioservices.EUtils.ELink(db='pubmed', dbfrom='nucleotide', id='12345,67890', cmd='neighbor')"
+        },
+        "EPost": {
+            "Parameters": [
+                {
+                    "name": "db",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "A string indicating the target NCBI database."
+                },
+                {
+                    "name": "id",
+                    "type": "list",
+                    "default": null,
+                    "optional": false,
+                    "description": "A list of UIDs identifying records in the specified database."
+                },
+                {
+                    "name": "kargs",
+                    "type": "dict",
+                    "default": null,
+                    "optional": true,
+                    "description": "Additional key=value pairs of parameters to be passed in the request."
+                }
+            ],
+            "Returns": {
+                "type": "dict",
+                "description": "A dictionary containing the WebEnv string and QueryKey."
+            },
+            "Docstring": "Stores UIDs on the NCBI History Server and returns WebEnv and QueryKey.\n\nParameters:\n-----------\ndb : str\n    Target NCBI database.\nid : list\n    List of UIDs identifying records in the database.\nkargs : dict, optional\n    Additional key=value pairs to include in the request.\n\nReturns:\n--------\ndict\n    Dictionary with WebEnv and QueryKey.\n\nExamples:\n---------\nfrom bioservices import EUtils\ne = EUtils()\ne.EPost(db='pubmed', id=['12345', '67890'])",
+            "api_type": "method",
+            "api_name": "bioservices.EUtils.EPost",
+            "api_calling": "bioservices.EUtils.EPost(db=$, id=$, kargs=$)",
+            "example": "bioservices.EUtils.EPost(db='pubmed', id=['12345,67890'])"
+        },
+        "ESearch": {
+            "Parameters": [
+                {
+                    "name": "db",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "A valid Entrez database in which to perform the search."
+                },
+                {
+                    "name": "term",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "The search term to query the database with, structured according to Entrez specifications."
+                },
+                {
+                    "name": "kargs",
+                    "type": "dict",
+                    "default": "{}",
+                    "optional": false,
+                    "description": "Optional keyword arguments for configuring the query."
+                }
+            ],
+            "Returns": {
+                "type": "dict",
+                "description": "List of search results and their metadata."
+            },
+            "Docstring": "Executes a query in the specified database using Entrez ESearch and retrieves relevant results.\n\nParameters:\n-----------\ndb : str\n    A valid Entrez database.\nterm : str\n    Search term according to Entrez specifications.\nkargs : dict\n    Optional key-value arguments to refine the query.\n\nReturns:\n--------\ndict\n    JSON-compatible dictionary with identifiers and metadata.\n\nExamples:\n---------\nfrom bioservices import EUtils\ne = EUtils()\ne.ESearch(db='protein', term='human', kargs={'RetMax': 10})",
+            "api_type": "method",
+            "api_name": "bioservices.EUtils.ESearch",
+            "api_calling": "bioservices.EUtils.ESearch(db=$, term=$, kargs=$)",
+            "example": "bioservices.EUtils.ESearch(db='protein', term='human', kargs={'RetMax':10})"
+        },
+        "ESpell": {
+            "Parameters": [
+                {
+                    "name": "db",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "Database to search. Valid Entrez database name."
+                },
+                {
+                    "name": "term",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "Entrez text query. URL encoding is required for special characters."
+                },
+                {
+                    "name": "kargs",
+                    "type": "dict",
+                    "default": "{}",
+                    "optional": false,
+                    "description": "Optional keyword arguments for configuring the query."
+                }
+            ],
+            "Returns": {
+                "type": "dict",
+                "description": "Contains the original and corrected query spelling."
+            },
+            "Docstring": "Retrieve spelling suggestions for a text query.\n\nParameters:\n-----------\ndb : str\n    Entrez database name.\nterm : str\n    Query text (URL-encoded).\nkargs : dict\n    Optional keyword arguments.\n\nReturns:\n--------\ndict\n    Contains original and corrected spellings.\n\nExamples:\n---------\nfrom bioservices import EUtils\ne = EUtils()\ne.ESpell(db=\"pubmed\", term=\"aasthma+OR+alergy\")",
+            "api_type": "method",
+            "api_name": "bioservices.EUtils.ESpell",
+            "api_calling": "bioservices.EUtils.ESpell(db=$, term=$)",
+            "example": "bioservices.EUtils.ESpell(db=\"pubmed\", term=\"aasthma+OR+alergy\")"
+        },
+        "ESummary": {
+            "Parameters": [
+                {
+                    "name": "db",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "A valid database name to retrieve UIDs from."
+                },
+                {
+                    "name": "id",
+                    "type": "str",
+                    "default": "None",
+                    "optional": true,
+                    "description": "A list or comma-separated string of identifiers to summarize; limited to 200 identifiers."
+                },
+                {
+                    "name": "kargs",
+                    "type": "dict",
+                    "default": "{}",
+                    "optional": false,
+                    "description": "Optional keyword arguments for configuring the query."
+                }
+            ],
+            "Returns": {
+                "type": "dict",
+                "description": "A dictionary containing the summaries of the requested UIDs."
+            },
+            "Docstring": "Provides document summaries for a list of input UIDs.\n\nParameters:\n-----------\ndb : str\n    A valid database name.\nid : str, optional\n    A list or comma-separated string of UIDs (up to 200).\nkargs : dict\n    Optional keyword arguments.\n\nReturns:\n--------\ndict\n    Dictionary of summarized document info.\n\nExamples:\n---------\nfrom bioservices import EUtils\ne = EUtils()\nret = e.ESummary(db='snp', id='7535')",
+            "api_type": "method",
+            "api_name": "bioservices.EUtils.ESummary",
+            "api_calling": "bioservices.EUtils.ESummary(db=$, id=$)",
+            "example": "s.ESummary(db='snp', id='7535')"
+        },
+        "databases": {
+            "Parameters": [],
+            "Returns": {
+                "type": "list",
+                "description": "A list of valid database names."
+            },
+            "Docstring": "Provides available database names managed by the service.\n\nReturns:\n--------\nlist\n    A list of valid database names supported by the service.\n\nExamples:\n---------\nfrom bioservices import EUtils\ne = EUtils()\nvalid_dbs = e.databases",
+            "api_type": "property",
+            "api_name": "bioservices.EUtils.databases",
+            "api_calling": "bioservices.EUtils.databases",
+            "example": "bioservices.EUtils.databases"
+        },
+        "parse_xml": {
+            "Parameters": [
+                {
+                    "name": "ret",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "The XML string content to be parsed."
+                },
+                {
+                    "name": "method",
+                    "type": "str",
+                    "default": "None",
+                    "optional": true,
+                    "description": "The parsing method to utilize, default is the instance's XML parser setting."
+                }
+            ],
+            "Returns": {
+                "type": "object",
+                "description": "An object representation of the parsed XML data."
+            },
+            "Docstring": "Parses the provided XML data using the specified method.\n\nParameters:\n-----------\nret : str\n    XML string to parse.\nmethod : str, optional\n    Parsing method; defaults to instance's parser.\n\nReturns:\n--------\nobject\n    Parsed XML object or dictionary depending on method.\n\nExamples:\n---------\nfrom bioservices import EUtils\ne = EUtils()\nresult = e.parse_xml(\"<data>example</data>\", method=\"dict\")",
+            "api_type": "method",
+            "api_name": "bioservices.EUtils.parse_xml",
+            "api_calling": "bioservices.EUtils.parse_xml(ret=$, method=$)",
+            "example": "bioservices.EUtils.parse_xml(ret=\"<example>data</example>\", method=\"dict\")"
+        },
+        "snp_summary": {
+            "Parameters": [
+                {
+                    "name": "id",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "A string representing SNP identifiers, either as a single identifier or a comma-delimited list."
+                }
+            ],
+            "Returns": {
+                "type": "dict",
+                "description": "Returns a JSON data structure containing summary information about the specified SNPs."
+            },
+            "Docstring": "Alias to EFetch for retrieving SNP database summaries.\n\nParameters:\n-----------\nid : str\n    SNP identifiers (single or comma-separated).\n\nReturns:\n--------\ndict\n    JSON data with summary information about SNPs.\n\nExamples:\n---------\nfrom bioservices import EUtils\ne = EUtils()\nret = e.snp_summary(id=\"123\")",
+            "api_type": "method",
+            "api_name": "bioservices.EUtils.snp_summary",
+            "api_calling": "bioservices.EUtils.snp_summary(id=$)",
+            "example": "bioservices.EUtils.snp_summary(id=\"123\")"
+        },
+        "taxonomy_summary": {
+            "Parameters": [
+                {
+                    "name": "id",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "A string or list of strings containing Taxonomy IDs"
+                }
+            ],
+            "Returns": {
+                "type": "dict",
+                "description": "A dictionary containing taxonomy information"
+            },
+            "Docstring": "Alias to EFetch for retrieving taxonomy database summaries.\n\nParameters:\n-----------\nid : str or list[str]\n    Taxonomy IDs as a string or list.\n\nReturns:\n--------\ndict\n    Dictionary containing taxonomy info.\n\nExamples:\n---------\nfrom bioservices import EUtils\ne = EUtils()\nret = e.taxonomy_summary(id=\"9606\")\nprint(ret['9606']['species'])",
+            "api_type": "method",
+            "api_name": "bioservices.EUtils.taxonomy_summary",
+            "api_calling": "bioservices.EUtils.taxonomy_summary(id=$)",
+            "example": "bioservices.EUtils.taxonomy_summary(id=\"9606\")"
+        }
+    }
+}

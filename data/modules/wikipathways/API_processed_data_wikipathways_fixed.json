@@ -1,0 +1,620 @@
+{
+    "wikipathways": {
+        "createPathway": {
+            "Parameters": [
+                {
+                    "name": "gpml",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "The GPML code."
+                },
+                {
+                    "name": "auth",
+                    "type": "object",
+                    "default": null,
+                    "optional": false,
+                    "description": "Authentication info (WSAuth)."
+                }
+            ],
+            "Returns": {
+                "type": "WSPathwayInfo",
+                "description": "The pathway info for the created pathway (containing identifier, revision, etc.)."
+            },
+            "Docstring": "Create a new pathway on the WikiPathways website with a given GPML code.\n\nParameters:\n: gpml (str) – The GPML code.\n: auth (object WSAuth) – The authentication info.\n\nReturns:\n: WSPathwayInfo – The pathway info for the created pathway (containing identifier, revision, etc.).",
+            "api_type": "method",
+            "api_name": "bioservices.wikipathways.createPathway",
+            "api_calling": "s.createPathway(gpml=$, auth=$)",
+            "example": "s.createPathway(gpml='<GPML_CODE>', auth=authInfo)"
+        },
+        "findInteractions": {
+            "Parameters": [
+                {
+                    "name": "query",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "The name of an entity to find interactions for (e.g. 'P53')."
+                }
+            ],
+            "Returns": {
+                "type": "list",
+                "description": "List of dictionaries representing interactions."
+            },
+            "Docstring": "Find interactions defined in WikiPathways pathways.\n\nParameters:\n: query (str) – The name of an entity to find interactions for (e.g. 'P53').\n\nReturns:\n: list of dictionaries",
+            "api_type": "method",
+            "api_name": "bioservices.wikipathways.findInteractions",
+            "api_calling": "s.findInteractions(query=$)",
+            "example": "s.findInteractions(\"P53\")"
+        },
+        "findPathwaysByLiterature": {
+            "Parameters": [
+                {
+                    "name": "query",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "A PubMed ID, author name, or title keyword."
+                }
+            ],
+            "Returns": {
+                "type": "dict",
+                "description": "Dictionary with Pathway as keys."
+            },
+            "Docstring": "Find pathways by their literature references.\n\nParameters:\n: query (str) – The query, can be a pubmed id, author name or title keyword.\n\nReturns:\n: dict – Dictionary with Pathway as keys.",
+            "api_type": "method",
+            "api_name": "bioservices.wikipathways.findPathwaysByLiterature",
+            "api_calling": "s.findPathwaysByLiterature(query=$)",
+            "example": "s.findPathwaysByLiterature(18651794)"
+        },
+        "findPathwaysByText": {
+            "Parameters": [
+                {
+                    "name": "query",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "The search query (e.g. 'apoptosis' or 'p53')."
+                },
+                {
+                    "name": "species",
+                    "type": "str",
+                    "default": null,
+                    "optional": true,
+                    "description": "Species to limit the search to (leave blank to search all species)."
+                }
+            ],
+            "Returns": {
+                "type": "list",
+                "description": "Array of WSSearchResult – an array of search results."
+            },
+            "Docstring": "Find pathways using a textual search on the description and text labels of the pathway objects.\n\nParameters:\n: query (str) – The search query (e.g. 'apoptosis' or 'p53').\n: species (str, optional) – The species to limit the search to (leave blank to search on all species).\n\nReturns:\n: list of WSSearchResult – An array of search results.",
+            "api_type": "method",
+            "api_name": "bioservices.wikipathways.findPathwaysByText",
+            "api_calling": "s.findPathwaysByText(query=$, species=$)",
+            "example": "s.findPathwaysByText(query=\"p53 OR mapk\", species=\"Homo sapiens\")"
+        },
+        "findPathwaysByXref": {
+            "Parameters": [
+                {
+                    "name": "ids",
+                    "type": "str or list",
+                    "default": null,
+                    "optional": false,
+                    "description": "One or more DataNode identifiers (e.g. 'P45985')."
+                },
+                {
+                    "name": "codes",
+                    "type": "str or list",
+                    "default": null,
+                    "optional": true,
+                    "description": "Database codes to restrict the search (e.g. 'L' for entrez gene)."
+                }
+            ],
+            "Returns": {
+                "type": "dict",
+                "description": "Dictionary of pathways found by xref."
+            },
+            "Docstring": "Find pathways by searching on the external references of DataNodes.\n\nParameters:\n: ids (str or list) – One or more DataNode identifiers (e.g. 'P45985').\n: codes (str or list, optional) – Database codes to restrict the search (e.g. 'L' for entrez gene).\n\nReturns:\n: dict – A dictionary of pathways by xref.",
+            "api_type": "method",
+            "api_name": "bioservices.wikipathways.findPathwaysByXref",
+            "api_calling": "s.findPathwaysByXref(ids=$, codes=$)",
+            "example": "s.findPathwaysByXref(ids=\"P45985\")"
+        },
+        "getColoredPathway": {
+            "Parameters": [
+                {
+                    "name": "pathwayId",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "The pathway identifier."
+                },
+                {
+                    "name": "fileType",
+                    "type": "str",
+                    "default": "svg",
+                    "optional": true,
+                    "description": "The image type ('svg', 'pdf' or 'png'; svg returned by default)."
+                },
+                {
+                    "name": "revision",
+                    "type": "int",
+                    "default": 0,
+                    "optional": true,
+                    "description": "The revision number of the pathway (0 for most recent)."
+                },
+                {
+                    "name": "color",
+                    "type": "unknown",
+                    "default": null,
+                    "optional": true,
+                    "description": "Optional color parameters (not yet implemented)."
+                },
+                {
+                    "name": "graphId",
+                    "type": "unknown",
+                    "default": null,
+                    "optional": true,
+                    "description": "Optional graph identifier (not yet implemented)."
+                }
+            ],
+            "Returns": {
+                "type": "bytes",
+                "description": "Binary form of the colored pathway image."
+            },
+            "Docstring": "Get a colored image version of the pathway.\n\nParameters:\n: pathwayId (str) – The pathway identifier.\n: fileType (str, optional) – The image type ('svg', 'pdf' or 'png'; svg returned by default).\n: revision (int, optional) – The revision number of the pathway (0 for most recent).\n: color (optional) – Optional color parameters (not yet implemented).\n: graphId (optional) – Optional graph identifier (not yet implemented).\n\nReturns:\n: bytes – Binary form of the colored pathway image.",
+            "api_type": "method",
+            "api_name": "bioservices.wikipathways.getColoredPathway",
+            "api_calling": "s.getColoredPathway(pathwayId=$, fileType=$, revision=$, color=$, graphId=$)",
+            "example": "s.getColoredPathway(pathwayId=\"WP4\", fileType=\"svg\")"
+        },
+        "getCurationTags": {
+            "Parameters": [
+                {
+                    "name": "pathwayId",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "The pathway identifier."
+                }
+            ],
+            "Returns": {
+                "type": "list",
+                "description": "Array of WSCurationTag."
+            },
+            "Docstring": "Get all curation tags for the given pathway.\n\nParameters:\n: pathwayId (str) – the pathway identifier.\n\nReturns:\n: list of WSCurationTag.",
+            "api_type": "method",
+            "api_name": "bioservices.wikipathways.getCurationTags",
+            "api_calling": "s.getCurationTags(pathwayId=$)",
+            "example": "s.getCurationTags(\"WP4\")"
+        },
+        "getCurationTagsByName": {
+            "Parameters": [
+                {
+                    "name": "tagName",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "The curation tag name."
+                }
+            ],
+            "Returns": {
+                "type": "list",
+                "description": "Array of WSCurationTag."
+            },
+            "Docstring": "Get all curation tags for the given tag name.\n\nParameters:\n: tagName (str) – The tag name.\n\nReturns:\n: list of WSCurationTag.",
+            "api_type": "method",
+            "api_name": "bioservices.wikipathways.getCurationTagsByName",
+            "api_calling": "s.getCurationTagsByName(tagName=$)",
+            "example": "s.getCurationTagsByName(\"Curation:FeaturedPathway\")"
+        },
+        "getOntologyTermsByPathway": {
+            "Parameters": [
+                {
+                    "name": "pathwayId",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "The pathway identifier."
+                }
+            ],
+            "Returns": {
+                "type": "list",
+                "description": "Array of WSOntologyTerm."
+            },
+            "Docstring": "Get a list of ontology terms for a given pathway.\n\nParameters:\n: pathwayId (str) – the pathway identifier.\n\nReturns:\n: list of WSOntologyTerm.",
+            "api_type": "method",
+            "api_name": "bioservices.wikipathways.getOntologyTermsByPathway",
+            "api_calling": "s.getOntologyTermsByPathway(pathwayId=$)",
+            "example": "s.getOntologyTermsByPathway(\"WP4\")"
+        },
+        "getPathway": {
+            "Parameters": [
+                {
+                    "name": "pathwayId",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "The pathway identifier."
+                },
+                {
+                    "name": "revision",
+                    "type": "int",
+                    "default": 0,
+                    "optional": true,
+                    "description": "The revision number (0 for most recent)."
+                }
+            ],
+            "Returns": {
+                "type": "dict",
+                "description": "The pathway as a dictionary in GPML format."
+            },
+            "Docstring": "Download a pathway from WikiPathways.\n\nParameters:\n: pathwayId (str) – the pathway identifier.\n: revision (int, optional) – the revision number (0 for most recent).\n\nReturns:\n: dict – The pathway as a dictionary in GPML format.",
+            "api_type": "method",
+            "api_name": "bioservices.wikipathways.getPathway",
+            "api_calling": "s.getPathway(pathwayId=$, revision=$)",
+            "example": "s.getPathway(\"WP2320\", revision=0)"
+        },
+        "getPathwayHistory": {
+            "Parameters": [
+                {
+                    "name": "pathwayId",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "The pathway identifier."
+                },
+                {
+                    "name": "date",
+                    "type": "str or int",
+                    "default": null,
+                    "optional": false,
+                    "description": "Timestamp filter (YYYYMMDDHHMMSS)."
+                }
+            ],
+            "Returns": {
+                "type": "list",
+                "description": "The revision history items."
+            },
+            "Docstring": "Get the revision history of a pathway.\n\nParameters:\n: pathwayId (str) – the pathway identifier.\n: date (str or int) – limit results to after this timestamp (YYYYMMDDHHMMSS).\n\nReturns:\n: list – The revision history items.",
+            "api_type": "method",
+            "api_name": "bioservices.wikipathways.getPathwayHistory",
+            "api_calling": "s.getPathwayHistory(pathwayId=$, date=$)",
+            "example": "s.getPathwayHistory(\"WP4\", 20110101000000)"
+        },
+        "getPathwayInfo": {
+            "Parameters": [
+                {
+                    "name": "pathwayId",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "The pathway identifier."
+                }
+            ],
+            "Returns": {
+                "type": "dict",
+                "description": "The pathway info."
+            },
+            "Docstring": "Get some general info about the pathway.\n\nParameters:\n: pathwayId (str) – the pathway identifier.\n\nReturns:\n: dict – The pathway info.",
+            "api_type": "method",
+            "api_name": "bioservices.wikipathways.getPathwayInfo",
+            "api_calling": "s.getPathwayInfo(pathwayId=$)",
+            "example": "s.getPathwayInfo(\"WP2320\")"
+        },
+        "getPathwaysByOntologyTerm": {
+            "Parameters": [
+                {
+                    "name": "terms",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "The ontology term identifier."
+                }
+            ],
+            "Returns": {
+                "type": "DataFrame",
+                "description": "DataFrame with pathways information."
+            },
+            "Docstring": "Get a list of pathways tagged with a given ontology term.\n\nParameters:\n: terms (str) – the ontology term identifier.\n\nReturns:\n: DataFrame – Pathways information.",
+            "api_type": "method",
+            "api_name": "bioservices.wikipathways.getPathwaysByOntologyTerm",
+            "api_calling": "s.getPathwaysByOntologyTerm(terms=$)",
+            "example": "s.getPathwaysByOntologyTerm(\"PW:0000724\")"
+        },
+        "getPathwaysByParentOntologyTerm": {
+            "Parameters": [
+                {
+                    "name": "term",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "The parent ontology term identifier."
+                }
+            ],
+            "Returns": {
+                "type": "list",
+                "description": "List of WSPathwayInfo."
+            },
+            "Docstring": "Get a list of pathways tagged with any ontology term that is the child of the given ontology term.\n\nParameters:\n: term (str) – the ontology term identifier.\n\nReturns:\n: list of WSPathwayInfo.",
+            "api_type": "method",
+            "api_name": "bioservices.wikipathways.getPathwaysByParentOntologyTerm",
+            "api_calling": "s.getPathwaysByParentOntologyTerm(term=$)",
+            "example": "s.getPathwaysByParentOntologyTerm(\"GO:0008150\")"
+        },
+        "getRecentChanges": {
+            "Parameters": [
+                {
+                    "name": "timestamp",
+                    "type": "str or int",
+                    "default": null,
+                    "optional": false,
+                    "description": "Only get changes after this time (YYYYMMDDHHMMSS)."
+                }
+            ],
+            "Returns": {
+                "type": "str",
+                "description": "XML string of changed pathways."
+            },
+            "Docstring": "Get the recently changed pathways.\n\nParameters:\n: timestamp (str or int) – Only get changes after this time (YYYYMMDDHHMMSS).\n\nReturns:\n: str – The changed pathways in XML format.",
+            "api_type": "method",
+            "api_name": "bioservices.wikipathways.getRecentChanges",
+            "api_calling": "s.getRecentChanges(timestamp=$)",
+            "example": "s.getRecentChanges(20110101000000)"
+        },
+        "listOrganisms": {
+            "Parameters": [],
+            "Returns": {
+                "type": "list",
+                "description": "List of all available organisms."
+            },
+            "Docstring": "Get a list of all available organisms.",
+            "api_type": "method",
+            "api_name": "bioservices.wikipathways.listOrganisms",
+            "api_calling": "s.listOrganisms()",
+            "example": "s.listOrganisms()"
+        },
+        "listPathways": {
+            "Parameters": [
+                {
+                    "name": "organism",
+                    "type": "str",
+                    "default": null,
+                    "optional": true,
+                    "description": "If provided, filter pathways by this organism."
+                }
+            ],
+            "Returns": {
+                "type": "DataFrame",
+                "description": "DataFrame of available pathways (index are pathway IDs)."
+            },
+            "Docstring": "Get a list of all available pathways.\n\nParameters:\n: organism (str, optional) – If provided, filter pathways by this organism.\n\nReturns:\n: DataFrame – Index are the pathway identifiers (e.g. WP1).",
+            "api_type": "method",
+            "api_name": "bioservices.wikipathways.listPathways",
+            "api_calling": "s.listPathways(organism=$)",
+            "example": "s.listPathways(organism=\"Homo sapiens\")"
+        },
+        "login": {
+            "Parameters": [
+                {
+                    "name": "usrname",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "The WikiPathways username."
+                },
+                {
+                    "name": "password",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "The WikiPathways password."
+                }
+            ],
+            "Returns": {
+                "type": "str",
+                "description": "Authentication code for this session."
+            },
+            "Docstring": "Start a logged in session using an existing WikiPathways account.\n\nWarning:\nInterface not exposed in bioservices.\n\nParameters:\n: usrname (str) – The username.\n: password (str) – The password.\n\nReturns:\n: str – The authentication code for this session.",
+            "api_type": "method",
+            "api_name": "bioservices.wikipathways.login",
+            "api_calling": "s.login(usrname=$, password=$)",
+            "example": "s.login(usrname=\"example_user\", password=\"example_pass\")"
+        },
+        "organism": {
+            "Parameters": [],
+            "Returns": {
+                "type": "str",
+                "description": "Read/write attribute for the organism (default 'Homo sapiens')."
+            },
+            "Docstring": "Read/write attribute for the organism. Default is 'Homo sapiens'.",
+            "api_type": "property",
+            "api_name": "bioservices.wikipathways.organism",
+            "api_calling": "s.organism",
+            "example": "current = s.organism"
+        },
+        "organisms": {
+            "Parameters": [],
+            "Returns": {
+                "type": "list",
+                "description": "List of all available organisms."
+            },
+            "Docstring": "Get a list of all available organisms.",
+            "api_type": "method",
+            "api_name": "bioservices.wikipathways.organisms",
+            "api_calling": "s.organisms()",
+            "example": "s.organisms()"
+        },
+        "removeCurationTag": {
+            "Parameters": [
+                {
+                    "name": "pathwayId",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "The pathway identifier."
+                },
+                {
+                    "name": "name",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "The curation tag name to remove."
+                }
+            ],
+            "Returns": {
+                "type": "bool",
+                "description": "True if the operation was successful."
+            },
+            "Docstring": "Remove a curation tag from a pathway.\n\nWarning:\nInterface not exposed in bioservices.\n\nParameters:\n: pathwayId (str) – the pathway identifier.\n: name (str) – the curation tag name.\n\nReturns:\n: bool – True if successful.",
+            "api_type": "method",
+            "api_name": "bioservices.wikipathways.removeCurationTag",
+            "api_calling": "s.removeCurationTag(pathwayId=$, name=$)",
+            "example": "s.removeCurationTag(\"WP4\", \"Curation:ExampleTag\")"
+        },
+        "saveCurationTag": {
+            "Parameters": [
+                {
+                    "name": "pathwayId",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "The pathway identifier."
+                },
+                {
+                    "name": "name",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "The curation tag name to apply."
+                },
+                {
+                    "name": "revision",
+                    "type": "int",
+                    "default": null,
+                    "optional": true,
+                    "description": "The revision number (most recent if None)."
+                }
+            ],
+            "Returns": {
+                "type": "bool",
+                "description": "True if the curation tag was successfully saved."
+            },
+            "Docstring": "Apply a curation tag to a pathway.\n\nWarning:\nInterface not exposed in bioservices.\n\nParameters:\n: pathwayId (str) – the pathway identifier.\n: name (str) – the curation tag name.\n: revision (int, optional) – the revision number (most recent if None).\n\nReturns:\n: bool – True if successful.",
+            "api_type": "method",
+            "api_name": "bioservices.wikipathways.saveCurationTag",
+            "api_calling": "s.saveCurationTag(pathwayId=$, name=$, revision=$)",
+            "example": "s.saveCurationTag(\"WP1234\", \"Curation:Approved\", revision=None)"
+        },
+        "savePathwayAs": {
+            "Parameters": [
+                {
+                    "name": "pathwayId",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "The pathway identifier."
+                },
+                {
+                    "name": "filename",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "The name of the file (extension determines format)."
+                },
+                {
+                    "name": "revision",
+                    "type": "int",
+                    "default": 0,
+                    "optional": true,
+                    "description": "The revision number (0 for most recent)."
+                },
+                {
+                    "name": "display",
+                    "type": "bool",
+                    "default": true,
+                    "optional": true,
+                    "description": "If True, the pathway will be displayed in the browser."
+                }
+            ],
+            "Returns": {
+                "type": "None",
+                "description": "None"
+            },
+            "Docstring": "Save a pathway.\n\nParameters:\n: pathwayId (str) – the pathway identifier.\n: filename (str) – the name of the file (extension determines format).\n: revision (int, optional) – the revision number (0 for most recent).\n: display (bool, optional) – if True, displays in your browser.\n\nNote:\nMethod from bioservices. Not a WikiPathways function.\nChanged in version 1.7: returns PNG by default instead of PDF.",
+            "api_type": "method",
+            "api_name": "bioservices.wikipathways.savePathwayAs",
+            "api_calling": "s.savePathwayAs(pathwayId=$, filename=$, revision=$, display=$)",
+            "example": "s.savePathwayAs(\"WP2320\", \"pathway.png\", revision=0, display=True)"
+        },
+        "showPathwayInBrowser": {
+            "Parameters": [
+                {
+                    "name": "pathwayId",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "The pathway identifier."
+                }
+            ],
+            "Returns": {
+                "type": "None",
+                "description": "None"
+            },
+            "Docstring": "Show a given Pathway in your default web browser.\n\nParameters:\n: pathwayId (str) – the pathway identifier.\n\nReturns:\n: None.",
+            "api_type": "method",
+            "api_name": "bioservices.wikipathways.showPathwayInBrowser",
+            "api_calling": "s.showPathwayInBrowser(pathwayId=$)",
+            "example": "s.showPathwayInBrowser(\"WP554\")"
+        },
+        "updatePathway": {
+            "Parameters": [
+                {
+                    "name": "pwId",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "The pathway identifier."
+                },
+                {
+                    "name": "description",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "A description of the modifications."
+                },
+                {
+                    "name": "gpml",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "The updated GPML code."
+                },
+                {
+                    "name": "revision",
+                    "type": "int",
+                    "default": 0,
+                    "optional": true,
+                    "description": "The revision number (used to prevent conflicts)."
+                },
+                {
+                    "name": "WSAuth_auth",
+                    "type": "object",
+                    "default": null,
+                    "optional": false,
+                    "description": "Authentication info (WSAuth)."
+                }
+            ],
+            "Returns": {
+                "type": "bool",
+                "description": "True if the pathway was updated successfully."
+            },
+            "Docstring": "Update a pathway on the WikiPathways website with a given GPML code.\n\nWarning:\nInterface not exposed in bioservices.\n\nParameters:\n: pwId (str) – the pathway identifier.\n: description (str) – a description of the modifications.\n: gpml (str) – the updated GPML code.\n: revision (int, optional) – the revision number (used to prevent conflicts).\n: WSAuth_auth (object) – the authentication info.\n\nReturns:\n: bool – True if the pathway was updated successfully.",
+            "api_type": "method",
+            "api_name": "bioservices.wikipathways.updatePathway",
+            "api_calling": "s.updatePathway(pwId=$, description=$, gpml=$, revision=$, WSAuth_auth=$)",
+            "example": "s.updatePathway(pwId=\"WP1234\", description=\"Updated nodes\", gpml=gpmlCode, revision=1, WSAuth_auth=authInfo)"
+        }
+    }
+}

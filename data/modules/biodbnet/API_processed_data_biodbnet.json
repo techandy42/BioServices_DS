@@ -1,0 +1,250 @@
+{
+    "biodbnet": {
+        "db2db": {
+            "Parameters": [
+                {
+                    "name": "input_db",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "Input database, specifying the type of data source to map from."
+                },
+                {
+                    "name": "output_db",
+                    "type": "list[str]",
+                    "default": null,
+                    "optional": false,
+                    "description": "List of databases to map the input identifiers to the corresponding outputs."
+                },
+                {
+                    "name": "input_values",
+                    "type": "list[str]",
+                    "default": null,
+                    "optional": false,
+                    "description": "List of identifiers to be converted based on the defined mapping rules."
+                },
+                {
+                    "name": "taxon",
+                    "type": "int",
+                    "default": "9606",
+                    "optional": true,
+                    "description": "NCBI Taxonomy ID for the conversion operation. Default is 9606 (Homo sapiens)."
+                }
+            ],
+            "Returns": {
+                "type": "pandas.DataFrame",
+                "description": "A DataFrame where the index corresponds to input database identifiers and columns contain identifiers for each output database."
+            },
+            "Docstring": "Converts identifiers from an input database to identifiers in one or more output databases.\n\nParameters:\n-----------\ninput_db : str\n           Input database.\noutput_db : list\n           List of target output databases.\ninput_values : list\n           List of identifiers to convert.\ntaxon : int, optional\n           Taxonomic identifier. Default is 9606.\n\nReturns:\n--------\npandas.DataFrame\n    Dataframe with input identifiers as index and output identifiers as columns.\n\nExamples:\n--------\n>>> from bioservices import BioDBNet\n>>> dbnet = BioDBNet()\n>>> input_db = 'Ensembl Gene ID'\n>>> output_db = ['Gene Symbol']\n>>> input_values = ['ENSG00000121410', 'ENSG00000171428']\n>>> result = dbnet.db2db(input_db, output_db, input_values, 9606)\n>>> print(result)",
+            "api_type": "method",
+            "api_name": "bioservices.BioDBNet.db2db",
+            "api_calling": "bioservices.BioDBNet.db2db(input_db=$, output_db=$, input_values=$, taxon=$)",
+            "example": "bioservices.BioDBNet.db2db(input_db='Ensembl Gene ID', output_db=['Gene Symbol'], input_values=['ENSG00000121410', 'ENSG00000171428'], taxon=9606)"
+        },
+        "dbFind": {
+            "_issues": [
+                "Make sure to >>> dbnet.services.settings.TIMEOUT = 30 before running the command to avoid timeout issues."
+            ],
+            "Parameters": [
+                {
+                    "name": "output_db",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "Valid database name."
+                },
+                {
+                    "name": "input_values",
+                    "type": "list[str]",
+                    "default": null,
+                    "optional": false,
+                    "description": "List of identifiers to look for."
+                },
+                {
+                    "name": "taxon",
+                    "type": "str",
+                    "default": "'9606'",
+                    "optional": true,
+                    "description": "Taxonomy identifier; defaults to 9606 for Homo sapiens."
+                }
+            ],
+            "Returns": {
+                "type": "pandas.DataFrame",
+                "description": "A dataframe indexed by input values with the results and identifier types."
+            },
+            "Docstring": "The dbFind function identifies and characterizes types of input identifiers, converting them to the specified output database if applicable.\n\nParameters:\n-----------\noutput_db : str\n            Valid database name.\ninput_values: list\n             List of identifiers to look for.\ntaxon: str, optional\n            Taxonomy identifier; defaults to 9606 for Homo sapiens.\n\nReturns:\n--------\npandas.DataFrame\n   A dataframe indexed by input values with the results and identifier types.\n\nExamples:\n--------\n>>> from bioservices import BioDBNet\n>>> dbnet = BioDBNet()\n>>> dbnet.services.settings.TIMEOUT = 30\n>>> dbnet.dbFind(\"Gene ID\", [\"ZMYM6_HUMAN\", \"NP_710159\", \"ENSP00000305919\"])",
+            "api_type": "method",
+            "api_name": "bioservices.BioDBNet.dbFind",
+            "api_calling": "bioservices.BioDBNet.dbFind(output_db=$, input_values=$, taxon=$)",
+            "example": "bioservices.BioDBNet.dbFind(output_db=\"Gene ID\", input_values=[\"ZMYM6_HUMAN\", \"NP_710159\"], taxon=\"9606\")"
+        },
+        "dbOrtho": {
+            "Parameters": [
+                {
+                    "name": "input_db",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "Input database to map identifiers from."
+                },
+                {
+                    "name": "output_db",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "Output database to map identifiers to."
+                },
+                {
+                    "name": "input_values",
+                    "type": "list[str]",
+                    "default": null,
+                    "optional": false,
+                    "description": "List of identifiers to convert."
+                },
+                {
+                    "name": "input_taxon",
+                    "type": "int",
+                    "default": null,
+                    "optional": false,
+                    "description": "Taxonomic ID of the input organism."
+                },
+                {
+                    "name": "output_taxon",
+                    "type": "int",
+                    "default": null,
+                    "optional": false,
+                    "description": "Taxonomic ID of the output organism."
+                }
+            ],
+            "Returns": {
+                "type": "pandas.DataFrame",
+                "description": "Dataframe mapping the input identifiers to the corresponding output data."
+            },
+            "Docstring": "Converts identifiers from one species to a corresponding identifier set of another species.\n\nParameters:\n-----------\ninput_db : str\n               Input database to map identifiers from.\noutput_db : str\n               Output database to map identifiers to.\ninput_values : list\n               List of identifiers to convert.\ninput_taxon : int\n               Taxonomic ID of the input organism.\noutput_taxon : int\n               Taxonomic ID of the output organism.\n\nReturns:\n--------\npandas.DataFrame\n    Dataframe mapping the input identifiers to the corresponding output data.\n\nExamples:\n--------\n>>> df = b.dbOrtho(\"Gene Symbol\", \"Gene ID\", [\"MYC\", \"MTOR\"], input_taxon=9606, output_taxon=10090)\n>>> print(df)",
+            "api_type": "method",
+            "api_name": "bioservices.BioDBNet.dbOrtho",
+            "api_calling": "bioservices.BioDBNet.dbOrtho(input_db=$, output_db=$, input_values=$, input_taxon=$, output_taxon=$)",
+            "example": "bioservices.BioDBNet.dbOrtho(input_db=\"Gene Symbol\", output_db=\"Gene ID\", input_values=[\"MYC\", \"MTOR\", \"A1BG\"], input_taxon=9606, output_taxon=10090)"
+        },
+        "dbReport": {
+            "Parameters": [
+                {
+                    "name": "input_db",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "Input database to be queried."
+                },
+                {
+                    "name": "input_values",
+                    "type": "list[str]",
+                    "default": null,
+                    "optional": false,
+                    "description": "List of identifiers from the input database."
+                },
+                {
+                    "name": "taxon",
+                    "type": "int",
+                    "default": "9606",
+                    "optional": true,
+                    "description": "Taxonomy ID for narrowing the reporting scope."
+                }
+            ],
+            "Returns": {
+                "type": "pandas.DataFrame",
+                "description": "Dataframe where the index corresponds to input database identifiers and the columns contain identifiers from all possible databases."
+            },
+            "Docstring": "Same as db2db() but retrieves results for all accessible databases from the provided input database and identifiers.\n\nParameters:\n-----------\ninput_db : str\n    Input database to be queried.\ninput_values : list\n    List of identifiers from the input database.\ntaxon : int, optional\n    Taxonomy ID to specify organism; default is 9606.\n\nReturns:\n--------\npd.DataFrame\n    Dataframe where the index corresponds to input database identifiers and the columns contain identifiers from all possible databases.\n\nExamples:\n--------\n>>> df = s.dbReport(\"Ensembl Gene ID\", ['ENSG00000121410', 'ENSG00000171428'])",
+            "api_type": "method",
+            "api_name": "bioservices.BioDBNet.dbReport",
+            "api_calling": "bioservices.BioDBNet.dbReport(input_db=$, input_values=$, taxon=$)",
+            "example": "bioservices.BioDBNet.dbReport(input_db=\"Ensembl Gene ID\", input_values=[\"ENSG00000121410\", \"ENSG00000171428\"], taxon=9606)"
+        },
+        "dbWalk": {
+            "Parameters": [
+                {
+                    "name": "db_path",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "Path to follow in the databases, detailing the node connections."
+                },
+                {
+                    "name": "input_values",
+                    "type": "list[str]",
+                    "default": null,
+                    "optional": false,
+                    "description": "List of input identifiers for processing."
+                },
+                {
+                    "name": "taxon",
+                    "type": "int",
+                    "default": "9606",
+                    "optional": true,
+                    "description": "Taxonomy identifier, defaulting to 9606 (Homo sapiens)."
+                }
+            ],
+            "Returns": {
+                "type": "pandas.DataFrame",
+                "description": "DataFrame where columns correspond to the nodes in the path."
+            },
+            "Docstring": "Walk through the biological database network with a specified path of node connections.\n\nParameters:\n-----------\ndb_path : str\n          Path to follow in the databases, detailing the node connections.\ninput_values : list\n          List of input identifiers for processing.\ntaxon : int, optional\n          Taxonomy identifier, defaulting to 9606 (Homo sapiens).\n\nReturns:\n--------\npandas.DataFrame\n    DataFrame where columns correspond to the nodes in the path.\n\nExamples:\n--------\n>>> db_path = 'Ensembl Gene ID->Gene ID->Homolog - Mouse Gene ID->Ensembl Gene ID'\n>>> result = s.dbWalk(db_path, ['ENSG00000175899'])",
+            "api_type": "method",
+            "api_name": "bioservices.BioDBNet.dbWalk",
+            "api_calling": "bioservices.BioDBNet.dbWalk(db_path=$, input_values=$, taxon=$)",
+            "example": "bioservices.BioDBNet.dbWalk(db_path='Ensembl Gene ID->Gene ID->Homolog - Mouse Gene ID->Ensembl Gene ID', input_values=['ENSG00000175899'], taxon=9606)"
+        },
+        "getDirectOutputsForInput": {
+            "Parameters": [
+                {
+                    "name": "input_db",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "The input database identifier, provided as a string."
+                }
+            ],
+            "Returns": {
+                "type": "list[str]",
+                "description": "A list containing all direct output nodes accessible via a single edge connection from the specified input node."
+            },
+            "Docstring": "Gets all the direct output nodes for a given input node.\n\nParameters:\n-----------\ninput_db : str\n               The input database identifier.\n\nReturns:\n--------\nlist\n    Direct output nodes accessible by single edge in the bioDBnet graph.\n\nExamples:\n--------\n>>> b.getDirectOutputsForInput(\"genesymbol\")\n>>> b.getDirectOutputsForInput(\"Gene Symbol\")",
+            "api_type": "method",
+            "api_name": "bioservices.BioDBNet.getDirectOutputsForInput",
+            "api_calling": "bioservices.BioDBNet.getDirectOutputsForInput(input_db=$)",
+            "example": "bioservices.BioDBNet.getDirectOutputsForInput(input_db=\"genesymbol\")"
+        },
+        "getInputs": {
+            "Parameters": [],
+            "Returns": {
+                "type": "list[str]",
+                "description": "A list of available input databases."
+            },
+            "Docstring": "Retrieve the list of available input databases.\n\nParameters:\n-----------\nNone\n\nReturns:\n--------\nlist\n    A list of available input databases.\n\nExamples:\n--------\n>>> s.getInputs()",
+            "api_type": "method",
+            "api_name": "bioservices.BioDBNet.getInputs",
+            "api_calling": "bioservices.BioDBNet.getInputs()",
+            "example": "s.getInputs()"
+        },
+        "getOutputsForInput": {
+            "Parameters": [
+                {
+                    "name": "input_db",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "The input database from which to retrieve possible output databases."
+                }
+            ],
+            "Returns": {
+                "type": "list[str]",
+                "description": "A list of output databases that are compatible as outputs for the given input database."
+            },
+            "Docstring": "Retrieve the list of possible output databases for a specified input database.\\n\\nParameters:\\n-----------\\ninput_db : str\\n   The input database from which to retrieve possible output databases.\\n\\nReturns:\\n--------\\nlist\\n   A list of output databases that are compatible as outputs with the given input database.\\n\\nExamples:\\n--------\\n>>> s.getOutputsForInput('UniProt Accession')\\n['PDB ID', 'RefSeq Protein Accession', 'Gene Symbol']",
+            "api_type": "method",
+            "api_name": "bioservices.BioDBNet.getOutputsForInput",
+            "api_calling": "bioservices.BioDBNet.getOutputsForInput(input_db=$)",
+            "example": "bioservices.BioDBNet.getOutputsForInput(input_db='UniProt Accession')"
+        }
+    }
+}

@@ -1,0 +1,273 @@
+{
+    "cog": {
+        "get_all_cogs_definition": {
+            "Parameters": [
+                {
+                    "name": "page",
+                    "type": "int",
+                    "default": "None",
+                    "optional": true,
+                    "description": "Determines the page of the results to retrieve; if omitted, fetches all."
+                }
+            ],
+            "Returns": {
+                "type": "dict",
+                "description": "A dictionary containing all COG definitions or results from the specified page."
+            },
+            "Docstring": "Fetch all COG Definitions or definitions for a specified page.\n\nParameters:\n-----------\npage : int or None\n    Determines the page of the results to retrieve; if omitted, fetches all.\n\nReturns:\n--------\ndict\n    A dictionary containing all COG definitions or results from the specified page.\n\nExamples:\n--------\n>>> cog = COG()\n>>> cog.get_all_cogs_definition(page=1)",
+            "api_type": "method",
+            "api_name": "bioservices.COG.get_all_cogs_definition",
+            "api_calling": "bioservices.COG.get_all_cogs_definition(page=$)",
+            "example": "bioservices.COG.get_all_cogs_definition(page=1)"
+        },
+        "get_cog_definition_by_cog_id": {
+            "Parameters": [
+                {
+                    "name": "cog_id",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "The identifier of the desired COG."
+                }
+            ],
+            "Returns": {
+                "type": "dict",
+                "description": "A dictionary containing the definition details of the specified COG."
+            },
+            "Docstring": "Retrieve the definition of a specific COG by its identifier.\n\nParameters:\n-----------\ncog_id : str\n               The identifier of the desired COG.\n\nReturns:\n--------\ndict\n    A dictionary containing the definition details of the specified COG.\n\nExamples:\n--------\n>>> cog_service = COG()\n>>> cog_service.get_cog_definition_by_cog_id(cog_id=\"COG0003\")",
+            "api_type": "method",
+            "api_name": "bioservices.COG.get_cog_definition_by_cog_id",
+            "api_calling": "bioservices.COG.get_cog_definition_by_cog_id(cog_id=$)",
+            "example": "bioservices.COG.get_cog_definition_by_cog_id(cog_id=\"COG0003\")"
+        },
+        "get_cogs": {
+            "Parameters": [
+                {
+                    "name": "kwargs",
+                    "type": "dict",
+                    "default": null,
+                    "optional": true,
+                    "description": "Additional parameters to refine the query."
+                }
+            ],
+            "Returns": {
+                "type": "dict",
+                "description": "A dictionary containing results, count, previous, and next page data from the COG API."
+            },
+            "Docstring": "Retrieve information about Clusters of Orthologous Groups (COGs).\n\nParameters:\n-----------\nkwargs : dict\n         Additional parameters for filtering results.\n\nReturns:\n--------\ndict\n    Contains the retrieved data, including results, count, previous, and next paging information.\n\nExamples:\n--------\n>>> c = COG()\n>>> result = c.get_cogs(page=1)",
+            "api_type": "method",
+            "api_name": "bioservices.COG.get_cogs",
+            "api_calling": "bioservices.COG.get_cogs(kwargs=$)",
+            "example": "bioservices.COG.get_cogs(page=1)"
+        },
+        "get_cogs_by_category_id": {
+            "Parameters": [
+                {
+                    "name": "category",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "Taxonomic Category ID for filtering results."
+                },
+                {
+                    "name": "page",
+                    "type": "int",
+                    "default": "None",
+                    "optional": true,
+                    "description": "Page number for paginated results; if None, retrieves all pages."
+                }
+            ],
+            "Returns": {
+                "type": "dict",
+                "description": "A dictionary containing filtered COG information based on the specified category ID."
+            },
+            "Docstring": "Filter COGs by taxonomic category ID.\n\nParameters:\n-----------\ncategory : str\n           Taxonomic Category ID for filtering results.\npage : int, optional\n           Page number for paginated results; if None, retrieves all pages.\n\nReturns:\n--------\ndict\n    A dictionary containing filtered COG information based on the specified category ID.\n\nExamples:\n--------\n>>> instance.get_cogs_by_category_id('651137')\n>>> instance.get_cogs_by_category_id('651137', page=1)",
+            "api_type": "method",
+            "api_name": "bioservices.COG.get_cogs_by_category_id",
+            "api_calling": "bioservices.COG.get_cogs_by_category_id(category=$, page=$)",
+            "example": "bioservices.COG.get_cogs_by_category_id(category='651137', page=1)"
+        },
+        "get_cogs_by_id": {
+            "Parameters": [
+                {
+                    "name": "cog_id",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "Specific COG ID tag to filter results, e.g., COG0003."
+                },
+                {
+                    "name": "page",
+                    "type": "int",
+                    "default": "None",
+                    "optional": true,
+                    "description": "Number of the requested page for results, defaults to retrieving all pages."
+                }
+            ],
+            "Returns": {
+                "type": "dict",
+                "description": "A dictionary containing filtered COG entries based on provided COG ID and page."
+            },
+            "Docstring": "Filter COGs by specific COG ID tag.\n\nParameters:\n-----------\ncog_id : str\n               Specific COG ID tag to filter results, e.g., COG0003.\npage : int, optional\n               Number of the requested page for results, defaults to retrieving all pages.\n\nReturns:\n--------\ndict\n    A dictionary containing filtered COG entries based on provided COG ID and page.\n\nExamples:\n--------\n>>> from bioservices import COG\n>>> c = COG()\n>>> result = c.get_cogs_by_id(cog_id=\"COG0003\", page=1)",
+            "api_type": "method",
+            "api_name": "bioservices.COG.get_cogs_by_id",
+            "api_calling": "bioservices.COG.get_cogs_by_id(cog_id=$, page=$)",
+            "example": "bioservices.COG.get_cogs_by_id(cog_id=\"COG0003\", page=1)"
+        },
+        "get_cogs_by_id_and_organism": {
+            "Parameters": [
+                {
+                    "name": "cog_id",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "The COG ID to be queried. Example value: COG0004."
+                },
+                {
+                    "name": "organism",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "The organism's identifier (e.g., Escherichia_coli_K-12_sub_MG1655)."
+                },
+                {
+                    "name": "page",
+                    "type": "int",
+                    "default": "None",
+                    "optional": true,
+                    "description": "The page number for paginated results. Default is None for querying all pages."
+                }
+            ],
+            "Returns": {
+                "type": "dict",
+                "description": "A dictionary containing filtered COGs corresponding to the input parameters."
+            },
+            "Docstring": "Filter COGs by their ID and associated organism.\n\nParameters:\n-----------\ncog_id : str\n               The unique identifier for the desired COG, e.g., 'COG0004'.\norganism : str\n               The canonical name of the organism to filter by, e.g., 'Escherichia_coli_K-12_sub_MG1655'.\npage : int, optional, default: None\n               Optionally specify the page of results to retrieve for paginated queries.\n\nReturns:\n--------\ndict\n    Dictionary containing the resulting set of COGs based on the criteria provided.\n\nExamples:\n--------\n>>> c = COG()\n>>> c.get_cogs_by_id_and_organism(cog_id='COG0004', organism='Escherichia_coli_K-12_sub_MG1655', page=1)",
+            "api_type": "method",
+            "api_name": "bioservices.COG.get_cogs_by_id_and_organism",
+            "api_calling": "bioservices.COG.get_cogs_by_id_and_organism(cog_id=$, organism=$, page=$)",
+            "example": "bioservices.COG.get_cogs_by_id_and_organism(cog_id='COG0004', organism='Escherichia_coli_K-12_sub_MG1655', page=1)"
+        },
+        "get_cogs_by_organism": {
+            "Parameters": [
+                {
+                    "name": "name",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "The exact organism name to filter the Clusters of Orthologous Groups."
+                },
+                {
+                    "name": "page",
+                    "type": "int",
+                    "default": null,
+                    "optional": true,
+                    "description": "The specific page of results to return, where each page contains 10 entries."
+                }
+            ],
+            "Returns": {
+                "type": "dict",
+                "description": "A dictionary containing the filtered groups of orthologous genes for the specified organism."
+            },
+            "Docstring": "Fetches Clusters of Orthologous Groups (COGs) associated with a given organism name from the COG database.\n\nParameters:\n-----------\nname : str\n       The exact organism name to filter the Clusters of Orthologous Groups.\npage : int, optional\n       The specific page of results to return, where each page contains 10 entries.\n\nReturns:\n--------\ndict\n    A dictionary containing the filtered groups of orthologous genes for the specified organism.\n\nExamples:\n--------\n>>> from bioservices import COG\n>>> c = COG()\n>>> c.get_cogs_by_organism(name='Nitrosopumilus_maritimus_SCM1', page=1)",
+            "api_type": "method",
+            "api_name": "bioservices.COG.get_cogs_by_organism",
+            "api_calling": "bioservices.COG.get_cogs_by_organism(name=$, page=$)",
+            "example": "bioservices.COG.get_cogs_by_organism(name='Nitrosopumilus_maritimus_SCM1', page=1)"
+        },
+        "get_cogs_by_taxon_id": {
+            "Parameters": [
+                {
+                    "name": "taxon_id",
+                    "type": "int",
+                    "default": null,
+                    "optional": false,
+                    "description": "The identifier of the taxonomy to filter by."
+                },
+                {
+                    "name": "page",
+                    "type": "int",
+                    "default": "None",
+                    "optional": true,
+                    "description": "The page number of the results to retrieve, if applicable."
+                }
+            ],
+            "Returns": {
+                "type": "dict",
+                "description": "A dictionary containing filtered COG information based on the taxonomic ID."
+            },
+            "Docstring": "Filter COGs by taxonomy ID, retrieving the relevant data.\n\nParameters:\n-----------\ntaxon_id : int\n               The identifier of the taxonomy to filter by.\npage : int, optional\n               The page number of the results to retrieve, if applicable.\n\nReturns:\n--------\ndict\n    A dictionary containing filtered COG information based on the taxonomic ID.\n\nExamples:\n--------\n>>> from bioservices import COG\n>>> c = COG()\n>>> cogs = c.get_cogs_by_taxon_id(taxon_id=1229908, page=1)",
+            "api_type": "method",
+            "api_name": "bioservices.COG.get_cogs_by_taxon_id",
+            "api_calling": "bioservices.COG.get_cogs_by_taxon_id(taxon_id=$, page=$)",
+            "example": "bioservices.COG.get_cogs_by_taxon_id(taxon_id=1229908, page=1)"
+        },
+        "get_taxonomic_categories": {
+            "Parameters": [
+                {
+                    "name": "page",
+                    "type": "int",
+                    "default": "None",
+                    "optional": true,
+                    "description": "The page number to return; if None, all pages are retrieved."
+                }
+            ],
+            "Returns": {
+                "type": "dict",
+                "description": "Dictionary with all retrieved taxonomic categories."
+            },
+            "Docstring": "Retrieve all taxonomic categories, optionally limited to a specific page.\n\nParameters:\n-----------\npage : int\n               The page number to retrieve. Defaults to None to retrieve all pages.\n\nReturns:\n--------\n dict\n    A dictionary containing retrieved taxonomic category data.\n\nExamples:\n--------\n>>> from bioservices import COG\n>>> c = COG()\n>>> categories = c.get_taxonomic_categories()\n>>> names = [x['name'] for x in categories['results']]",
+            "api_type": "method",
+            "api_name": "bioservices.COG.get_taxonomic_categories",
+            "api_calling": "bioservices.COG.get_taxonomic_categories(page=$)",
+            "example": "bioservices.COG.get_taxonomic_categories(page=None)"
+        },
+        "get_taxonomic_category_by_name": {
+            "Parameters": [
+                {
+                    "name": "name",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "The name of the desired taxonomic category."
+                },
+                {
+                    "name": "page",
+                    "type": "int",
+                    "default": "None",
+                    "optional": true,
+                    "description": "The specific page of the results to fetch; defaults to all pages."
+                }
+            ],
+            "Returns": {
+                "type": "dict",
+                "description": "A dictionary containing the information about the specified taxonomic category."
+            },
+            "Docstring": "Retrieves a specific taxonomic category by its name.\n\nParameters:\n-----------\nname : str\n               The name of the desired taxonomic category.\npage : int\n               The specific page of the results to fetch; defaults to all pages.\n\nReturns:\n--------\ndict\n    A dictionary containing the information about the specified taxonomic category.\n\nExamples:\n--------\n>>> from bioservices import COG\n>>> c = COG()\n>>> c.get_taxonomic_category_by_name(name=\"ALPHAPROTEOBACTERIA\", page=1)",
+            "api_type": "method",
+            "api_name": "bioservices.COG.get_taxonomic_category_by_name",
+            "api_calling": "bioservices.COG.get_taxonomic_category_by_name(name=$, page=$)",
+            "example": "bioservices.COG.get_taxonomic_category_by_name(name=\"ALPHAPROTEOBACTERIA\", page=1)"
+        },
+        "search_organism": {
+            "Parameters": [
+                {
+                    "name": "name",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "The organism name to search for possible matches."
+                }
+            ],
+            "Returns": {
+                "type": "list[dict]",
+                "description": "A list where each item is a dictionary containing genome name, assembly identifier, and taxon identifier."
+            },
+            "Docstring": "Search for candidates matching the provided organism name.\n\nParameters:\n-----------\nname : str\n               The organism name to search for matching candidates.\n\nReturns:\n--------\nlist\n    A list of dictionaries, each with genome name, assembly identifier, and taxon identifier.\n\nExamples:\n--------\n>>> from bioservices import COG\n>>> cog = COG()\n>>> matches = cog.search_organism('coli')\n>>> print(matches)",
+            "api_type": "method",
+            "api_name": "bioservices.COG.search_organism",
+            "api_calling": "bioservices.COG.search_organism(name=$)",
+            "example": "bioservices.COG.search_organism(name='coli')"
+        }
+    }
+}

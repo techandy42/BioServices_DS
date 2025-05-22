@@ -1,0 +1,1399 @@
+{
+    "chembl": {
+        "compounds2accession": {
+            "Parameters": [
+                {
+                    "name": "compounds",
+                    "type": "list[str]",
+                    "default": null,
+                    "optional": false,
+                    "description": "List of ChEMBL compound IDs as strings."
+                }
+            ],
+            "Returns": {
+                "type": "defaultdict",
+                "description": "Mapping of compound IDs to UniProt accession numbers."
+            },
+            "Docstring": "Identifies the target and corresponding UniProt accession number for a list of ChEMBL compounds.\n\nParameters:\n-----------\ncompounds : list[str]\n    List of ChEMBL compound IDs as strings.\n\nReturns:\n--------\ndefaultdict\n    Mapping of compound IDs to UniProt accession numbers.\n\nExamples:\n--------\n>>> from bioservices import ChEMBL\n>>> c = ChEMBL()\n>>> res = c.compounds2accession(['CHEMBL25', 'CHEMBL2'])",
+            "api_type": "method",
+            "api_name": "bioservices.ChEMBL.compounds2accession",
+            "api_calling": "bioservices.ChEMBL.compounds2accession(compounds=$)",
+            "example": "bioservices.ChEMBL.compounds2accession(compounds=['CHEMBL25', 'CHEMBL2'])"
+        },
+        "get_ATC": {
+            "Parameters": [
+                {
+                    "name": "limit",
+                    "type": "int",
+                    "default": "20",
+                    "optional": true,
+                    "description": "The maximum number of records to retrieve. Default is 20."
+                },
+                {
+                    "name": "offset",
+                    "type": "int",
+                    "default": "0",
+                    "optional": true,
+                    "description": "The initial index from which to retrieve resources. Default is 0."
+                },
+                {
+                    "name": "filters",
+                    "type": "list[str]",
+                    "default": "None",
+                    "optional": true,
+                    "description": "List of filter criteria for narrowing the search results."
+                }
+            ],
+            "Returns": {
+                "type": "list[dict]",
+                "description": "The retrieved ATC classification entries, each represented as a dictionary."
+            },
+            "Docstring": "Retrieve the WHO ATC classification data for drugs in the ChEMBL database.\n\nParameters:\n-----------\nlimit : int\n    The maximum number of records to retrieve. Default is 20.\noffset : int\n    The initial index from which to retrieve resources. Default is 0.\nfilters : list[str]\n    List of filter criteria for narrowing the search results.\n\nReturns:\n--------\nlist[dict]\n    The retrieved ATC classification entries, each represented as a dictionary.\n\nExamples:\n--------\n>>> from bioservices import ChEMBL\n>>> c = ChEMBL()\n>>> res = c.get_ATC(limit=5)",
+            "api_type": "method",
+            "api_name": "bioservices.ChEMBL.get_ATC",
+            "api_calling": "bioservices.ChEMBL.get_ATC(limit=$, offset=$, filters=$)",
+            "example": "bioservices.ChEMBL.get_ATC(limit=5, offset=0, filters=None)"
+        },
+        "get_activity": {
+            "Parameters": [
+                {
+                    "name": "query",
+                    "type": "str",
+                    "default": "None",
+                    "optional": true,
+                    "description": "Query string or entity identifier for activity search."
+                },
+                {
+                    "name": "limit",
+                    "type": "int",
+                    "default": "20",
+                    "optional": true,
+                    "description": "Number of entries to retrieve."
+                },
+                {
+                    "name": "offset",
+                    "type": "int",
+                    "default": "0",
+                    "optional": true,
+                    "description": "Number of entries to skip before retrieving."
+                },
+                {
+                    "name": "filters",
+                    "type": "list[str]",
+                    "default": "None",
+                    "optional": true,
+                    "description": "List of filter criteria for narrowing the search results."
+                }
+            ],
+            "Returns": {
+                "type": "list[dict] (query=None) or dict (query=\"...\")",
+                "description": "A list of dictionaries or dictionary of activity records matching the query and filters."
+            },
+            "Docstring": "Activity values recorded in an Assay.\n\nParameters:\n-----------\nquery : str\n    Query string or entity identifier for activity search.\nlimit : int\n    Number of entries to retrieve.\noffset : int\n    Number of entries to skip before retrieving.\nfilters : list[str]\n    List of filter criteria for narrowing the search results.\n\nReturns:\n--------\nlist[dict] (query=None) or dict (query=\"...\")\n    A list of dictionaries or dictionary of activity records matching the query and filters.\n\nExamples:\n--------\n>>> from bioservices import ChEMBL\n>>> c = ChEMBL()\n>>> res = c.get_activity(filters=['pchembl_value__isnull=False', 'molecule_chembl_id=CHEMBL25'])",
+            "api_type": "method",
+            "api_name": "bioservices.ChEMBL.get_activity",
+            "api_calling": "bioservices.ChEMBL.get_activity(query=$, limit=$, offset=$, filters=$)",
+            "example": "bioservices.ChEMBL.c.get_activity(filters=['pchembl_value__isnull=False', 'molecule_chembl_id=CHEMBL25'])"
+        },
+        "get_approved_drugs": {
+            "Parameters": [
+                {
+                    "name": "max_phase",
+                    "type": "int",
+                    "default": "4",
+                    "optional": true,
+                    "description": "Filter drugs at the specified maximum approval phase stage. Default is 4 for fully approved drugs."
+                },
+                {
+                    "name": "maxdrugs",
+                    "type": "int",
+                    "default": "1000000",
+                    "optional": true,
+                    "description": "Specify the maximum number of drugs to retrieve. Default is 1000000."
+                }
+            ],
+            "Returns": {
+                "type": "list[dict]",
+                "description": "A list of dictionaries containing information about the approved drugs."
+            },
+            "Docstring": "Retrieve information on approved drugs from the ChEMBL database at specified phases.\n\nParameters:\n-----------\nmax_phase : int\n           Filter drugs at the specified maximum approval phase stage. Default is 4 for fully approved drugs.\nmaxdrugs : int\n           Specify the maximum number of drugs to retrieve. Default is 1000000.\n\nReturns:\n--------\nlist(dict)\n    A list of dictionaries containing information about the approved drugs.\n\nExamples:\n--------\n>>> from bioservices import ChEMBL\n>>> c = ChEMBL()\n>>> approved_drugs = c.get_approved_drugs(max_phase=4, maxdrugs=500)\n>>> print(approved_drugs)",
+            "api_type": "method",
+            "api_name": "bioservices.ChEMBL.get_approved_drugs",
+            "api_calling": "bioservices.ChEMBL.get_approved_drugs(max_phase=$, maxdrugs=$)",
+            "example": "bioservices.ChEMBL.get_approved_drugs(max_phase=4, maxdrugs=500)"
+        },
+        "get_assay": {
+            "Parameters": [
+                {
+                    "name": "query",
+                    "type": "str",
+                    "default": "None",
+                    "optional": true,
+                    "description": "Query string or entity identifier for assay search."
+                },
+                {
+                    "name": "limit",
+                    "type": "int",
+                    "default": "20",
+                    "optional": true,
+                    "description": "The maximum number of results to retrieve."
+                },
+                {
+                    "name": "offset",
+                    "type": "int",
+                    "default": "0",
+                    "optional": true,
+                    "description": "The number of results to skip before starting to collect the result set."
+                },
+                {
+                    "name": "filters",
+                    "type": "list[str]",
+                    "default": "None",
+                    "optional": true,
+                    "description": "List of filter criteria for narrowing the search results."
+                }
+            ],
+            "Returns": {
+                "type": "list[dict] (query=None) or dict (query=\"...\")",
+                "description": "A list of dictionaries or dictionary containing assay details matching the query parameters."
+            },
+            "Docstring": "Retrieve details about assays as recorded in the ChEMBL database.\n\nParameters:\n-----------\nquery : str\n    Query string or entity identifier for assay search.\nlimit : int\n    The maximum number of results to retrieve.\noffset : int\n    The number of results to skip before starting to collect the result set.\nfilters : list[str]\n    List of filter criteria for narrowing the search results.\n\nReturns:\n--------\nlist[dict] (query=None) or dict (query=\"...\")\n    A list of dictionaries or dictionary containing assay details matching the query parameters.\n\nExamples:\n--------\n>>> from bioservices import ChEMBL\n>>> c = ChEMBL()\n>>> res = c.get_assay(query=\"CHEMBL1217643\")",
+            "api_type": "method",
+            "api_name": "bioservices.ChEMBL.get_assay",
+            "api_calling": "bioservices.ChEMBL.get_assay(query=$, limit=$, offset=$, filters=$)",
+            "example": "bioservices.ChEMBL.get_assay(query=\"CHEMBL1217643\", limit=20, offset=0, filters=None)"
+        },
+        "get_binding_site": {
+            "Parameters": [
+                {
+                    "name": "limit",
+                    "type": "int",
+                    "default": "20",
+                    "optional": true,
+                    "description": "Maximum number of entries to retrieve, defaults to 20."
+                },
+                {
+                    "name": "offset",
+                    "type": "int",
+                    "default": "0",
+                    "optional": true,
+                    "description": "Starting point for the results to retrieve, defaults to 0."
+                },
+                {
+                    "name": "filters",
+                    "type": "list[str]",
+                    "default": "None",
+                    "optional": true,
+                    "description": "List of filter criteria for narrowing the search results."
+                }
+            ],
+            "Returns": {
+                "type": "list[dict]",
+                "description": "A list where each entry contains information about a target binding site."
+            },
+            "Docstring": "Retrieve data on target binding site definitions.\n\nParameters:\n-----------\nlimit : int\n    Maximum number of entries to retrieve, defaults to 20.\noffset : int\n    Starting point for the results to retrieve, defaults to 0.\nfilters : list[str]\n    List of filter criteria for narrowing the search results.\n\nReturns:\n--------\nlist[dict]\n    A list where each entry contains information about a target binding site.\n\nExamples:\n--------\n>>> from bioservices import ChEMBL\n>>> c = ChEMBL()\n>>> res = c.get_binding_site(limit=10, offset=0)\n>>> for entry in res:\n>>>     print(entry['site_name'])",
+            "api_type": "method",
+            "api_name": "bioservices.ChEMBL.get_binding_site",
+            "api_calling": "bioservices.ChEMBL.get_binding_site(limit=$, offset=$, filters=$)",
+            "example": "bioservices.ChEMBL.get_binding_site(limit=10, offset=0, filters=None)"
+        },
+        "get_biotherapeutic": {
+            "Parameters": [
+                {
+                    "name": "limit",
+                    "type": "int",
+                    "default": "20",
+                    "optional": true,
+                    "description": "Number of records to retrieve, not exceeding a predefined maximum."
+                },
+                {
+                    "name": "offset",
+                    "type": "int",
+                    "default": "0",
+                    "optional": true,
+                    "description": "Number of records to skip from the start."
+                },
+                {
+                    "name": "filters",
+                    "type": "list[str]",
+                    "default": "None",
+                    "optional": true,
+                    "description": "List of filter criteria for narrowing the search results."
+                }
+            ],
+            "Returns": {
+                "type": "list[dict]",
+                "description": "A list of dictionaries containing biotherapeutic molecules along with their data."
+            },
+            "Docstring": "Retrieve information about biotherapeutic molecules, including HELM notation and related data.\n\nParameters:\n-----------\nlimit : int, optional\n    Number of records to return, defaults to 20.\noffset : int, optional\n    Number of records to skip, defaults to 0.\nfilters : list[str], optional\n    Query filter string to refine results.\n\nReturns:\n--------\nlist[dict]\n    A list of dictionaries containing biotherapeutic molecule information including metadata.\n\nExamples:\n--------\n>>> from bioservices import ChEMBL\n>>> c = ChEMBL()\n>>> res = c.get_biotherapeutic(limit=10)",
+            "api_type": "method",
+            "api_name": "bioservices.ChEMBL.get_biotherapeutic",
+            "api_calling": "bioservices.ChEMBL.get_biotherapeutic(limit=$, offset=$, filters=$)",
+            "example": "bioservices.ChEMBL.get_biotherapeutic(limit=10, offset=0, filters=None)"
+        },
+        "get_cell_line": {
+            "Parameters": [
+                {
+                    "name": "limit",
+                    "type": "int",
+                    "default": "20",
+                    "optional": true,
+                    "description": "Number of entries to retrieve. Maximum limit is 1000."
+                },
+                {
+                    "name": "offset",
+                    "type": "int",
+                    "default": "0",
+                    "optional": true,
+                    "description": "The number of entries to skip before starting retrieval."
+                },
+                {
+                    "name": "filters",
+                    "type": "list[str]",
+                    "default": "None",
+                    "optional": true,
+                    "description": "List of filter criteria for narrowing the search results."
+                }
+            ],
+            "Returns": {
+                "type": "list[dict]",
+                "description": "List of cell line information records matching query parameters."
+            },
+            "Docstring": "Retrieve cell line information from the ChEMBL database.\n\nParameters:\n-----------\nlimit : int\n    Number of entries to retrieve. Maximum limit is 1000.\noffset : int\n    The number of entries to skip before starting retrieval.\nfilters : list[str]\n    Criteria for filtering records; specify fields and conditions.\n\nReturns:\n--------\nlist[dict]\n    List of cell line information records matching query parameters.\n\nExamples:\n---------\n>>> from bioservices import ChEMBL\n>>> c = ChEMBL()\n>>> res = c.get_cell_line(limit=10, offset=5, filters=None)",
+            "api_type": "method",
+            "api_name": "bioservices.ChEMBL.get_cell_line",
+            "api_calling": "bioservices.ChEMBL.get_cell_line(limit=$, offset=$, filters=$)",
+            "example": "bioservices.ChEMBL.get_cell_line(limit=20, offset=0, filters=None)"
+        },
+        "get_chembl_id_lookup": {
+            "Parameters": [
+                {
+                    "name": "query",
+                    "type": "str",
+                    "default": "None",
+                    "optional": true,
+                    "description": "Query string or entity identifier for ChEMBL ID lookup."
+                },
+                {
+                    "name": "limit",
+                    "type": "int",
+                    "default": "20",
+                    "optional": true,
+                    "description": "Maximum number of entities to retrieve in a single request."
+                },
+                {
+                    "name": "offset",
+                    "type": "int",
+                    "default": "0",
+                    "optional": true,
+                    "description": "Number of entities to skip from the start."
+                },
+                {
+                    "name": "filters",
+                    "type": "list[str]",
+                    "default": "None",
+                    "optional": true,
+                    "description": "List of filter criteria for narrowing the search results."
+                }
+            ],
+            "Returns": {
+                "type": "list[dict] (query=None) or dict (query=\"...\")",
+                "description": "A list of dictionaries or dictionary containing the information of ChEMBL ID entities."
+            },
+            "Docstring": "Retrieve information about ChEMBL IDs.\n\nParameters:\n-----------\nquery : str\n    Query string to look up ChEMBL IDs.\nlimit : int\n    Maximum number of entries in the response.\noffset : int\n    Skip the first 'offset' entries in the response.\nfilters : list[str]\n    Conditions to filter the results.\n\nReturns:\n--------\nlist[dict] (query=None) or dict (query=\"...\")\n    A list of dictionaries or dictionary containing the information of ChEMBL ID entities.\n\nExamples:\n--------\n>>> from bioservices import ChEMBL\n>>> c = ChEMBL()\n>>> res = c.get_chembl_id_lookup(query=\"CHEMBL123\", limit=20, offset=0, filters=None)",
+            "api_type": "method",
+            "api_name": "bioservices.ChEMBL.get_chembl_id_lookup",
+            "api_calling": "bioservices.ChEMBL.get_chembl_id_lookup(query=$, limit=$, offset=$, filters=$)",
+            "example": "bioservices.ChEMBL.get_chembl_id_lookup(query=\"CHEMBL123\", limit=20, offset=0, filters=None)"
+        },
+        "get_compound_record": {
+            "Parameters": [
+                {
+                    "name": "query",
+                    "type": "str",
+                    "default": "None",
+                    "optional": true,
+                    "description": "Query string or entity identifier for compound record search."
+                },
+                {
+                    "name": "limit",
+                    "type": "int",
+                    "default": "20",
+                    "optional": true,
+                    "description": "Number of records to retrieve."
+                },
+                {
+                    "name": "offset",
+                    "type": "int",
+                    "default": "0",
+                    "optional": true,
+                    "description": "Offset for the starting record."
+                },
+                {
+                    "name": "filters",
+                    "type": "list[str]",
+                    "default": "None",
+                    "optional": true,
+                    "description": "List of filter criteria for narrowing the search results."
+                }
+            ],
+            "Returns": {
+                "type": "list[dict] (query=None) or dict (query=\"...\")",
+                "description": "A list of dictionaries or dictionary containing the compound record details."
+            },
+            "Docstring": "Retrieve occurrence of a specified compound in a particular document.\n\nParameters:\n-----------\nquery : str\n    Specific query string or list of identifiers.\nlimit : int\n    Number of records to retrieve.\noffset : int\n    Offset for the starting record.\nfilters : list[str]\n    Filters to apply to the query.\n\nReturns:\n--------\nlist[dict] (query=None) or dict (query=\"...\")\n    A list of dictionaries or dictionary containing the compound record details.\n\nExamples:\n--------\n>>> from bioservices import ChEMBL\n>>> c = ChEMBL()\n>>> res = c.get_compound_record(query=\"1874935\", limit=20, offset=0, filters=None)",
+            "api_type": "method",
+            "api_name": "bioservices.ChEMBL.get_compound_record",
+            "api_calling": "bioservices.ChEMBL.get_compound_record(query=$, limit=$, offset=$, filters=$)",
+            "example": "bioservices.ChEMBL.get_compound_record(query=\"1874935\", limit=20, offset=0, filters=None)"
+        },
+        "get_compound_structural_alert": {
+            "Parameters": [
+                {
+                    "name": "query",
+                    "type": "str",
+                    "default": "None",
+                    "optional": true,
+                    "description": "Query string or entity identifier for compound structural alert search."
+                },
+                {
+                    "name": "limit",
+                    "type": "int",
+                    "default": "20",
+                    "optional": true,
+                    "description": "Defines the maximum number of records to retrieve at once."
+                },
+                {
+                    "name": "offset",
+                    "type": "int",
+                    "default": "0",
+                    "optional": true,
+                    "description": "Specifies the number of records to skip before beginning to fetch data."
+                },
+                {
+                    "name": "filters",
+                    "type": "list[str]",
+                    "default": "None",
+                    "optional": true,
+                    "description": "List of filter criteria for narrowing the search results."
+                }
+            ],
+            "Returns": {
+                "type": "list[dict] (query=None) or dict (query=\"...\")",
+                "description": "A list of structural alert dictionaries or single dictionary related to compounds that meet the query and filter criteria."
+            },
+            "Docstring": "Returns structural alerts in compounds based on the provided criteria.\n\nParameters:\n-----------\nquery : str\n    Specifies the query to filter or retrieve the structural alert details for a compound.\nlimit : int\n    Defines the maximum number of records to retrieve at once.\noffset : int\n    Specifies the number of records to skip before beginning to fetch data.\nfilters : list[str]\n    Contains optional filtering conditions for the query to narrow down results.\n\nReturns:\n--------\nlist[dict] (query=None) or dict (query=\"...\")\n    A list of structural alert dictionaries or single dictionary related to compounds that meet the query and filter criteria.\n\nExamples:\n--------\n>>> from bioservices import ChEMBL\n>>> c = ChEMBL()\n>>> res = c.get_compound_structural_alert(query='CHEMBL123', limit=20, offset=0, filters=None)\n>>> len(res)",
+            "api_type": "method",
+            "api_name": "bioservices.ChEMBL.get_compound_structural_alert",
+            "api_calling": "bioservices.ChEMBL.get_compound_structural_alert(query=$, limit=$, offset=$, filters=$)",
+            "example": "bioservices.ChEMBL.get_compound_structural_alert(query='CHEMBL123', limit=20, offset=0, filters=None)"
+        },
+        "get_document": {
+            "Parameters": [
+                {
+                    "name": "query",
+                    "type": "str",
+                    "default": "None",
+                    "optional": true,
+                    "description": "Query string or entity identifier for document search."
+                },
+                {
+                    "name": "limit",
+                    "type": "int",
+                    "default": "20",
+                    "optional": true,
+                    "description": "Limit the number of returned records (default is 20)."
+                },
+                {
+                    "name": "offset",
+                    "type": "int",
+                    "default": "0",
+                    "optional": true,
+                    "description": "The starting point for records to fetch (default is 0)."
+                },
+                {
+                    "name": "filters",
+                    "type": "list[str]",
+                    "default": "None",
+                    "optional": true,
+                    "description": "List of filter criteria for narrowing the search results."
+                }
+            ],
+            "Returns": {
+                "type": "list[dict] (query=None) or dict (query=\"...\")",
+                "description": "A list of dictionaries or dictionary containing metadata and documents extracted from the ChEMBL dataset."
+            },
+            "Docstring": "Retrieve details of documents/datasets from which assays have been extracted.\n\nParameters:\n-----------\nquery : str, optional\n    Specifies the query to identify the document/document set. Defaults to None.\nlimit : int, optional\n    Specifies the maximum number of records to return. Defaults to 20.\noffset : int, optional\n    Specifies the index of the first record to return. Defaults to 0.\nfilters : list[str], optional\n    Specifies additional constraints for query results. Defaults to no filters.\n\nReturns:\n--------\nlist[dict] (query=None) or dict (query=\"...\")\n    A list of dictionaries or dictionary containing metadata and documents extracted from the ChEMBL dataset.\n\nExamples:\n--------\n>>> from bioservices import ChEMBL\n>>> c = ChEMBL()\n>>> res = c.get_document(query=\"CHEMBL1123498\", limit=20, offset=0, filters=None)",
+            "api_type": "method",
+            "api_name": "bioservices.ChEMBL.get_document",
+            "api_calling": "bioservices.ChEMBL.get_document(query=$, limit=$, offset=$, filters=$)",
+            "example": "bioservices.ChEMBL.get_document_term(query=\"CHEMBL1123498\", limit=20, offset=0, filters=None)"
+        },
+        "get_document_similarity": {
+            "Parameters": [
+                {
+                    "name": "query",
+                    "type": "str",
+                    "default": "None",
+                    "optional": true,
+                    "description": "Query string or entity identifier for document similarity search."
+                },
+                {
+                    "name": "limit",
+                    "type": "int",
+                    "default": "20",
+                    "optional": true,
+                    "description": "Number of similar documents to retrieve."
+                },
+                {
+                    "name": "offset",
+                    "type": "int",
+                    "default": "0",
+                    "optional": true,
+                    "description": "Number of documents to skip before starting to retrieve."
+                },
+                {
+                    "name": "filters",
+                    "type": "list",
+                    "default": "None",
+                    "optional": true,
+                    "description": "List of conditions to apply to the search."
+                }
+            ],
+            "Returns": {
+                "type": "list[dict] (query=None) or dict (query=\"...\")",
+                "description": "A list of dictionaries or dictionary containing similar documents and associated metadata."
+            },
+            "Docstring": "Provides documents similar to a specified one.\n\nParameters:\n-----------\nquery : str\n    Identifier of the source document to compare.\nlimit : int\n    Number of similar documents to retrieve.\noffset : int\n    Number of documents to skip before starting to retrieve.\nfilters : list[str]\n    List of conditions to apply to the search.\n\nReturns:\n--------\nlist[dict] (query=None) or dict (query=\"...\")\n    A list of dictionaries or dictionary containing similar documents and associated metadata.\n\nExamples:\n--------\n>>> from bioservices import ChEMBL\n>>> c = ChEMBL()\n>>> res = c.get_document_similarity(limit=20, offset=0, filters=None)",
+            "api_type": "method",
+            "api_name": "bioservices.ChEMBL.get_document_similarity",
+            "api_calling": "bioservices.ChEMBL.get_document_similarity(query=$, limit=$, offset=$, filters=$)",
+            "example": "bioservices.ChEMBL.get_document_similarity(limit=20, offset=0, filters=None)"
+        },
+        "get_drug": {
+            "Parameters": [
+                {
+                    "name": "query",
+                    "type": "str",
+                    "default": "None",
+                    "optional": true,
+                    "description": "Query string or entity identifier for drug search."
+                },
+                {
+                    "name": "limit",
+                    "type": "int",
+                    "default": "20",
+                    "optional": true,
+                    "description": "Maximum number of results to be retrieved."
+                },
+                {
+                    "name": "offset",
+                    "type": "int",
+                    "default": "0",
+                    "optional": true,
+                    "description": "Number of results to skip from the start."
+                },
+                {
+                    "name": "filters",
+                    "type": "list[str]",
+                    "default": "None",
+                    "optional": true,
+                    "description": "List of filter criteria for narrowing the search results."
+                }
+            ],
+            "Returns": {
+                "type": "list[dict] (query=None) or dict (query=\"...\")",
+                "description": "A list of dictionaries or dictionary containing drug-related information."
+            },
+            "Docstring": "Retrieve information about approved drugs including applicants, patents, and research codes.\n\nParameters:\n-----------\nquery : str, list, int, or float, optional\n    Identifier(s) for the query if specified.\nlimit : int, optional\n    Maximum number of results to be retrieved. Default is 20.\noffset : int, optional\n    Number of results to skip from the start. Default is 0.\nfilters : list[str], optional\n    Query filters in list of strings format.\n\nReturns:\n--------\nlist[dict] (query=None) or dict (query=\"...\")\n    A list of dictionaries or dictionary containing drug-related information.\n\nExamples:\n--------\n>>> from bioservices import ChEMBL\n>>> c = ChEMBL()\n>>> data = c.get_drug(query=\"CHEMBL25\", limit=10)",
+            "api_type": "method",
+            "api_name": "bioservices.ChEMBL.get_drug",
+            "api_calling": "bioservices.ChEMBL.get_drug(query=$, limit=$, offset=$, filters=$)",
+            "example": "bioservices.ChEMBL.get_drug(query=\"CHEMBL25\", limit=10)"
+        },
+        "get_drug_indication": {
+            "Parameters": [
+                {
+                    "name": "query",
+                    "type": "str",
+                    "default": "None",
+                    "optional": true,
+                    "description": "Query string or entity identifier for drug indication search."
+                },
+                {
+                    "name": "limit",
+                    "type": "int",
+                    "default": "20",
+                    "optional": true,
+                    "description": "The maximum number of entries to retrieve for the query."
+                },
+                {
+                    "name": "offset",
+                    "type": "int",
+                    "default": "0",
+                    "optional": true,
+                    "description": "The number of entries to skip before starting to collect the result set."
+                },
+                {
+                    "name": "filters",
+                    "type": "list[str]",
+                    "default": "None",
+                    "optional": true,
+                    "description": "List of filter criteria for narrowing the search results."
+                }
+            ],
+            "Returns": {
+                "type": "list[dict] (query=None) or dict (query=\"...\")",
+                "description": "A list of dictionaries or dictionary containing joined drug indication data."
+            },
+            "Docstring": "Retrieves drug indication information by combining data for drugs and diseases.\n\nParameters:\n-----------\nquery : str\n    A specific query to identify the drug indication information.\nlimit : int\n    The maximum number of entries to retrieve for the query.\noffset : int\n    The number of entries to skip before starting to collect the result set.\nfilters : list[str]\n    A filter criteria to refine the query results.\n\nReturns:\n--------\nlist[dict] (query=None) or dict (query=\"...\")\n    A list of dictionaries or dictionary containing joined drug indication data.\n\nExamples:\n--------\n>>> from bioservices import ChEMBL\n>>> c = ChEMBL()\n>>> data = c.get_drug_indication(limit=50, offset=100)",
+            "api_type": "method",
+            "api_name": "bioservices.ChEMBL.get_drug_indication",
+            "api_calling": "bioservices.ChEMBL.get_drug_indication(query=$, limit=$, offset=$, filters=$)",
+            "example": "bioservices.ChEMBL.get_drug_indication(limit=50, offset=100)"
+        },
+        "get_go_slim": {
+            "Parameters": [
+                {
+                    "name": "query",
+                    "type": "str",
+                    "default": "None",
+                    "optional": true,
+                    "description": "Query string or entity identifier for GO slim search."
+                },
+                {
+                    "name": "limit",
+                    "type": "int",
+                    "default": "20",
+                    "optional": true,
+                    "description": "The maximum number of records to return in one request."
+                },
+                {
+                    "name": "offset",
+                    "type": "int",
+                    "default": "0",
+                    "optional": true,
+                    "description": "The number of records to skip before starting to return records."
+                },
+                {
+                    "name": "filters",
+                    "type": "list[str]",
+                    "default": "None",
+                    "optional": true,
+                    "description": "List of filter criteria for narrowing the search results."
+                }
+            ],
+            "Returns": {
+                "type": "list[dict] (query=None) or dict (query=\"...\")",
+                "description": "A list of dictionaries or dictionary containing the requested GO slim resources."
+            },
+            "Docstring": "Retrieve GO slim ontology data from the ChEMBL database.\n\nParameters:\n-----------\nquery : str or list or None\n    Optional identifier to specify specific GO slim resource(s) to retrieve.\nlimit : int\n    The maximum number of records to return in one request.\noffset : int\n    The number of records to skip before starting to return records.\nfilters : list[str] or None\n    Filters to apply for narrowing down the search results.\n\nReturns:\n--------\nlist[dict] (query=None) or dict (query=\"...\")\n    A list of dictionaries or dictionary containing the requested GO slim resources.\n\nExamples:\n--------\n>>> from bioservices import ChEMBL\n>>> c = ChEMBL()\n>>> res = c.get_go_slim(limit=10, offset=0, filters=None)",
+            "api_type": "method",
+            "api_name": "bioservices.ChEMBL.get_go_slim",
+            "api_calling": "bioservices.ChEMBL.get_go_slim(query=$, limit=$, offset=$, filters=$)",
+            "example": "bioservices.ChEMBL.get_go_slim(limit=10, offset=0, filters=None)"
+        },
+        "get_mechanism": {
+            "Parameters": [
+                {
+                    "name": "query",
+                    "type": "str",
+                    "default": "None",
+                    "optional": true,
+                    "description": "Query string or entity identifier for mechanism search."
+                },
+                {
+                    "name": "limit",
+                    "type": "int",
+                    "default": "20",
+                    "optional": true,
+                    "description": "Maximum number of results to return; use -1 for all available records."
+                },
+                {
+                    "name": "offset",
+                    "type": "int",
+                    "default": "0",
+                    "optional": true,
+                    "description": "Number of records to skip before starting to fetch results."
+                },
+                {
+                    "name": "filters",
+                    "type": "list[str]",
+                    "default": "None",
+                    "optional": true,
+                    "description": "List of filter criteria for narrowing the search results."
+                }
+            ],
+            "Returns": {
+                "type": "list[dict] (query=None) or dict (query=\"...\")",
+                "description": "List or dictionary of mechanism of action information records for FDA-approved drugs."
+            },
+            "Docstring": "Fetches mechanism of action information for FDA-approved drugs.\n\nParameters:\n-----------\nquery : str or list of str, optional\n    Specific entry or entries to fetch; can be None, a string, or a list of strings.\nlimit : int, optional\n    Maximum number of results to return; use -1 for all available records.\noffset : int, optional\n    Number of records to skip before starting to fetch results.\nfilters : list[str], optional\n    Filter criteria to apply to the query results.\n\nReturns:\n--------\nlist[dict] (query=None) or dict (query=\"...\")\n    List or dictionary of mechanism of action information records for FDA-approved drugs.\n\nExamples:\n---------\n>>> from bioservices import ChEMBL\n>>> c = ChEMBL()\n>>> res = c.get_mechanism(limit=20, offset=0, filters=None)",
+            "api_type": "method",
+            "api_name": "bioservices.ChEMBL.get_mechanism",
+            "api_calling": "bioservices.ChEMBL.get_mechanism(query=$, limit=$, offset=$, filters=$)",
+            "example": "bioservices.ChEMBL.get_mechanism(limit=20, offset=0, filters=None)"
+        },
+        "get_metabolism": {
+            "Parameters": [
+                {
+                    "name": "query",
+                    "type": "str",
+                    "default": "None",
+                    "optional": true,
+                    "description": "Query string or entity identifier for metabolism search."
+                },
+                {
+                    "name": "limit",
+                    "type": "int",
+                    "default": "20",
+                    "optional": true,
+                    "description": "Number of entries to retrieve, with a default value of 20."
+                },
+                {
+                    "name": "offset",
+                    "type": "int",
+                    "default": "0",
+                    "optional": true,
+                    "description": "Offset for the entries retrieval, with a default value of 0."
+                },
+                {
+                    "name": "filters",
+                    "type": "list[str]",
+                    "default": "None",
+                    "optional": true,
+                    "description": "List of filter criteria for narrowing the search results."
+                }
+            ],
+            "Returns": {
+                "type": "list[dict] (query=None) or dict (query=\"...\")",
+                "description": "A list of dictionaries or dictionary containing details about metabolic pathways, with references."
+            },
+            "Docstring": "Provides information about metabolic pathways with references.\n\nParameters:\n-----------\nquery : str, optional\n    Optional query string to fetch specific metabolic pathways.\nlimit : int\n    Number of entries to retrieve, default is 20.\noffset : int\n    Offset for entries retrieval, default is 0.\nfilters : list[str], optional\n    List of filters to apply for query.\n\nReturns:\n--------\nlist[dict] (query=None) or dict (query=\"...\")\n    A list of dictionaries or dictionary containing details about metabolic pathways, with references.\n\nExamples:\n--------\n>>> from bioservices import ChEMBL\n>>> c = ChEMBL()\n>>> res = c.get_metabolism(limit=50, offset=10)",
+            "api_type": "method",
+            "api_name": "bioservices.ChEMBL.get_metabolism",
+            "api_calling": "bioservices.ChEMBL.get_metabolism(query=$, limit=$, offset=$, filters=$)",
+            "example": "bioservices.ChEMBL.get_metabolism(query=None, limit=50, offset=10, filters=None)"
+        },
+        "get_molecule": {
+            "Parameters": [
+                {
+                    "name": "query",
+                    "type": "str",
+                    "default": "None",
+                    "optional": true,
+                    "description": "Query string or entity identifier for molecule search."
+                },
+                {
+                    "name": "limit",
+                    "type": "int",
+                    "default": "20",
+                    "optional": true,
+                    "description": "Number of molecules to retrieve. Maximum is 1000."
+                },
+                {
+                    "name": "offset",
+                    "type": "int",
+                    "default": "0",
+                    "optional": true,
+                    "description": "Number of molecules to skip before retrieving results."
+                },
+                {
+                    "name": "filters",
+                    "type": "list[str]",
+                    "default": "None",
+                    "optional": true,
+                    "description": "List of filter criteria for narrowing the search results."
+                }
+            ],
+            "Returns": {
+                "type": "list[dict] (query=None) or dict (query=\"...\")",
+                "description": "A list of dictionaries or dictionary with keys including 'page_meta' and 'molecules'."
+            },
+            "Docstring": "Fetches molecular data from the ChEMBL database.\n\nParameters:\n-----------\nquery : str or list[str] or None\n    A string query for molecule retrieval, a list of queries, or None.\nlimit : int\n    The maximum number of entries to retrieve per request.\noffset : int\n    The offset to skip for pagination.\nfilters : list[str] or None\n    Filtering conditions for the query.\n\nReturns:\n--------\nlist[dict] (query=None) or dict (query=\"...\")\n    A list of dictionaries or dictionary with keys including 'page_meta' and 'molecules'.\n\nExamples:\n--------\n>>> from bioservices import ChEMBL\n>>> c = ChEMBL()\n>>> res = c.get_molecule(limit=10)",
+            "api_type": "method",
+            "api_name": "bioservices.ChEMBL.get_molecule",
+            "api_calling": "bioservices.ChEMBL.get_molecule(query=$, limit=$, offset=$, filters=$)",
+            "example": "bioservices.ChEMBL.get_molecule(query='CHEMBL25', limit=10, offset=0, filters=None)"
+        },
+        "get_molecule_form": {
+            "Parameters": [
+                {
+                    "name": "query",
+                    "type": "str",
+                    "default": "None",
+                    "optional": true,
+                    "description": "Query string or entity identifier for molecule form search."
+                },
+                {
+                    "name": "limit",
+                    "type": "int",
+                    "default": "20",
+                    "optional": true,
+                    "description": "Maximum number of entries to return."
+                },
+                {
+                    "name": "offset",
+                    "type": "int",
+                    "default": "0",
+                    "optional": true,
+                    "description": "Number of entries to skip before retrieving results."
+                },
+                {
+                    "name": "filters",
+                    "type": "list[str]",
+                    "default": "None",
+                    "optional": true,
+                    "description": "List of filter criteria for narrowing the search results."
+                }
+            ],
+            "Returns": {
+                "type": "list[dict] (query=None) or dict (query=\"...\")",
+                "description": "A list of dictionaries or dictionary containing the relationships between molecule parents and salts."
+            },
+            "Docstring": "Relationships between molecule parents and salts.\n\nParameters:\n-----------\nquery : str, optional (default=None)\n    Identifies the targeted molecules. Possible values: single ID, list of IDs, or None to retrieve all entries.\nlimit : int, optional (default=20)\n    Maximum number of entries to return.\noffset : int, optional (default=0)\n    Number of entries to skip before retrieving results.\nfilters : list[str] or None, optional (default=None)\n    Filtering criteria as a list of strings in format 'key=value'.\n\nReturns:\n--------\nlist[dict] (query=None) or dict (query=\"...\")\n    A list of dictionaries or dictionary containing the relationships between molecule parents and salts.\n\nExamples:\n--------\n>>> from bioservices import ChEMBL\n>>> c = ChEMBL()\n>>> res = c.get_molecule_form(\"CHEMBL2\")\n>>> print(res['molecule_forms'])",
+            "api_type": "method",
+            "api_name": "bioservices.ChEMBL.get_molecule_form",
+            "api_calling": "bioservices.ChEMBL.get_molecule_form(query=$, limit=$, offset=$, filters=$)",
+            "example": "bioservices.ChEMBL.get_molecule_form(query=\"CHEMBL2\", limit=20, offset=0, filters=None)"
+        },
+        "get_organism": {
+            "Parameters": [
+                {
+                    "name": "query",
+                    "type": "str",
+                    "default": "None",
+                    "optional": true,
+                    "description": "Query string or entity identifier for organism search."
+                },
+                {
+                    "name": "limit",
+                    "type": "int",
+                    "default": "20",
+                    "optional": true,
+                    "description": "The number of records to retrieve."
+                },
+                {
+                    "name": "offset",
+                    "type": "int",
+                    "default": "0",
+                    "optional": true,
+                    "description": "The starting point for the retrieval."
+                },
+                {
+                    "name": "filters",
+                    "type": "list[str]",
+                    "default": "None",
+                    "optional": true,
+                    "description": "List of filter criteria for narrowing the search results."
+                }
+            ],
+            "Returns": {
+                "type": "list[dict] (query=None) or dict (query=\"...\")",
+                "description": "A list of dictionaries or dictionary containing organism-related data retrieved from ChEMBL."
+            },
+            "Docstring": "Retrieve data about an organism from the ChEMBL database.\n\nParameters:\n-----------\nquery : str, optional\n    Query string or entity identifier for organism search.\nlimit : int, optional\n    The number of records to retrieve. Default is 20.\noffset : int, optional\n    The starting point for the retrieval. Default is 0.\nfilters : list[str], optional\n    List of filter criteria for narrowing the search results.\n\nReturns:\n--------\nlist[dict] (query=None) or dict (query=\"...\")\n    A list of dictionaries or dictionary containing organism-related data retrieved from ChEMBL.\n\nExamples:\n---------\n>>> from bioservices import ChEMBL\n>>> c = ChEMBL()\n>>> res = c.get_organism(limit=10, offset=0, filters=None)\n>>> print(res)",
+            "api_type": "method",
+            "api_name": "bioservices.ChEMBL.get_organism",
+            "api_calling": "bioservices.ChEMBL.get_organism(query=$, limit=$, offset=$, filters=$)",
+            "example": "bioservices.ChEMBL.get_organism(limit=10, offset=0, filters=None)"
+        },
+        "get_similarity": {
+            "Parameters": [
+                {
+                    "name": "structure",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "Provide a valid existing substructure in SMILES format to look for in all molecules."
+                },
+                {
+                    "name": "similarity",
+                    "type": "int",
+                    "default": "80",
+                    "optional": true,
+                    "description": "Must be an integer greater than 70 and less than 100."
+                },
+                {
+                    "name": "limit",
+                    "type": "int",
+                    "default": "20",
+                    "optional": true,
+                    "description": "Maximum number of molecules to retrieve."
+                },
+                {
+                    "name": "offset",
+                    "type": "int",
+                    "default": "0",
+                    "optional": true,
+                    "description": "Number of molecules to skip before retrieval."
+                },
+                {
+                    "name": "filters",
+                    "type": "list[str]",
+                    "default": "None",
+                    "optional": true,
+                    "description": "List of filter criteria for narrowing the search results."
+                }
+            ],
+            "Returns": {
+                "type": "list[dict]",
+                "description": "A list of molecules matching the similarity search criteria."
+            },
+            "Docstring": "Conduct a similarity search for molecules in the ChEMBL database.\n\nParameters:\n-----------\nstructure : str\nProvide a valid existing substructure in SMILES format to look for in all molecules.\nsimilarity : int\nMust be an integer greater than 70 and less than 100.\nlimit : int\nMaximum number of molecules to retrieve.\noffset : int\nNumber of molecules to skip before retrieval.\nfilters : list\nList of filter conditions to refine the search.\n\nReturns:\n--------\nlist\nA list of molecules matching the similarity search criteria.\n\nExamples:\n--------\n>>> from bioservices import ChEMBL\n>>> c = ChEMBL()\n>>> res = c.get_similarity(\"CC(=O)Oc1ccccc1C(=O)O\", similarity=80)\n>>> print(res['molecules'])",
+            "api_type": "method",
+            "api_name": "bioservices.ChEMBL.get_similarity",
+            "api_calling": "bioservices.ChEMBL.get_similarity(structure=$, similarity=$, limit=$, offset=$, filters=$)",
+            "example": "bioservices.ChEMBL.get_similarity(structure=\"CC(=O)Oc1ccccc1C(=O)O\", similarity=85, limit=10, offset=0, filters=None)"
+        },
+        "get_source": {
+            "Parameters": [
+                {
+                    "name": "query",
+                    "type": "str",
+                    "default": "None",
+                    "optional": true,
+                    "description": "Query string or entity identifier for source search."
+                },
+                {
+                    "name": "limit",
+                    "type": "int",
+                    "default": "20",
+                    "optional": true,
+                    "description": "The maximum number of records to retrieve."
+                },
+                {
+                    "name": "offset",
+                    "type": "int",
+                    "default": "0",
+                    "optional": true,
+                    "description": "The number of records to skip in the retrieval process."
+                },
+                {
+                    "name": "filters",
+                    "type": "list[str]",
+                    "default": "None",
+                    "optional": true,
+                    "description": "List of filter criteria for narrowing the search results."
+                }
+            ],
+            "Returns": {
+                "type": "list[dict] (query=None) or dict (query=\"...\")",
+                "description": "A list of dictionaries or dictionary containing the documents or dataset source information."
+            },
+            "Docstring": "Retrieve information about document or dataset sources.\n\nParameters:\n-----------\nquery : str or None\n    A specific identifier or None to request general data.\nlimit : int\n    Maximum number of records to retrieve. Default is 20.\noffset : int\n    Records to skip during retrieval. Default is 0.\nfilters : list[str] or None\n    Optional conditional filters for retrieval.\n\nReturns:\n--------\nlist[dict] (query=None) or dict (query=\"...\")\n    A list of dictionaries or dictionary containing the documents or dataset source information.\n\nExamples:\n--------\n>>> from bioservices import ChEMBL\n>>> c = ChEMBL()\n>>> result = c.get_source(limit=10)",
+            "api_type": "method",
+            "api_name": "bioservices.ChEMBL.get_source",
+            "api_calling": "bioservices.ChEMBL.get_source(query=$, limit=$, offset=$, filters=$)",
+            "example": "bioservices.ChEMBL.get_source(limit=10, offset=0, filters=None)"
+        },
+        "get_status": {
+            "Parameters": [],
+            "Returns": {
+                "type": "dict",
+                "description": "A dictionary with information about database version and entry counts."
+            },
+            "Docstring": "This method provides a version overview and entry counts of the database, including activities, compound records, distinct compounds, publications, targets, etc.\n\nParameters:\n-----------\nNone\n\nReturns:\n--------\ndict\n    A dictionary with information about database version and entry counts.\n\nExamples:\n--------\n>>> from bioservices import ChEMBL\n>>> c = ChEMBL()\n>>> res = c.get_status()\n>>> print(res)",
+            "api_type": "method",
+            "api_name": "bioservices.ChEMBL.get_status",
+            "api_calling": "bioservices.ChEMBL.get_status()",
+            "example": "bioservices.ChEMBL.get_status()"
+        },
+        "get_status_resources": {
+            "Parameters": [],
+            "Returns": {
+                "type": "dict",
+                "description": "A dictionary containing the total counts of entries for each data resource in the ChEMBL database."
+            },
+            "Docstring": "Retrieves the number of entries for all available resources in the ChEMBL database.\n\nParameters:\n-----------\nNone\n\nReturns:\n--------\ndict\n    A dictionary containing the total counts of entries for each data resource in the ChEMBL database.\n\nExamples:\n--------\n>>> from bioservices import ChEMBL\n>>> c = ChEMBL()\n>>> res = c.get_status_resources()\n>>> print(res)",
+            "api_type": "method",
+            "api_name": "bioservices.ChEMBL.get_status_resources",
+            "api_calling": "bioservices.ChEMBL.get_status_resources()",
+            "example": "bioservices.ChEMBL.get_status_resources()"
+        },
+        "get_substructure": {
+            "Parameters": [
+                {
+                    "name": "structure",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "A valid substructure in SMILE format or ChEMBL ID."
+                },
+                {
+                    "name": "limit",
+                    "type": "int",
+                    "default": "20",
+                    "optional": true,
+                    "description": "Maximum number of results to return."
+                },
+                {
+                    "name": "offset",
+                    "type": "int",
+                    "default": "0",
+                    "optional": true,
+                    "description": "Number of initial results to skip."
+                },
+                {
+                    "name": "filters",
+                    "type": "list[str]",
+                    "default": "None",
+                    "optional": true,
+                    "description": "List of filter criteria for narrowing the search results."
+                }
+            ],
+            "Returns": {
+                "type": "list[dict]",
+                "description": "A list of molecules corresponding to the substructure search."
+            },
+            "Docstring": "Perform a substructure search based on the provided chemical structure.\n\nParameters:\n-----------\nstructure : str\n           A valid substructure in SMILE format or ChEMBL ID.\nlimit : int\n           Maximum number of results to return. Default is 20.\noffset : int\n           Number of initial results to skip. Default is 0.\nfilters : NoneType, optional\n           Additional search filters to narrow results. Default is None.\n\nReturns:\n--------\nlist\n    A list of molecules corresponding to the substructure search.\n\nExamples:\n---------\n>>> c = ChEMBL()\n>>> res = c.get_substructure(\"CC(=O)Oc1ccccc1C(=O)O\")",
+            "api_type": "method",
+            "api_name": "bioservices.ChEMBL.get_substructure",
+            "api_calling": "bioservices.ChEMBL.get_substructure(structure=$, limit=$, offset=$, filters=$)",
+            "example": "bioservices.ChEMBL.get_substructure(structure=\"CHEMBL25\", limit=20, offset=0, filters=None)"
+        },
+        "get_target": {
+            "Parameters": [
+                {
+                    "name": "query",
+                    "type": "str",
+                    "default": "None",
+                    "optional": true,
+                    "description": "Query string or entity identifier for target search."
+                },
+                {
+                    "name": "limit",
+                    "type": "int",
+                    "default": "20",
+                    "optional": true,
+                    "description": "The maximum number of results to retrieve. Use -1 to retrieve all."
+                },
+                {
+                    "name": "offset",
+                    "type": "int",
+                    "default": "0",
+                    "optional": true,
+                    "description": "The offset of the first result to retrieve for pagination."
+                },
+                {
+                    "name": "filters",
+                    "type": "list[str]",
+                    "default": "None",
+                    "optional": true,
+                    "description": "List of filter criteria for narrowing the search results."
+                }
+            ],
+            "Returns": {
+                "type": "list[dict] (query=None) or dict (query=\"...\")",
+                "description": "A list of dictionaries or dictionary representing targets."
+            },
+            "Docstring": "Retrieve targets, including proteins and non-proteins, as defined in assay definitions.\n\nParameters:\n-----------\nquery : str or None\n    The identifier of the target or None to retrieve all.\nlimit : int\n    The maximum number of results to retrieve. Use -1 to retrieve all.\noffset : int\n    The offset of the first result to retrieve for pagination.\nfilters : list[str] or None\n    A list of filters to apply to the search results.\n\nReturns:\n--------\nlist[dict] (query=None) or dict (query=\"...\")\n    A list of dictionaries or dictionary representing targets.\n\nExamples:\n--------\n>>> from bioservices import ChEMBL\n>>> s = ChEMBL(verbose=False)\n>>> resjson = s.get_target('CHEMBL240')",
+            "api_type": "method",
+            "api_name": "bioservices.ChEMBL.get_target",
+            "api_calling": "bioservices.ChEMBL.get_target(query=$, limit=$, offset=$, filters=$)",
+            "example": "bioservices.ChEMBL.get_target(query='CHEMBL240', limit=20, offset=0, filters=None)"
+        },
+        "get_target_component": {
+            "Parameters": [
+                {
+                    "name": "query",
+                    "type": "int",
+                    "default": "None",
+                    "optional": true,
+                    "description": "Query string or entity identifier for target compound search."
+                },
+                {
+                    "name": "limit",
+                    "type": "int",
+                    "default": "20",
+                    "optional": true,
+                    "description": "Number of entries to retrieve per request."
+                },
+                {
+                    "name": "offset",
+                    "type": "int",
+                    "default": "0",
+                    "optional": true,
+                    "description": "Starting offset for entry retrieval."
+                },
+                {
+                    "name": "filters",
+                    "type": "list[str]",
+                    "default": "None",
+                    "optional": true,
+                    "description": "List of filter criteria for narrowing the search results."
+                }
+            ],
+            "Returns": {
+                "type": "list[dict] (query=None) or dict (query=\"...\")",
+                "description": "List of dictionaries or dictionary containing detailed target component information."
+            },
+            "Docstring": "Retrieve comprehensive information about specific target components, including their sequence details.\n\nParameters:\n-----------\nquery : int\n    Query parameter for filtering results.\nlimit : int\n    Number of entries to retrieve per request.\noffset : int\n    Starting offset for entry retrieval.\nfilters : list[str]\n    Custom filters to apply to the query.\n\nReturns:\n--------\nlist[dict] (query=None) or dict (query=\"...\")\n    List of dictionaries or dictionary containing detailed target component information.\n\nExamples:\n--------\n>>> from bioservices import ChEMBL\n>>> c = ChEMBL()\n>>> res = c.get_target_component(query=1)\n>>> print(res['sequence'])",
+            "api_type": "method",
+            "api_name": "bioservices.ChEMBL.get_target_component",
+            "api_calling": "bioservices.ChEMBL.get_target_component(query=$, limit=$, offset=$, filters=$)",
+            "example": "bioservices.ChEMBL.get_target_component(query=1, limit=10, offset=0, filters=None)"
+        },
+        "get_target_relation": {
+            "Parameters": [
+                {
+                    "name": "query",
+                    "type": "str",
+                    "default": "None",
+                    "optional": true,
+                    "description": "Query string or entity identifier for target relation search."
+                },
+                {
+                    "name": "limit",
+                    "type": "int",
+                    "default": "20",
+                    "optional": true,
+                    "description": "Number of items to retrieve in one call."
+                },
+                {
+                    "name": "offset",
+                    "type": "int",
+                    "default": "0",
+                    "optional": true,
+                    "description": "Number of items to skip before starting retrieval."
+                },
+                {
+                    "name": "filters",
+                    "type": "list[str]",
+                    "default": "None",
+                    "optional": true,
+                    "description": "List of filter criteria for narrowing the search results."
+                }
+            ],
+            "Returns": {
+                "type": "list[dict] (query=None) or dict (query=\"...\")",
+                "description": "A list of dictionaries or dictionary containing details about target relations."
+            },
+            "Docstring": "Describes relations between targets.\n\nParameters:\n-----------\nquery : str\n    Identifier for the target or a set of IDs.\nlimit : int\n    Number of items to retrieve in one call.\noffset : int\n    Number of items to skip before starting retrieval.\nfilters : list[str]\n    Filters to apply on the query.\n\nReturns:\n--------\nlist[dict] (query=None) or dict (query=\"...\")\n    A list of dictionaries or dictionary containing details about target relations.\n\nExamples:\n--------\n>>> from bioservices import ChEMBL\n>>> c = ChEMBL()\n>>> res = c.get_target_relation('CHEMBL261')\n>>> print(res)",
+            "api_type": "method",
+            "api_name": "bioservices.ChEMBL.get_target_relation",
+            "api_calling": "bioservices.ChEMBL.get_target_relation(query=$, limit=$, offset=$, filters=$)",
+            "example": "bioservices.ChEMBL.get_target_relation(query='CHEMBL261', limit=20, offset=0, filters=None)"
+        },
+        "get_tissue": {
+            "Parameters": [
+                {
+                    "name": "query",
+                    "type": "str",
+                    "default": "None",
+                    "optional": true,
+                    "description": "The identifier or query term associated with the tissue resource."
+                },
+                {
+                    "name": "limit",
+                    "type": "int",
+                    "default": "20",
+                    "optional": true,
+                    "description": "The maximum number of results to retrieve."
+                },
+                {
+                    "name": "offset",
+                    "type": "int",
+                    "default": "0",
+                    "optional": true,
+                    "description": "The starting index of the results to return."
+                },
+                {
+                    "name": "filters",
+                    "type": "list[str]",
+                    "default": "None",
+                    "optional": true,
+                    "description": "List of filter criteria for narrowing the search results."
+                }
+            ],
+            "Returns": {
+                "type": "list[dict] (query=None) or dict (query=\"...\")",
+                "description": "A list of dictionaries or dictionary containing the tissue classification entries."
+            },
+            "Docstring": "Retrieves tissue classification information from the ChEMBL database.\n\nParameters:\n-----------\nquery : str\n    The identifier or term to search for in the tissue resource.\nlimit : int\n    Maximum number of results to retrieve.\noffset : int\n    Number of initial results to skip before returning the data.\nfilters : list[str]\n    Additional filtering criteria to apply during retrieval.\n\nReturns:\n--------\nlist[dict] (query=None) or dict (query=\"...\")\n    A list of dictionaries or dictionary containing the tissue classification entries.\n\nExamples:\n---------\n>>> from bioservices import ChEMBL\n>>> c = ChEMBL()\n>>> data = c.get_tissue(filters=['pref_name__contains=cervix'])",
+            "api_type": "method",
+            "api_name": "bioservices.ChEMBL.get_tissue",
+            "api_calling": "bioservices.ChEMBL.get_tissue(query=$, limit=$, offset=$, filters=$)",
+            "example": "bioservices.ChEMBL.get_tissue(limit=20, offset=0, filters=['pref_name__contains=cervix'])"
+        },
+        "get_xref_source": {
+            "Parameters": [
+                {
+                    "name": "query",
+                    "type": "str",
+                    "default": "None",
+                    "optional": true,
+                    "description": "The query to search cross-references"
+                },
+                {
+                    "name": "limit",
+                    "type": "int",
+                    "default": "20",
+                    "optional": true,
+                    "description": "The maximum number of records to retrieve."
+                },
+                {
+                    "name": "offset",
+                    "type": "int",
+                    "default": "0",
+                    "optional": true,
+                    "description": "The number of records to skip before starting to collect the result set."
+                },
+                {
+                    "name": "filters",
+                    "type": "list[str]",
+                    "default": "None",
+                    "optional": true,
+                    "description": "List of filter criteria for narrowing the search results."
+                }
+            ],
+            "Returns": {
+                "type": "list[dict] (query=None) or dict (query=\"...\")",
+                "description": "The search result matching the query parameters."
+            },
+            "Docstring": "Retrieves cross-reference information from ChEMBL's database using specified query parameters.\n\nParameters:\n-----------\nquery : str or list[str], optional\n    The query to search cross-references, either by string or list of strings.\nlimit : int, optional\n    The maximum number of records to retrieve. Default is 20.\noffset : int, optional\n    The number of records to skip before starting to collect the result set. Default is 0.\nfilters : list[str], optional\n    Filter conditions to refine the search result.\n\nReturns:\n--------\nlist[dict] (query=None) or dict (query=\"...\")\n    The search result matching the query parameters.\n\nExamples:\n---------\n>>> from bioservices import ChEMBL\n>>> c = ChEMBL()\n>>> res = c.get_xref_source(limit=5, offset=0)",
+            "api_type": "method",
+            "api_name": "bioservices.ChEMBL.get_xref_source",
+            "api_calling": "bioservices.ChEMBL.get_xref_source(query=$, limit=$, offset=$, filters=$)",
+            "example": "bioservices.ChEMBL.get_xref_source(limit=5, offset=0)"
+        },
+        "order_by": {
+            "Parameters": [
+                {
+                    "name": "data",
+                    "type": "list[dict]",
+                    "default": null,
+                    "optional": false,
+                    "description": "A list of dictionaries representing data records to be sorted."
+                },
+                {
+                    "name": "name",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "The field name by which the data should be ordered. Includes nested field access using '__'."
+                },
+                {
+                    "name": "filters",
+                    "type": "list[str]",
+                    "default": "None",
+                    "optional": true,
+                    "description": "List of filter criteria for narrowing the search results."
+                }
+            ],
+            "Returns": {
+                "type": "list[dict]",
+                "description": "The ordered list of data based on the provided field."
+            },
+            "Docstring": "Sorts a given list of data dictionaries based on a specified field.\n\nParameters:\n-----------\ndata : list[dict]\n    A list of dictionaries representing data records to be sorted.\nname : str\n    The field name by which the data should be ordered. Includes nested field access using '__'.\nascending : bool, optional\n    Specifies if the ordering should be in ascending order; defaults to True.\nfilters : list[str], optional\n    List of filter criteria for narrowing the search results.\n\nReturns:\n--------\nlist[dict]\n    The ordered list of data based on the provided field.\n\nExamples:\n---------\n>>> from bioservices import ChEMBL\n>>> c = ChEMBL()\n>>> data = c.get_molecule()\n>>> data1 = c.order_by(data, 'molecule_chembl_id')\n>>> data2 = c.order_by(data, 'molecule_properties__alogp')",
+            "api_type": "method",
+            "api_name": "bioservices.chembl.order_by",
+            "api_calling": "bioservices.chembl.order_by(data=$, name=$, ascending=$)",
+            "example": "bioservices.chembl.order_by(data=data, name='molecule_chembl_id')"
+        },
+        "search_activity": {
+            "Parameters": [
+                {
+                    "name": "query",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "Search query to filter the activities."
+                },
+                {
+                    "name": "limit",
+                    "type": "int",
+                    "default": "20",
+                    "optional": true,
+                    "description": "Number of records to retrieve."
+                },
+                {
+                    "name": "offset",
+                    "type": "int",
+                    "default": "0",
+                    "optional": true,
+                    "description": "Number of records to skip."
+                }
+            ],
+            "Returns": {
+                "type": "dict",
+                "description": "A dictionary containing activity values recorded in assays, up to the limit and offset specified."
+            },
+            "Docstring": "Retrieve activity values recorded in an assay.\n\nParameters:\n-----------\nquery : str\n    Search query to filter the activities.\nlimit : int, optional\n    Number of records to retrieve (default is 20).\noffset : int, optional\n    Number of records to skip before retrieving (default is 0).\n\nReturns:\n--------\ndict\n    A dictionary containing activity values recorded in assays, up to the limit and offset specified.\n\nExamples:\n--------\n>>> from bioservices import ChEMBL\n>>> c = ChEMBL()\n>>> res = c.search_activity(query=\"CHEMBL123\", limit=10, offset=5)",
+            "api_type": "method",
+            "api_name": "bioservices.ChEMBL.search_activity",
+            "api_calling": "bioservices.ChEMBL.search_activity(query=$, limit=$, offset=$)",
+            "example": "bioservices.ChEMBL.search_activity(query=\"CHEMBL123\", limit=10, offset=5)"
+        },
+        "search_assay": {
+            "Parameters": [
+                {
+                    "name": "query",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "The string query to search for assays in the ChEMBL database."
+                },
+                {
+                    "name": "limit",
+                    "type": "int",
+                    "default": "20",
+                    "optional": true,
+                    "description": "The maximum number of records to retrieve."
+                },
+                {
+                    "name": "offset",
+                    "type": "int",
+                    "default": "0",
+                    "optional": true,
+                    "description": "The index of the first record to retrieve."
+                }
+            ],
+            "Returns": {
+                "type": "dict",
+                "description": "A dictionary containing assay details matching the search query."
+            },
+            "Docstring": "Search and retrieve assay details from the ChEMBL database.\n\nParameters:\n-----------\nquery : str\n               The query string to search assays.\nlimit : int\n               The maximum number of records to retrieve.\noffset : int\n               The starting record index for retrieval.\n\nReturns:\n--------\ndict\n    A dictionary containing the assay details corresponding to the query.\n\nExamples:\n--------\n>>> c = ChEMBL()\n>>> result = c.search_assay(query='CHEMBL1217643', limit=20, offset=0)\n",
+            "api_type": "method",
+            "api_name": "bioservices.ChEMBL.search_assay",
+            "api_calling": "bioservices.ChEMBL.search_assay(query=$, limit=$, offset=$)",
+            "example": "bioservices.ChEMBL.search_assay(query='CHEMBL1217643', limit=20, offset=0)"
+        },
+        "search_chembl_id_lookup": {
+            "Parameters": [
+                {
+                    "name": "query",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "The search query to look up ChEMBL IDs."
+                },
+                {
+                    "name": "limit",
+                    "type": "int",
+                    "default": "20",
+                    "optional": true,
+                    "description": "The maximum number of results to return."
+                },
+                {
+                    "name": "offset",
+                    "type": "int",
+                    "default": "0",
+                    "optional": true,
+                    "description": "The starting point for the query results."
+                }
+            ],
+            "Returns": {
+                "type": "dict",
+                "description": "A dictionary containing the lookup results for the provided query."
+            },
+            "Docstring": "Look up ChEMBL ID entity type.\n\nParameters:\n-----------\nquery : str or None\n    The search query to look up ChEMBL IDs.\nlimit : int, optional, default=20\n    The maximum number of results to return.\noffset : int, optional, default=0\n    The starting point for the query results.\n\nReturns:\n--------\ndict\n    A dictionary containing the lookup results for the provided query.\n\nExamples:\n--------\n>>> c = ChEMBL()\n>>> res = c.search_chembl_id_lookup(query=\"CHEMBL25\", limit=10, offset=0)",
+            "api_type": "method",
+            "api_name": "bioservices.ChEMBL.search_chembl_id_lookup",
+            "api_calling": "bioservices.ChEMBL.search_chembl_id_lookup(query=$, limit=$, offset=$)",
+            "example": "bioservices.ChEMBL.search_chembl_id_lookup(query=\"CHEMBL25\", limit=10, offset=0)"
+        },
+        "search_document": {
+            "Parameters": [
+                {
+                    "name": "query",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "Query string to search for in documents."
+                },
+                {
+                    "name": "limit",
+                    "type": "int",
+                    "default": "20",
+                    "optional": true,
+                    "description": "Number of results to retrieve."
+                },
+                {
+                    "name": "offset",
+                    "type": "int",
+                    "default": "0",
+                    "optional": true,
+                    "description": "Start position of results to retrieve."
+                }
+            ],
+            "Returns": {
+                "type": "dict",
+                "description": "A dictionary containing the search results."
+            },
+            "Docstring": "Perform a search for documents within the ChEMBL database.\n\nParameters:\n-----------\nquery : str\n    Query string to search for in documents.\nlimit : int\n    Number of results to retrieve.\noffset : int\n    Start position of results to retrieve.\n\nReturns:\n--------\ndict\n    A dictionary containing the search results.\n\nExamples:\n--------\n>>> from bioservices import ChEMBL\n>>> c = ChEMBL()\n>>> res = c.search_document(query='cancer', limit=10, offset=0)\n>>> print(res)",
+            "api_type": "method",
+            "api_name": "bioservices.ChEMBL.search_document",
+            "api_calling": "bioservices.ChEMBL.search_document(query=$, limit=$, offset=$)",
+            "example": "bioservices.ChEMBL.search_document(query='cancer', limit=10, offset=0)"
+        },
+        "search_molecule": {
+            "Parameters": [
+                {
+                    "name": "query",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "The molecule identifier or criterion for searching, such as synonyms, SMILE strings, or InChI Key."
+                },
+                {
+                    "name": "limit",
+                    "type": "int",
+                    "default": "20",
+                    "optional": true,
+                    "description": "The maximum number of results to return. Default is 20."
+                },
+                {
+                    "name": "offset",
+                    "type": "int",
+                    "default": "0",
+                    "optional": true,
+                    "description": "The initial index from which search results are returned. Default is 0."
+                }
+            ],
+            "Returns": {
+                "type": "dict",
+                "description": "A dictionary containing search results and associated data or notes."
+            },
+            "Docstring": "Search for molecule data in the ChEMBL database using specific queries.\n\n    Parameters:\n    -----------\n    query : str\n                   The molecule identifier or criterion for searching, such as synonyms, SMILE strings, or InChI Key.\n    limit : int\n                   The maximum number of results to return. Default is 20.\n    offset : int\n                   The initial index from which search results are returned. Default is 0.\n\n    Returns:\n    --------\n    dict\n        A dictionary containing search results and associated data or notes.\n\n    Examples:\n    --------\n    >>> from bioservices import ChEMBL\n    >>> c = ChEMBL()\n    >>> res = c.search_molecule('aspirin')",
+            "api_type": "method",
+            "api_name": "bioservices.ChEMBL.search_molecule",
+            "api_calling": "bioservices.ChEMBL.search_molecule(query=$, limit=$, offset=$)",
+            "example": "bioservices.ChEMBL.search_molecule(query='aspirin', limit=20, offset=0)"
+        }, 
+        "search_target": {
+            "Parameters": [
+                {
+                    "name": "query",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "Query string to search for a target. Example: gene name or synonyms."
+                },
+                {
+                    "name": "limit",
+                    "type": "int",
+                    "default": "20",
+                    "optional": true,
+                    "description": "Number of results to retrieve. Must be greater than zero and less than or equal to 1000."
+                },
+                {
+                    "name": "offset",
+                    "type": "int",
+                    "default": "0",
+                    "optional": true,
+                    "description": "Number of results to skip before returning data."
+                }
+            ],
+            "Returns": {
+                "type": "dict",
+                "description": "A dictionary containing the search results with detailed target data."
+            },
+            "Docstring": "Search for targets (protein and non-protein) based on provided query.\n\nParameters:\n-----------\nquery : str\n    Query string to search for a target. Example: gene name or synonyms.\nlimit : int\n    Number of results to retrieve. Must be greater than zero and less than or equal to 1000.\noffset : int\n    Number of results to skip before returning data.\n\nReturns:\n--------\ndict\n    A dictionary containing the search results with detailed target data.\n\nExamples:\n--------\n>>> from bioservices import ChEMBL\n>>> c = ChEMBL()\n>>> res = c.search_target('GABRB2')\n>>> len(res['targets'])",
+            "api_type": "method",
+            "api_name": "bioservices.ChEMBL.search_target",
+            "api_calling": "bioservices.ChEMBL.search_target(query=$, limit=$, offset=$)",
+            "example": "bioservices.ChEMBL.search_target(query=\"GABRB2\", limit=20, offset=0)"
+        }
+    }
+}

@@ -1,0 +1,721 @@
+{
+    "reactome": {
+        "get_complex_subunits": {
+            "Parameters": [
+                {
+                    "name": "identifier",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "The complex for which subunits are requested."
+                },
+                {
+                    "name": "excludeStructures",
+                    "type": "bool",
+                    "default": false,
+                    "optional": true,
+                    "description": "Specifies whether contained complexes and entity sets are excluded in the response."
+                }
+            ],
+            "Returns": {
+                "type": "list",
+                "description": "A list with the entities contained in a given complex."
+            },
+            "Docstring": "Retrieves the list of subunits that constitute any given complex. In case the complex comprises other complexes, this method recursively traverses the content returning each contained PhysicalEntity. Contained complexes and entity sets can be excluded by setting the `excludeStructures` optional parameter to `True`.\n\nParameters:\n-----------\nidentifier : str\n    The complex for which subunits are requested.\nexcludeStructures : bool, optional\n    Specifies whether contained complexes and entity sets are excluded in the response.\n\nReturns:\n--------\nlist\n    A list with the entities contained in a given complex.\n\nExamples:\n--------\n>>> r.get_complex_subunits(\"R-HSA-5674003\", excludeStructures=True)",
+            "api_type": "method",
+            "api_name": "bioservices.Reactome.get_complex_subunits",
+            "api_calling": "bioservices.Reactome.get_complex_subunits(identifier=$, excludeStructures=$)",
+            "example": ">>> r.get_complex_subunits(\"R-HSA-5674003\", excludeStructures=True)"
+        },
+        "get_complexes": {
+            "Parameters": [
+                {
+                    "name": "resource",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "The resource of the identifier for which complexes are requested (e.g. UniProt)."
+                },
+                {
+                    "name": "identifier",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "The identifier for which complexes are requested."
+                }
+            ],
+            "Returns": {
+                "type": "list",
+                "description": "A list of complexes that contain the given pair of (identifier, resource)."
+            },
+            "Docstring": "Retrieves the list of complexes that contain a given (identifier, resource). The method deconstructs the complexes into all its participants to do so.\n\nParameters:\n-----------\nresource : str\n    The resource of the identifier for which complexes are requested (e.g. UniProt).\nidentifier : str\n    The identifier for which complexes are requested.\n\nReturns:\n--------\nlist\n    A list of complexes that contain the given pair of (identifier, resource).\n\nExamples:\n--------\n>>> r.get_complexes('UniProt', 'P43403')",
+            "api_type": "method",
+            "api_name": "bioservices.Reactome.get_complexes",
+            "api_calling": "bioservices.Reactome.get_complexes(resource=$, identifier=$)",
+            "example": ">>> r.get_complexes(resource='UniProt', identifier='P43403')"
+        },
+        "get_discover": {
+            "Parameters": [
+                {
+                    "name": "identifier",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "The unique identifier representing the Reactome event (reaction or pathway)."
+                }
+            ],
+            "Returns": {
+                "type": "dict",
+                "description": "A JSON-formatted dictionary conforming to schema.org for the specified Reactome event."
+            },
+            "Docstring": "For each event (reaction or pathway), generates a JSON representation conforming to schema.org. This is mainly used by search engines to index the data.\n\nParameters:\n-----------\nidentifier : str\n    The unique identifier representing the Reactome event (reaction or pathway).\n\nReturns:\n--------\ndict\n    A JSON-formatted dictionary conforming to schema.org for the specified Reactome event.\n\nExamples:\n--------\n>>> r.get_discover(\"R-HSA-446203\")",
+            "api_type": "method",
+            "api_name": "bioservices.Reactome.get_discover",
+            "api_calling": "bioservices.Reactome.get_discover(identifier=$)",
+            "example": ">>> r.get_discover(\"R-HSA-446203\")"
+        },
+        "get_diseases": {
+            "Parameters": [],
+            "Returns": {
+                "type": "list",
+                "description": "A list of disease objects retrieved from the Reactome knowledgebase."
+            },
+            "Docstring": "Retrieve a list of disease objects annotated in the Reactome knowledgebase.\n\nParameters:\n-----------\nNone\n\nReturns:\n--------\nlist\n    A list of disease objects available in Reactome.\n\nExamples:\n--------\n>>> r.get_diseases()",
+            "api_type": "method",
+            "api_name": "bioservices.Reactome.get_diseases",
+            "api_calling": "bioservices.Reactome.get_diseases()",
+            "example": ">>> r.get_diseases()"
+        },
+        "get_diseases_doid": {
+            "Parameters": [],
+            "Returns": {
+                "type": "dict",
+                "description": "A dictionary where keys are identifiers and values are Disease Ontology IDs (DOIDs) annotated in Reactome."
+            },
+            "Docstring": "Retrieve the list of Disease Ontology IDs (DOIDs) annotated in Reactome.\n\nReturns:\n--------\ndict\n    A dictionary containing Disease Ontology IDs annotated in Reactome.\n\nExamples:\n--------\n>>> Reactome().get_diseases_doid()",
+            "api_type": "method",
+            "api_name": "bioservices.Reactome.get_diseases_doid",
+            "api_calling": "bioservices.Reactome.get_diseases_doid()",
+            "example": ">>> Reactome().get_diseases_doid()"
+        },
+        "get_entity_componentOf": {
+            "Parameters": [
+                {
+                    "name": "identifier",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "The identifier of the entity to be queried."
+                }
+            ],
+            "Returns": {
+                "type": "list",
+                "description": "A list of larger structures containing the specified entity."
+            },
+            "Docstring": "Retrieves the list of structures (Complexes and Sets) that include the given entity as their component. The list includes only simplified entries (type, names, ids).\n\nParameters:\n-----------\nidentifier : str\n    The identifier of the entity to be queried.\n\nReturns:\n--------\nlist\n    A list of larger structures containing the specified entity.\n\nExamples:\n--------\n>>> r.get_entity_componentOf(\"R-HSA-199420\")",
+            "api_type": "method",
+            "api_name": "bioservices.Reactome.get_entity_componentOf",
+            "api_calling": "bioservices.Reactome.get_entity_componentOf(identifier=$)",
+            "example": ">>> r.get_entity_componentOf(\"R-HSA-199420\")"
+        },
+        "get_entity_otherForms": {
+            "Parameters": [
+                {
+                    "name": "identifier",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "The identifier of the PhysicalEntity for which other forms are requested."
+                }
+            ],
+            "Returns": {
+                "type": "list",
+                "description": "A list of alternative forms of the provided PhysicalEntity, each represented as a dictionary."
+            },
+            "Docstring": "Retrieves a list containing all other forms of the given PhysicalEntity. These forms share the same ReferenceEntity identifier.\n\nParameters:\n-----------\nidentifier : str\n    The identifier of the PhysicalEntity for which other forms are requested.\n\nReturns:\n--------\nlist\n    A list of other forms of the provided PhysicalEntity.\n\nExamples:\n--------\n>>> r.get_entity_otherForms(\"R-HSA-199420\")",
+            "api_type": "method",
+            "api_name": "bioservices.Reactome.get_entity_otherForms",
+            "api_calling": "bioservices.Reactome.get_entity_otherForms(identifier=$)",
+            "example": ">>> r.get_entity_otherForms(\"R-HSA-199420\")"
+        },
+        "get_event_ancestors": {
+            "Parameters": [
+                {
+                    "name": "identifier",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "The event for which the ancestors are requested."
+                }
+            ],
+            "Returns": {
+                "type": "list",
+                "description": "A list of all possible paths from the requested event to the top-level pathway(s)."
+            },
+            "Docstring": "Retrieves all possible ancestor paths from a given Reactome event (pathway or reaction) to top-level pathways.\n\nParameters:\n-----------\nidentifier : str\n    The event for which the ancestors are requested.\n\nReturns:\n--------\nlist\n    A list of possible ancestor paths.\n\nExamples:\n--------\n>>> r.get_event_ancestors(\"R-HSA-5673001\")",
+            "api_type": "method",
+            "api_name": "bioservices.Reactome.get_event_ancestors",
+            "api_calling": "bioservices.Reactome.get_event_ancestors(identifier=$)",
+            "example": ">>> r.get_event_ancestors(\"R-HSA-5673001\")"
+        },
+        "get_eventsHierarchy": {
+            "Parameters": [
+                {
+                    "name": "species",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "Allowed species filter: SpeciesName (e.g., Homo sapiens) or SpeciesTaxId (e.g., 9606)."
+                }
+            ],
+            "Returns": {
+                "type": "list",
+                "description": "A list of tree structures, each representing the full event hierarchy for the specified species."
+            },
+            "Docstring": "Retrieves the full event hierarchy for a given species by following all 'hasEvent' relationships. Each tree corresponds to a TopLevelPathway and contains PathwayBrowserNodes with detailed metadata.\n\nParameters:\n-----------\nspecies : str\n    Allowed species filter: SpeciesName (e.g., Homo sapiens) or SpeciesTaxId (e.g., 9606).\n\nReturns:\n--------\nlist\n    A list of hierarchical event trees for the specified species.\n\nExamples:\n--------\n>>> r.get_eventsHierarchy('9606')",
+            "api_type": "method",
+            "api_name": "bioservices.Reactome.get_eventsHierarchy",
+            "api_calling": "bioservices.Reactome.get_eventsHierarchy(species=$)",
+            "example": ">>> r.get_eventsHierarchy('9606')"
+        },
+        "get_exporter_diagram": {
+            "Parameters": [
+                {
+                    "name": "identifier",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "Event identifier (pathway, subpathway, or reaction) for which the diagram is exported."
+                },
+                {
+                    "name": "ext",
+                    "type": "str",
+                    "default": "png",
+                    "optional": true,
+                    "description": "File extension/format for export (png, jpeg, jpg, svg, gif)."
+                },
+                {
+                    "name": "quality",
+                    "type": "int",
+                    "default": 5,
+                    "optional": true,
+                    "description": "Result image quality between 1 and 10."
+                },
+                {
+                    "name": "diagramProfile",
+                    "type": "str",
+                    "default": "Modern",
+                    "optional": true,
+                    "description": "Diagram color scheme (Modern or Standard)."
+                },
+                {
+                    "name": "analysisProfile",
+                    "type": "str",
+                    "default": "Standard",
+                    "optional": true,
+                    "description": "Analysis color scheme."
+                },
+                {
+                    "name": "filename",
+                    "type": "str",
+                    "default": null,
+                    "optional": true,
+                    "description": "Local file path to save the diagram. If omitted, raw binary data is returned."
+                }
+            ],
+            "Returns": {
+                "type": "any",
+                "description": "Raw binary data of the diagram if not saved; otherwise, returns None."
+            },
+            "Docstring": "Exports a given pathway diagram to the specified raster format. For subpathways and reactions, the parent pathway is used for rendering.\n\nParameters:\n-----------\nidentifier : str\n    Event identifier (pathway, subpathway, or reaction).\next : str, optional\n    File extension/format (png, jpeg, jpg, svg, gif). Default is 'png'.\nquality : int, optional\n    Image quality between 1 and 10. Default is 5.\ndiagramProfile : str, optional\n    Diagram color scheme ('Modern' or 'Standard').\nanalysisProfile : str, optional\n    Analysis color scheme. Default is 'Standard'.\nfilename : str, optional\n    Path to save the diagram. If omitted, returns raw data.\n\nReturns:\n--------\nany\n    Raw binary data if `filename` is None; otherwise, None.\n\nExamples:\n--------\n>>> r.get_exporter_diagram(identifier='R-HSA-5673001', filename='diagram.png')",
+            "api_type": "method",
+            "api_name": "bioservices.Reactome.get_exporter_diagram",
+            "api_calling": "bioservices.Reactome.get_exporter_diagram(identifier=$, ext=$, quality=$, diagramProfile=$, analysisProfile=$, filename=$)",
+            "example": ">>> r.get_exporter_diagram(identifier='R-HSA-5673001', ext='png', quality=5, diagramProfile='Modern', analysisProfile='Standard', filename='diagram.png')"
+        },
+        "get_exporter_fireworks": {
+            "Parameters": [],
+            "Returns": {
+                "type": null,
+                "description": "Not implemented."
+            },
+            "Docstring": "This method is marked as not implemented and does not perform any actions.",
+            "api_type": "method",
+            "api_name": "bioservices.Reactome.get_exporter_fireworks",
+            "api_calling": "bioservices.Reactome.get_exporter_fireworks()",
+            "example": ""
+        },
+        "get_exporter_reaction": {
+            "Parameters": [],
+            "Returns": {
+                "type": null,
+                "description": "Not implemented."
+            },
+            "Docstring": "This method is currently unimplemented and has no functional behavior.",
+            "api_type": "method",
+            "api_name": "bioservices.Reactome.get_exporter_reaction",
+            "api_calling": "bioservices.Reactome.get_exporter_reaction()",
+            "example": ""
+        },
+        "get_exporter_sbml": {
+            "Parameters": [
+                {
+                    "name": "identifier",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "DbId or StId of the requested database object."
+                }
+            ],
+            "Returns": {
+                "type": "str",
+                "description": "An SBML-formatted string representing the requested pathway."
+            },
+            "Docstring": "Exports the given pathway to SBML format.\n\nParameters:\n-----------\nidentifier : str\n    DbId or StId of the requested database object.\n\nReturns:\n--------\nstr\n    An SBML formatted string representing the requested pathway.\n\nExamples:\n--------\n>>> r.get_exporter_sbml(identifier=\"R-HSA-68616\")",
+            "api_type": "method",
+            "api_name": "bioservices.Reactome.get_exporter_sbml",
+            "api_calling": "bioservices.Reactome.get_exporter_sbml(identifier=$)",
+            "example": ">>> r.get_exporter_sbml(identifier=\"R-HSA-68616\")"
+        },
+        "get_interactors_psicquic_molecule_details": {
+            "Parameters": [],
+            "Returns": {
+                "type": null,
+                "description": "Not implemented."
+            },
+            "Docstring": "Retrieve clustered interaction, sorted by score, for a given accession by resource. (Not yet implemented.)",
+            "api_type": "method",
+            "api_name": "bioservices.Reactome.get_interactors_psicquic_molecule_details",
+            "api_calling": "bioservices.Reactome.get_interactors_psicquic_molecule_details()",
+            "example": ""
+        },
+        "get_interactors_psicquic_molecule_summary": {
+            "Parameters": [],
+            "Returns": {
+                "type": null,
+                "description": "Not implemented."
+            },
+            "Docstring": "Retrieve a summary of a given accession by resource. (Not yet implemented.)",
+            "api_type": "method",
+            "api_name": "bioservices.Reactome.get_interactors_psicquic_molecule_summary",
+            "api_calling": "bioservices.Reactome.get_interactors_psicquic_molecule_summary()",
+            "example": ""
+        },
+        "get_interactors_psicquic_resources": {
+            "Parameters": [],
+            "Returns": {
+                "type": "list",
+                "description": "A list of services available in PSICQUIC registries."
+            },
+            "Docstring": "Retrieve a list of all PSICQUIC Registries services.\n\nReturns:\n--------\nlist\n    A list of available PSICQUIC services.\n\nExamples:\n--------\n>>> Reactome.get_interactors_psicquic_resources()",
+            "api_type": "method",
+            "api_name": "bioservices.Reactome.get_interactors_psicquic_resources",
+            "api_calling": "bioservices.Reactome.get_interactors_psicquic_resources()",
+            "example": ">>> Reactome.get_interactors_psicquic_resources()"
+        },
+        "get_interactors_static_molecule_details": {
+            "Parameters": [],
+            "Returns": {
+                "type": null,
+                "description": "Not implemented."
+            },
+            "Docstring": "Retrieve detailed interaction information of a molecule. (Not yet implemented.)",
+            "api_type": "method",
+            "api_name": "bioservices.Reactome.get_interactors_static_molecule_details",
+            "api_calling": "bioservices.Reactome.get_interactors_static_molecule_details()",
+            "example": ""
+        },
+        "get_interactors_static_molecule_pathways": {
+            "Parameters": [],
+            "Returns": {
+                "type": null,
+                "description": "Not implemented."
+            },
+            "Docstring": "Retrieve a list of lower-level pathways where the interacting molecules can be found. (Not yet implemented.)",
+            "api_type": "method",
+            "api_name": "bioservices.Reactome.get_interactors_static_molecule_pathways",
+            "api_calling": "bioservices.Reactome.get_interactors_static_molecule_pathways()",
+            "example": ""
+        },
+        "get_interactors_static_molecule_summary": {
+            "Parameters": [],
+            "Returns": {
+                "type": null,
+                "description": "Not implemented."
+            },
+            "Docstring": "Retrieve a summary of a given accession. (Not yet implemented.)",
+            "api_type": "method",
+            "api_name": "bioservices.Reactome.get_interactors_static_molecule_summary",
+            "api_calling": "bioservices.Reactome.get_interactors_static_molecule_summary()",
+            "example": ""
+        },
+        "get_mapping_identifier_pathways": {
+            "Parameters": [
+                {
+                    "name": "resource",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "The resource associated with the identifier (e.g. UniProt)."
+                },
+                {
+                    "name": "identifier",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "The specific identifier to retrieve pathways for."
+                }
+            ],
+            "Returns": {
+                "type": "list",
+                "description": "A list of pathways associated with the provided resource and identifier."
+            },
+            "Docstring": "Retrieve the pathways associated with a specific resource and identifier in the Reactome database.\n\nParameters:\n-----------\nresource : str\n    The resource associated with the identifier.\nidentifier : str\n    The unique identifier to retrieve pathways for.\n\nReturns:\n--------\nlist\n    A list of pathways associated with the provided resource and identifier.\n\nExamples:\n--------\n>>> r.get_mapping_identifier_pathways(\"UniProt\", \"P43403\")",
+            "api_type": "method",
+            "api_name": "bioservices.Reactome.get_mapping_identifier_pathways",
+            "api_calling": "bioservices.Reactome.get_mapping_identifier_pathways(resource=$, identifier=$)",
+            "example": ">>> r.get_mapping_identifier_pathways(resource=\"UniProt\", identifier=\"P43403\")"
+        },
+        "get_mapping_identifier_reactions": {
+            "Parameters": [
+                {
+                    "name": "resource",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "The resource of the identifier (e.g. UniProt)."
+                },
+                {
+                    "name": "identifier",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "The specific identifier to retrieve reactions for."
+                }
+            ],
+            "Returns": {
+                "type": "json",
+                "description": "A JSON object containing mapping information about reactions."
+            },
+            "Docstring": "Retrieve mapping information about reactions in Reactome.\n\nParameters:\n-----------\nresource : str\n    The resource of the identifier (e.g. UniProt).\nidentifier : str\n    The specific identifier to retrieve reactions for.\n\nReturns:\n--------\njson\n    A JSON object containing mapping information about reactions.\n\nExamples:\n--------\n>>> r.get_mapping_identifier_reactions(\"UniProt\", \"P43403\")",
+            "api_type": "method",
+            "api_name": "bioservices.Reactome.get_mapping_identifier_reactions",
+            "api_calling": "bioservices.Reactome.get_mapping_identifier_reactions(resource=$, identifier=$)",
+            "example": ">>> r.get_mapping_identifier_reactions(\"UniProt\", \"P43403\")"
+        },
+        "get_pathway_containedEvents": {
+            "Parameters": [
+                {
+                    "name": "identifier",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "The unique event identifier for which contained events are requested."
+                }
+            ],
+            "Returns": {
+                "type": "list",
+                "description": "A list of contained events represented in structured Python objects."
+            },
+            "Docstring": "Retrieve all events contained within a specified parent event, recursively traversing subpathways and reactions.\n\nParameters:\n-----------\nidentifier : str\n    The unique event identifier.\n\nReturns:\n--------\nlist\n    A list of contained events represented in structured Python objects.\n\nExamples:\n--------\n>>> r.get_pathway_containedEvents(identifier=\"R-HSA-5673001\")",
+            "api_type": "method",
+            "api_name": "bioservices.Reactome.get_pathway_containedEvents",
+            "api_calling": "bioservices.Reactome.get_pathway_containedEvents(identifier=$)",
+            "example": ">>> r.get_pathway_containedEvents(identifier=\"R-HSA-5673001\")"
+        },
+        "get_pathway_containedEvents_by_attribute": {
+            "Parameters": [
+                {
+                    "name": "identifier",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "The event identifier for which the contained events' attributes are requested."
+                },
+                {
+                    "name": "attribute",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "The attribute to be filtered and returned for each contained event."
+                }
+            ],
+            "Returns": {
+                "type": "list[str]",
+                "description": "A list of specified attributes for each event contained in the given event."
+            },
+            "Docstring": "Retrieve a specific attribute for events contained within a biological event.\n\nParameters:\n-----------\nidentifier : str\n    The event identifier for which the contained events' attributes are requested.\nattribute : str\n    The attribute to be filtered and returned for each contained event.\n\nReturns:\n--------\nlist[str]\n    A list of specified attributes for each event contained in the given event.\n\nExamples:\n--------\n>>> r.get_pathway_containedEvents_by_attribute(identifier='R-HSA-5673001', attribute='stId')",
+            "api_type": "method",
+            "api_name": "bioservices.Reactome.get_pathway_containedEvents_by_attribute",
+            "api_calling": "bioservices.Reactome.get_pathway_containedEvents_by_attribute(identifier=$, attribute=$)",
+            "example": ">>> r.get_pathway_containedEvents_by_attribute(identifier='R-HSA-5673001', attribute='stId')"
+        },
+        "get_pathways_low_diagram_entity": {
+            "Parameters": [
+                {
+                    "name": "identifier",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "The entity that must be present in the pathways."
+                },
+                {
+                    "name": "species",
+                    "type": "str",
+                    "default": null,
+                    "optional": true,
+                    "description": "The species filter: taxonomy ID (e.g. 9606) or species name (e.g. 'Homo sapiens')."
+                }
+            ],
+            "Returns": {
+                "type": "list",
+                "description": "A list of lower-level pathways with diagrams containing the specified entity or event."
+            },
+            "Docstring": "Retrieves lower-level pathways that have diagrams and contain the given PhysicalEntity or Event, optionally filtered by species.\n\nParameters:\n-----------\nidentifier : str\n    The entity that must be present in the pathways.\nspecies : str, optional\n    The species filter: taxonomy ID (e.g. 9606) or species name.\n\nReturns:\n--------\nlist\n    A list of lower-level pathways with diagrams containing the specified entity.\n\nExamples:\n--------\n>>> r.get_pathways_low_diagram_entity(\"R-HSA-199420\")",
+            "api_type": "method",
+            "api_name": "bioservices.Reactome.get_pathways_low_diagram_entity",
+            "api_calling": "bioservices.Reactome.get_pathways_low_diagram_entity(identifier=$, species=$)",
+            "example": ">>> r.get_pathways_low_diagram_entity(identifier=\"R-HSA-199420\", species=\"Homo sapiens\")"
+        },
+        "get_pathways_low_diagram_entity_allForms": {
+            "Parameters": [
+                {
+                    "name": "identifier",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "The identifier of the entity or event whose pathways are to be retrieved in all its forms."
+                }
+            ],
+            "Returns": {
+                "type": "list[dict]",
+                "description": "A list of pathways related to the specified entity, including diagrams, for all its variant forms."
+            },
+            "Docstring": "Retrieves all lower-level pathways with diagrams containing a given entity or event based on all its variant forms.\n\nParameters:\n-----------\nidentifier : str\n    The identifier of the entity or event whose pathways are to be retrieved.\n\nReturns:\n--------\nlist[dict]\n    A list of pathway data for all variant forms.\n\nExamples:\n--------\n>>> r.get_pathways_low_diagram_entity_allForms(\"R-HSA-199420\")",
+            "api_type": "method",
+            "api_name": "bioservices.Reactome.get_pathways_low_diagram_entity_allForms",
+            "api_calling": "bioservices.Reactome.get_pathways_low_diagram_entity_allForms(identifier=$)",
+            "example": ">>> r.get_pathways_low_diagram_entity_allForms(identifier=\"R-HSA-199420\")"
+        },
+        "get_pathways_low_entity": {
+            "Parameters": [
+                {
+                    "name": "identifier",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "The entity or event which the pathways should contain."
+                }
+            ],
+            "Returns": {
+                "type": "list",
+                "description": "A list of pathways containing the specified entity or event."
+            },
+            "Docstring": "Retrieves lower-level pathways that contain a given PhysicalEntity or Event.\n\nParameters:\n-----------\nidentifier : str\n    The entity or event to be queried.\n\nReturns:\n--------\nlist\n    A list of pathways containing the specified entity or event.\n\nExamples:\n--------\n>>> r.get_pathways_low_entity(\"R-HSA-199420\")",
+            "api_type": "method",
+            "api_name": "bioservices.Reactome.get_pathways_low_entity",
+            "api_calling": "bioservices.Reactome.get_pathways_low_entity(identifier=$)",
+            "example": ">>> r.get_pathways_low_entity(identifier=\"R-HSA-199420\")"
+        },
+        "get_pathways_low_entity_allForms": {
+            "Parameters": [
+                {
+                    "name": "identifier", 
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "The identifier of the entity whose variant pathways are to be retrieved."
+                }
+            ],
+            "Returns": {
+                "type": "list[dict]",
+                "description": "A list containing pathway information for each associated variant form."
+            },
+            "Docstring": "Retrieves lower-level pathways containing any variant of a given entity by traversing its variant forms.\n\nParameters:\n-----------\nidentifier : str\n    The identifier whose variant-associated pathways are of interest.\n\nReturns:\n--------\nlist[dict]\n    A list of pathway data for each variant form.\n\nExamples:\n--------\n>>> r.get_pathways_low_entity_allForms(\"R-HSA-199420\")",
+            "api_type": "method",
+            "api_name": "bioservices.Reactome.get_pathways_low_entity_allForms",
+            "api_calling": "bioservices.Reactome.get_pathways_low_entity_allForms(identifier=$)",
+            "example": ">>> r.get_pathways_low_entity_allForms(identifier=\"R-HSA-199420\")"
+        },
+        "get_pathways_top": {
+            "Parameters": [
+                {
+                    "name": "species",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "Species identifier (e.g., 'Homo sapiens' or taxonomy ID like '9606')."
+                }
+            ],
+            "Returns": {
+                "type": "list",
+                "description": "A JSON list of top-level pathways for the specified species."
+            },
+            "Docstring": "Retrieves the top-level pathways for a given species.\n\nParameters:\n-----------\nspecies : str\n    Species identifier (e.g., 'Homo sapiens' or taxonomy ID like '9606').\n\nReturns:\n--------\nlist\n    A list of top-level Reactome pathways for that species.\n\nExamples:\n--------\n>>> r.get_pathways_top(\"Homo sapiens\")",
+            "api_type": "method",
+            "api_name": "bioservices.Reactome.get_pathways_top",
+            "api_calling": "bioservices.Reactome.get_pathways_top(species=$)",
+            "example": ">>> r.get_pathways_top(species=\"Homo sapiens\")"
+        },
+        "get_references": {
+            "Parameters": [
+                {
+                    "name": "identifier",
+                    "type": "int",
+                    "default": null,
+                    "optional": false,
+                    "description": "The unique identifier for which reference entities are requested."
+                }
+            ],
+            "Returns": {
+                "type": "list",
+                "description": "A list of all reference entities associated with the specified identifier."
+            },
+            "Docstring": "Retrieves a list containing all the reference entities for a given identifier.\n\nParameters:\n-----------\nidentifier : int\n    The unique identifier for which reference entities are requested.\n\nReturns:\n--------\nlist\n    A list of reference entities for the specified identifier.\n\nExamples:\n--------\n>>> r.get_references(15377)",
+            "api_type": "method",
+            "api_name": "bioservices.Reactome.get_references",
+            "api_calling": "bioservices.Reactome.get_references(identifier=$)",
+            "example": ">>> r.get_references(identifier=15377)"
+        },
+        "get_species_all": {
+            "Parameters": [],
+            "Returns": {
+                "type": "list",
+                "description": "A list of all species available in the Reactome database."
+            },
+            "Docstring": "Retrieve the list of all species in Reactome.\n\nReturns:\n--------\nlist\n    A list containing the details of all species in Reactome.\n\nExamples:\n--------\n>>> r.get_species_all()",
+            "api_type": "method",
+            "api_name": "bioservices.Reactome.get_species_all",
+            "api_calling": "bioservices.Reactome.get_species_all()",
+            "example": ">>> r.get_species_all()"
+        },
+        "get_species_main": {
+            "Parameters": [],
+            "Returns": {
+                "type": "list",
+                "description": "A list of the main (commonly used) species entries."
+            },
+            "Docstring": "Retrieves the list of main species in Reactome.\n\nReturns:\n--------\nlist\n    A list of common species entries.\n\nExamples:\n--------\n>>> r.get_species_main()",
+            "api_type": "method",
+            "api_name": "bioservices.Reactome.get_species_main",
+            "api_calling": "bioservices.Reactome.get_species_main()",
+            "example": ">>> r.get_species_main()"
+        },
+        "name": {
+            "Parameters": [],
+            "Returns": {
+                "type": "str",
+                "description": "The name of the Reactome database."
+            },
+            "Docstring": "Retrieve the name of the Reactome database.\n\nReturns:\n--------\nstr\n    The name of the Reactome database.\n\nExamples:\n--------\n>>> r.name",
+            "api_type": "other",
+            "api_name": "bioservices.Reactome.name",
+            "api_calling": "bioservices.Reactome.name",
+            "example": ">>> r.name"
+        },
+        "search_facet": {
+            "Parameters": [],
+            "Returns": {
+                "type": "list",
+                "description": "Faceting information about the Reactome search data."
+            },
+            "Docstring": "Retrieves faceting information on the entire Reactome search dataset.\n\nReturns:\n--------\nlist\n    A list of faceting elements within Reactome search data.\n\nExamples:\n--------\n>>> Reactome.search_facet()",
+            "api_type": "method",
+            "api_name": "bioservices.Reactome.search_facet",
+            "api_calling": "bioservices.Reactome.search_facet()",
+            "example": ">>> Reactome.search_facet()"
+        },
+        "search_facet_query": {
+            "Parameters": [
+                {
+                    "name": "query",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "The specific query string to retrieve facet information for."
+                }
+            ],
+            "Returns": {
+                "type": "list",
+                "description": "A list of facets corresponding to the input query."
+            },
+            "Docstring": "Retrieve faceting information for a specific query.\n\nParameters:\n-----------\nquery : str\n    The query string for which to retrieve facet information.\n\nReturns:\n--------\nlist\n    A list of facets corresponding to the provided query.\n\nExamples:\n--------\n>>> r.search_facet_query(query=\"apoptotic\")",
+            "api_type": "method",
+            "api_name": "bioservices.Reactome.search_facet_query",
+            "api_calling": "bioservices.Reactome.search_facet_query(query=$)",
+            "example": ">>> r.search_facet_query(query=\"apoptotic\")"
+        },
+        "search_query": {
+            "Parameters": [
+                {
+                    "name": "query",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "The search query to retrieve matching results."
+                }
+            ],
+            "Returns": {
+                "type": "list",
+                "description": "A list of results matching the queried information in Reactome."
+            },
+            "Docstring": "Queries the Reactome knowledgebase using Solr to retrieve matching results.\n\nParameters:\n-----------\nquery : str\n    The search query to retrieve data.\n\nReturns:\n--------\nlist\n    A list of results matching the search query.\n\nExamples:\n--------\n>>> reactome = Reactome()\n>>> results = reactome.search_query(query=\"apoptosis\")",
+            "api_type": "method",
+            "api_name": "bioservices.Reactome.search_query",
+            "api_calling": "bioservices.Reactome.search_query(query=$)",
+            "example": ">>> reactome.search_query(query=\"apoptosis\")"
+        },
+        "search_spellcheck": {
+            "Parameters": [
+                {
+                    "name": "query",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "The search term to retrieve spell-check suggestions for."
+                }
+            ],
+            "Returns": {
+                "type": "list",
+                "description": "A list of possible spell-check suggestions."
+            },
+            "Docstring": "Retrieve spell-check suggestions for the provided query.\n\nParameters:\n-----------\nquery : str\n    The search term for which to retrieve suggestions.\n\nReturns:\n--------\nlist\n    A list of spell-check suggestions.\n\nExamples:\n--------\n>>> r.search_spellcheck(query=\"apoptpe\")",
+            "api_type": "method",
+            "api_name": "bioservices.Reactome.search_spellcheck",
+            "api_calling": "bioservices.Reactome.search_spellcheck(query=$)",
+            "example": ">>> r.search_spellcheck(query=\"apoptpe\")"
+        },
+        "search_suggest": {
+            "Parameters": [
+                {
+                    "name": "query",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "The search term for which suggestions are requested."
+                }
+            ],
+            "Returns": {
+                "type": "list",
+                "description": "A list of autosuggestions related to the search term."
+            },
+            "Docstring": "Retrieve autosuggestions for a given query.\n\nParameters:\n-----------\nquery : str\n    The search term for which suggestions are requested.\n\nReturns:\n--------\nlist\n    A list of suggestion strings.\n\nExamples:\n--------\n>>> r.search_suggest(query=\"apopt\")",
+            "api_type": "method",
+            "api_name": "bioservices.Reactome.search_suggest",
+            "api_calling": "bioservices.Reactome.search_suggest(query=$)",
+            "example": ">>> r.search_suggest(query=\"apopt\")"
+        },
+        "version": {
+            "Parameters": [],
+            "Returns": {
+                "type": "str",
+                "description": "The version of the Reactome database."
+            },
+            "Docstring": "Retrieve the version used in the Reactome database.\n\nReturns:\n--------\nstr\n    The version string of the Reactome database.\n\nExamples:\n--------\n>>> r.version",
+            "api_type": "other",
+            "api_name": "bioservices.Reactome.version",
+            "api_calling": "bioservices.Reactome.version",
+            "example": ">>> r.version"
+        }
+    }
+}

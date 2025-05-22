@@ -1,0 +1,276 @@
+{
+    "unichem": {
+        "get_all_src_ids": {
+            "Parameters": [],
+            "Returns": {
+                "type": "list",
+                "description": "List of source IDs available within UniChem."
+            },
+            "Docstring": "Obtain all src_ids of sources available in UniChem.\n\nReturns:\n    list of src_ids.",
+            "api_type": "method",
+            "api_name": "bioservices.UniChem.get_all_src_ids",
+            "api_calling": "bioservices.UniChem.get_all_src_ids()",
+            "example": "u = UniChem()\nresult = u.get_all_src_ids()"
+        },
+        "get_compounds": {
+            "Parameters": [
+                {
+                    "name": "compound",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "InChI, InChIKey, Name, UCI, or Compound Source ID."
+                },
+                {
+                    "name": "source_type",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "Identifier type: 'uci', 'inchi', 'inchikey', or 'sourceID' (case-sensitive, e.g. 'chembl')."
+                }
+            ],
+            "Returns": {
+                "type": "list",
+                "description": "List of matched compounds and their assigned sources."
+            },
+            "Docstring": "Get matched compounds information.\n\nParameters:\n    compound (str): InChI, InChIKey, Name, UCI, or Compound Source ID.\n    source_type (str): Identifier type: 'uci', 'inchi', 'inchikey', or 'sourceID'.\n\nReturns:\n    list: Matched compounds list. Each entry contains 'inchi', 'standardInchikey', 'uci', and 'sources'.\n\nExample:\n    >>> u = UniChem()\n    >>> res = u.get_compounds('CHEMBL12', 'chembl')\n    >>> compound_info = res['compounds'][0]",
+            "api_type": "method",
+            "api_name": "bioservices.UniChem.get_compounds",
+            "api_calling": "bioservices.UniChem.get_compounds(compound=$, source_type=$)",
+            "example": "bioservices.UniChem.get_compounds(compound='CHEMBL12', source_type='chembl')"
+        },
+        "get_connectivity": {
+            "Parameters": [
+                {
+                    "name": "compound",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "InChI, InChIKey, Name, UCI, or Compound Source ID."
+                },
+                {
+                    "name": "source_type",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "Identifier type: 'uci', 'inchi', 'inchikey', or 'sourceID'."
+                }
+            ],
+            "Returns": {
+                "type": "dict",
+                "description": "Connectivity data including 'response', 'searchedCompound', 'sources', 'comparison', 'totalCompounds', and 'totalSources'."
+            },
+            "Docstring": "Fetch connectivity data for a given compound.\n\nParameters:\n    compound (str): InChI, InChIKey, Name, UCI, or Compound Source ID.\n    source_type (str): Identifier type: 'uci', 'inchi', 'inchikey', or 'sourceID'.\n\nReturns:\n    dict: {\n       'response': str (e.g., 'Success'),\n       'searchedCompound': dict with 'inchi', 'standardInchikey', 'uci',\n       'sources': dict of compoundID and source info,\n       'comparison': dict,\n       'totalCompounds': int,\n       'totalSources': int\n    }\n\nExample:\n    >>> u = UniChem()\n    >>> data = u.get_connectivity('CHEMBL12', 'chembl')",
+            "api_type": "method",
+            "api_name": "bioservices.UniChem.get_connectivity",
+            "api_calling": "bioservices.UniChem.get_connectivity(compound=$, source_type=$)",
+            "example": "bioservices.UniChem.get_connectivity(compound='CHEMBL12', source_type='chembl')"
+        },
+        "get_id_from_name": {
+            "Parameters": [
+                {
+                    "name": "name",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "A valid database name, e.g., 'chembl'."
+                }
+            ],
+            "Returns": {
+                "type": "int",
+                "description": "Source identifier associated with the given database name."
+            },
+            "Docstring": "Return the source ID for a given database name.\n\nParameters:\n    name (str): Valid database name (e.g., 'chembl').\n\nReturns:\n    int: Source identifier in UniChem.\n\nExample:\n    >>> u = UniChem()\n    >>> sid = u.get_id_from_name('chembl')",
+            "api_type": "method",
+            "api_name": "bioservices.UniChem.get_id_from_name",
+            "api_calling": "bioservices.UniChem.get_id_from_name(name=$)",
+            "example": "bioservices.UniChem.get_id_from_name(name='chembl')"
+        },
+        "get_images": {
+            "Parameters": [
+                {
+                    "name": "uci",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "UCI of the compound to retrieve the image for."
+                },
+                {
+                    "name": "filename",
+                    "type": "str",
+                    "default": null,
+                    "optional": true,
+                    "description": "Optional filename to save the SVG+XML output."
+                }
+            ],
+            "Returns": {
+                "type": "str",
+                "description": "SVG+XML string representation of the compound image."
+            },
+            "Docstring": "Return or create the compound image in SVG+XML format.\n\nParameters:\n    uci (str): The UCI of the compound.\n    filename (str, optional): Filename to save output.\n\nReturns:\n    str: SVG+XML representation.\n\nExample:\n    >>> u = UniChem()\n    >>> svg = u.get_images('304698', filename='compound.svg')",
+            "api_type": "method",
+            "api_name": "bioservices.UniChem.get_images",
+            "api_calling": "bioservices.UniChem.get_images(uci=$, filename=$)",
+            "example": "bioservices.UniChem.get_images(uci='304698', filename='compound.svg')"
+        },
+        "get_inchi_from_inchikey": {
+            "Parameters": [
+                {
+                    "name": "inchikey",
+                    "type": "str or list of str",
+                    "default": null,
+                    "optional": false,
+                    "description": "InChIKey or list of InChIKeys to search."
+                }
+            ],
+            "Returns": {
+                "type": "list or dict",
+                "description": "List of InChIs or dict mapping InChIKeys to lists of matching InChIs."
+            },
+            "Docstring": "Retrieve InChIs corresponding to the given InChIKey(s).\n\nParameters:\n    inchikey (str or list of str): InChIKey(s) to query.\n\nReturns:\n    list or dict: Matching InChIs or mapping of keys to InChIs.\n\nExample:\n    >>> u = UniChem()\n    >>> res = u.get_inchi_from_inchikey('AAOVKJBEBIDNHE-UHFFFAOYSA-N')",
+            "api_type": "method",
+            "api_name": "bioservices.UniChem.get_inchi_from_inchikey",
+            "api_calling": "bioservices.UniChem.get_inchi_from_inchikey(inchikey=$)",
+            "example": "bioservices.UniChem.get_inchi_from_inchikey(inchikey='AAOVKJBEBIDNHE-UHFFFAOYSA-N')"
+        },
+        "get_source_info_by_id": {
+            "Parameters": [
+                {
+                    "name": "ID",
+                    "type": "int",
+                    "default": null,
+                    "optional": false,
+                    "description": "Source identifier."
+                }
+            ],
+            "Returns": {
+                "type": "dict",
+                "description": "Metadata including UCICount, baseIdUrl, created, description, and other fields."
+            },
+            "Docstring": "Obtain detailed information for a source by its ID.\n\nParameters:\n    ID (int): Source identifier.\n\nReturns:\n    dict: Source metadata such as 'UCICount', 'baseIdUrl', 'created', 'description', etc.\n\nExample:\n    >>> u = UniChem()\n    >>> info = u.get_source_info_by_id(10)",
+            "api_type": "method",
+            "api_name": "bioservices.UniChem.get_source_info_by_id",
+            "api_calling": "bioservices.UniChem.get_source_info_by_id(ID=$)",
+            "example": "bioservices.UniChem.get_source_info_by_id(ID=10)"
+        },
+        "get_source_info_by_name": {
+            "Parameters": [
+                {
+                    "name": "src_name",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "Name of the source (e.g., 'chembl')."
+                }
+            ],
+            "Returns": {
+                "type": "dict or list",
+                "description": "Source metadata or list of metadata dicts if multiple matches."
+            },
+            "Docstring": "Obtain detailed information for a source by its name.\n\nParameters:\n    src_name (str): Source name (e.g., 'chembl').\n\nReturns:\n    dict or list: Metadata dict or list of dicts.\n\nExample:\n    >>> u = UniChem()\n    >>> res = u.get_source_info_by_name('chebi')",
+            "api_type": "method",
+            "api_name": "bioservices.UniChem.get_source_info_by_name",
+            "api_calling": "bioservices.UniChem.get_source_info_by_name(src_name=$)",
+            "example": "bioservices.UniChem.get_source_info_by_name(src_name='chebi')"
+        },
+        "get_sources": {
+            "Parameters": [],
+            "Returns": {
+                "type": "list",
+                "description": "List of metadata dicts for all sources in UniChem."
+            },
+            "Docstring": "Retrieve information on all sources in UniChem.\n\nReturns:\n    list: Each entry is a metadata dict for a source.\n\nExample:\n    >>> u = UniChem()\n    >>> sources = u.get_sources()",
+            "api_type": "method",
+            "api_name": "bioservices.UniChem.get_sources",
+            "api_calling": "bioservices.UniChem.get_sources()",
+            "example": "u.get_sources()"
+        },
+        "get_sources_by_inchikey": {
+            "Parameters": [
+                {
+                    "name": "inchikey",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "InChIKey or list of InChIKeys."
+                }
+            ],
+            "Returns": {
+                "type": "list or dict",
+                "description": "List of sources or dict mapping InChIKeys to source lists."
+            },
+            "Docstring": "Get sources for given InChIKey(s).\n\nParameters:\n    inchikey (str or list of str): InChIKey(s) to search.\n\nReturns:\n    list or dict: Sources list or mapping.\n\nExample:\n    >>> u = UniChem()\n    >>> res = u.get_sources_by_inchikey('GZUITABIAKMVPG-UHFFFAOYSA-N')",
+            "api_type": "method",
+            "api_name": "bioservices.UniChem.get_sources_by_inchikey",
+            "api_calling": "bioservices.UniChem.get_sources_by_inchikey(inchikey=$)",
+            "example": "bioservices.UniChem.get_sources_by_inchikey(inchikey='GZUITABIAKMVPG-UHFFFAOYSA-N')"
+        },
+        "get_sources_by_inchikey_verbose": {
+            "Parameters": [
+                {
+                    "name": "inchikey",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "InChIKey or list of InChIKeys."
+                }
+            ],
+            "Returns": {
+                "type": "dict",
+                "description": "Mapping of InChIKeys to detailed source metadata."
+            },
+            "Docstring": "Retrieve verbose source metadata for given InChIKey(s).\n\nParameters:\n    inchikey (str or list of str): InChIKey(s).\n\nReturns:\n    dict: Mapping of InChIKeys to source metadata.\n\nExample:\n    >>> u = UniChem()\n    >>> res = u.get_sources_by_inchikey_verbose(['GZUITABIAKMVPG-UHFFFAOYSA-N'])",
+            "api_type": "method",
+            "api_name": "bioservices.UniChem.get_sources_by_inchikey_verbose",
+            "api_calling": "bioservices.UniChem.get_sources_by_inchikey_verbose(inchikey=$)",
+            "example": "bioservices.UniChem.get_sources_by_inchikey_verbose(inchikey='GZUITABIAKMVPG-UHFFFAOYSA-N')"
+        },
+        "get_structure": {
+            "Parameters": [
+                {
+                    "name": "compound_id",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "Compound identifier."
+                },
+                {
+                    "name": "src_id",
+                    "type": "int or str",
+                    "default": null,
+                    "optional": false,
+                    "description": "Source identifier or name."
+                }
+            ],
+            "Returns": {
+                "type": "dict",
+                "description": "Keys 'standardinchi' and 'standardinchikey'."
+            },
+            "Docstring": "Retrieve structure(s) for a given compound and source.\n\nParameters:\n    compound_id (str): Compound identifier.\n    src_id (int or str): Source identifier or name.\n\nReturns:\n    dict: {'standardinchi': str, 'standardinchikey': str}.\n\nExample:\n    >>> u = UniChem()\n    >>> u.get_structure('CHEMBL12', 'chembl')",
+            "api_type": "method",
+            "api_name": "bioservices.UniChem.get_structure",
+            "api_calling": "bioservices.UniChem.get_structure(compound_id=$, src_id=$)",
+            "example": "u.get_structure('CHEMBL12', 'chembl')"
+        },
+        "source_ids": {
+            "Parameters": [
+                {
+                    "name": "source_ids",
+                    "type": "dict",
+                    "default": null,
+                    "optional": true,
+                    "description": "Dictionary of source names to their IDs."
+                }
+            ],
+            "Returns": {
+                "type": "dict",
+                "description": "Source mapping dictionary."
+            },
+            "Docstring": "Container for all source name-to-ID mappings in UniChem.\n\nAttributes:\n    source_ids (dict): Mapping of source names to IDs.",
+            "api_type": "other",
+            "api_name": "bioservices.UniChem.source_ids",
+            "api_calling": "bioservices.UniChem.source_ids",
+            "example": "u.source_ids"
+        }
+    }
+}

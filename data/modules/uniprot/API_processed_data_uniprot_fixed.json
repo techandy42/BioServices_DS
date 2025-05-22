@@ -1,0 +1,317 @@
+{
+    "uniprot": {
+        "get_df": {
+            "Parameters": [
+                {
+                    "name": "entries",
+                    "type": "list",
+                    "default": null,
+                    "optional": false,
+                    "description": "List of valid UniProt entry names or identifiers. If the list is very large (>200), split it into chunks."
+                },
+                {
+                    "name": "nChunk",
+                    "type": "int",
+                    "default": 100,
+                    "optional": true,
+                    "description": "Size of chunks to query the entries."
+                },
+                {
+                    "name": "organism",
+                    "type": "str",
+                    "default": null,
+                    "optional": true,
+                    "description": "Apply an organism filter via organism_id."
+                },
+                {
+                    "name": "limit",
+                    "type": "int",
+                    "default": 10,
+                    "optional": true,
+                    "description": "Limit number of entries per identifier; set to null to return all."
+                },
+                {
+                    "name": "columns",
+                    "type": "str",
+                    "default": null,
+                    "optional": true,
+                    "description": "Comma-separated list of columns to include."
+                },
+                {
+                    "name": "progress",
+                    "type": "bool",
+                    "default": false,
+                    "optional": true,
+                    "description": "Display progress bar during retrieval."
+                }
+            ],
+            "Returns": {
+                "type": "pandas.DataFrame",
+                "description": "DataFrame indexed by UniProt ID containing the requested annotation columns."
+            },
+            "Docstring": "Given a list of UniProt entries, return a DataFrame with annotation for each entry.\n\nParameters:\nentries (list): List of valid entry names or identifiers.\nnChunk (int, optional): Size of entry chunks for batch queries. Default is 100.\norganism (str, optional): Filter entries by organism_id. Default is None.\nlimit (int, optional): Number of entries per identifier. None returns all; default is 10.\ncolumns (str, optional): Comma-separated columns to include. Default is None.\nprogress (bool, optional): Show progress bar. Default is False.\n\nReturns:\nDataFrame: pandas.DataFrame indexed by UniProt ID with retrieved annotation columns.\n\nExample:\n>>> u.get_df(['P62988'], nChunk=50, columns='id,entry name', progress=True)",
+            "api_type": "method",
+            "api_name": "bioservices.UniProt.get_df",
+            "api_calling": "bioservices.UniProt.get_df(entries=$, nChunk=$, organism=$, limit=$, columns=$, progress=$)",
+            "example": "bioservices.UniProt.get_df(entries=['P62988'], nChunk=50, organism=None, limit=10, columns='id,entry name', progress=True)"
+        },
+        "get_fasta": {
+            "Parameters": [
+                {
+                    "name": "uniprot_id",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "A valid UniProt accession identifier (e.g., 'P12345')."
+                }
+            ],
+            "Returns": {
+                "type": "str",
+                "description": "FASTA-formatted sequence string for the given UniProt ID."
+            },
+            "Docstring": "Alias to retrieve() with format 'fasta'. Returns the FASTA sequence for the given UniProt ID.\n\nParameters:\nuniprot_id (str): Valid UniProt identifier.\n\nReturns:\nstr: FASTA-formatted sequence.\n\nExample:\n>>> u.get_fasta('P12345')",
+            "api_type": "method",
+            "api_name": "bioservices.UniProt.get_fasta",
+            "api_calling": "bioservices.UniProt.get_fasta(uniprot_id=$)",
+            "example": "bioservices.UniProt.get_fasta(uniprot_id='P12345')"
+        },
+        "mapping": {
+            "Parameters": [
+                {
+                    "name": "fr",
+                    "type": "str",
+                    "default": "UniProtKB_AC-ID",
+                    "optional": true,
+                    "description": "Source database identifier; see valid_mapping."
+                },
+                {
+                    "name": "to",
+                    "type": "str",
+                    "default": "KEGG",
+                    "optional": true,
+                    "description": "Target database identifier; see valid_mapping."
+                },
+                {
+                    "name": "query",
+                    "type": "str or list of str",
+                    "default": "P13368",
+                    "optional": true,
+                    "description": "One or more source IDs to map (comma-separated string or list)."
+                },
+                {
+                    "name": "polling_interval_seconds",
+                    "type": "int",
+                    "default": 3,
+                    "optional": true,
+                    "description": "Seconds between job status checks."
+                },
+                {
+                    "name": "max_waiting_time",
+                    "type": "int",
+                    "default": 100,
+                    "optional": true,
+                    "description": "Maximum seconds to wait for the mapping job result."
+                },
+                {
+                    "name": "progress",
+                    "type": "bool",
+                    "default": true,
+                    "optional": true,
+                    "description": "Display progress updates."
+                }
+            ],
+            "Returns": {
+                "type": "dict",
+                "description": "Dictionary with 'results' (list of {'from','to'} mappings) and 'failedIds' (list of IDs not found)."
+            },
+            "Docstring": "Map identifiers between source and target databases via UniProt ID mapping service.\n\nParameters:\nfr (str, optional): Source database identifier; see valid_mapping.\nto (str, optional): Target database identifier; see valid_mapping.\nquery (str or list of str, optional): One or more source IDs to map.\npolling_interval_seconds (int, optional): Interval between status checks in seconds. Default is 3.\nmax_waiting_time (int, optional): Max time to wait in seconds. Default is 100.\nprogress (bool, optional): Display progress bar. Default is True.\n\nReturns:\nDict: Contains 'results' (list of mapping dicts with 'from' and 'to') and 'failedIds' (list of IDs not found).\n\nExample:\n>>> u.mapping('UniProtKB_AC-ID', 'KEGG', 'P43403')\n{'results': [{'from': 'P43403', 'to': 'hsa:7535'}]}",
+            "api_type": "method",
+            "api_name": "bioservices.UniProt.mapping",
+            "api_calling": "bioservices.UniProt.mapping(fr=$, to=$, query=$, polling_interval_seconds=$, max_waiting_time=$, progress=$)",
+            "example": "bioservices.UniProt.mapping(fr='UniProtKB_AC-ID', to='KEGG', query='P43403', polling_interval_seconds=3, max_waiting_time=100, progress=True)"
+        },
+        "quick_search": {
+            "Parameters": [
+                {
+                    "name": "query",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "Query string for UniProt database."
+                },
+                {
+                    "name": "limit",
+                    "type": "int",
+                    "default": 1,
+                    "optional": true,
+                    "description": "Number of results to return; default is 1."
+                }
+            ],
+            "Returns": {
+                "type": "dict",
+                "description": "Dictionary of search results (headers and corresponding data)."
+            },
+            "Docstring": "Specialised alias for search() returning a limited number of results.\n\nParameters:\nquery (str): Query string for UniProt.\nlimit (int, optional): Max number of results; default is 1.\n\nReturns:\nDict: Search results.\n\nExample:\n>>> u.quick_search('P43403', limit=1)",
+            "api_type": "method",
+            "api_name": "bioservices.UniProt.quick_search",
+            "api_calling": "bioservices.UniProt.quick_search(query=$, limit=$)",
+            "example": "bioservices.UniProt.quick_search(query='P43403', limit=1)"
+        },
+        "retrieve": {
+            "Parameters": [
+                {
+                    "name": "uniprot_id",
+                    "type": "str or list of str",
+                    "default": null,
+                    "optional": false,
+                    "description": "UniProtKB, UniRef, UniParc, or Taxonomy ID(s)."
+                },
+                {
+                    "name": "frmt",
+                    "type": "str",
+                    "default": "json",
+                    "optional": true,
+                    "description": "Output format: 'xml','txt','fasta','gff','rdf','json'."
+                },
+                {
+                    "name": "database",
+                    "type": "str",
+                    "default": "uniprot",
+                    "optional": true,
+                    "description": "Database to query: 'uniprot','uniparc','uniref','taxonomy'."
+                },
+                {
+                    "name": "include",
+                    "type": "bool",
+                    "default": false,
+                    "optional": true,
+                    "description": "Include additional RDF data when frmt='rdf'."
+                }
+            ],
+            "Returns": {
+                "type": "str, list, or dict",
+                "description": "Retrieved data formatted as string, list, or dict depending on frmt."
+            },
+            "Docstring": "Retrieve data for UniProt ID(s) in specified format.\n\nParameters:\nuniprot_id (str or list of str): UniProtKB, UniRef, UniParc, or Taxonomy ID(s).\nfrmt (str, optional): Output format ('xml','txt','fasta','gff','rdf','json'). Default is 'json'.\ndatabase (str, optional): Database to query. Default is 'uniprot'.\ninclude (bool, optional): Include additional RDF data if frmt='rdf'. Default is False.\n\nReturns:\nstr, list, or dict: Retrieved data formatted per frmt parameter.\n\nExample:\n>>> u.retrieve('P09958', frmt='txt')\n>>> u.retrieve(['P29317','Q5BKX8'], frmt='fasta')",
+            "api_type": "method",
+            "api_name": "bioservices.UniProt.retrieve",
+            "api_calling": "bioservices.UniProt.retrieve(uniprot_id=$, frmt=$, database=$, include=$)",
+            "example": "bioservices.UniProt.retrieve(uniprot_id='P09958', frmt='txt', database='uniprot', include=False)"
+        },
+        "search": {
+            "Parameters": [
+                {
+                    "name": "query",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "Valid UniProt search query string."
+                },
+                {
+                    "name": "frmt",
+                    "type": "str",
+                    "default": "tsv",
+                    "optional": true,
+                    "description": "Format: 'xlsx','fasta','gff','tsv','json'."
+                },
+                {
+                    "name": "columns",
+                    "type": "str",
+                    "default": null,
+                    "optional": true,
+                    "description": "Comma-separated output columns; valid for 'tsv' or 'xlsx'."
+                },
+                {
+                    "name": "include_isoforms",
+                    "type": "bool",
+                    "default": false,
+                    "optional": true,
+                    "description": "Include isoform sequences when frmt='fasta'."
+                },
+                {
+                    "name": "sort",
+                    "type": "str",
+                    "default": "score",
+                    "optional": true,
+                    "description": "Sort criteria; set to null to disable."
+                },
+                {
+                    "name": "compress",
+                    "type": "bool",
+                    "default": false,
+                    "optional": true,
+                    "description": "Compress output data."
+                },
+                {
+                    "name": "limit",
+                    "type": "int",
+                    "default": null,
+                    "optional": true,
+                    "description": "Maximum number of entries to return."
+                },
+                {
+                    "name": "size",
+                    "type": "int",
+                    "default": 25,
+                    "optional": true,
+                    "description": "Number of entries to fetch per page."
+                },
+                {
+                    "name": "database",
+                    "type": "str",
+                    "default": "uniprotkb",
+                    "optional": true,
+                    "description": "Database to query: 'uniprotkb'."
+                },
+                {
+                    "name": "progress",
+                    "type": "bool",
+                    "default": false,
+                    "optional": true,
+                    "description": "Show progress bar during retrieval."
+                }
+            ],
+            "Returns": {
+                "type": "str",
+                "description": "Concatenated search results formatted per frmt parameter."
+            },
+            "Docstring": "Query the UniProt search service and return results in chosen format.\n\nParameters:\nquery (str): Valid UniProt query.\nfrmt (str, optional): Output format ('xlsx','fasta','gff','tsv','json'). Default is 'tsv'.\ncolumns (str, optional): Columns for 'tsv'/'xlsx'. Default is None.\ninclude_isoforms (bool, optional): Include isoforms in 'fasta'. Default is False.\nsort (str, optional): Sort criteria. Default is 'score'.\ncompress (bool, optional): Gzip results. Default is False.\nlimit (int, optional): Max entries to return. Default is None.\nsize (int, optional): Page size. Default is 25.\ndatabase (str, optional): Database to query. Default is 'uniprotkb'.\nprogress (bool, optional): Show progress bar. Default is False.\n\nReturns:\nstr: Search results per frmt.\n\nExample:\n>>> u.search('zap70+AND+organism_id:9606', frmt='tsv', limit=3, columns='id,entry name')",
+            "api_type": "method",
+            "api_name": "bioservices.UniProt.search",
+            "api_calling": "bioservices.UniProt.search(query=$, frmt=$, columns=$, include_isoforms=$, sort=$, compress=$, limit=$, size=$, database=$, progress=$)",
+            "example": "bioservices.UniProt.search(query='P12345+taxonomy_id:9606', frmt='json', limit=100)"
+        },
+        "uniref": {
+            "Parameters": [
+                {
+                    "name": "query",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "Query string for UniRef service (e.g., 'Q03063')."
+                }
+            ],
+            "Returns": {
+                "type": "dict",
+                "description": "JSON-like dictionary response from the UniRef service."
+            },
+            "Docstring": "Alias to retrieve() for the UniRef service; returns a JSON dictionary for the given query.\n\nParameters:\nquery (str): Query filter for UniRef service.\n\nReturns:\ndict: JSON-like response from UniRef.\n\nExample:\n>>> u.uniref('Q03063')",
+            "api_type": "method",
+            "api_name": "bioservices.UniProt.uniref",
+            "api_calling": "bioservices.UniProt.uniref(query=$)",
+            "example": "bioservices.UniProt.uniref(query='Q03063')"
+        },
+        "valid_mapping": {
+            "Parameters": [],
+            "Returns": {
+                "type": "dict",
+                "description": "Dictionary of valid mapping identifiers supported by the UniProt service."
+            },
+            "Docstring": "Property listing valid mapping identifiers supported by the UniProt service.\n\nReturns:\n\ndict: Valid mapping options.",
+            "api_type": "property",
+            "api_name": "bioservices.UniProt.valid_mapping",
+            "api_calling": "bioservices.UniProt.valid_mapping",
+            "example": ""
+        }
+    }
+}

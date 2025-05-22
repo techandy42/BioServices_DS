@@ -1,0 +1,177 @@
+{
+    "bigg": {
+        "download": {
+            "Parameters": [
+                {
+                    "name": "model_id",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "Identifier of the model to download."
+                },
+                {
+                    "name": "format_",
+                    "type": "str",
+                    "default": "'json'",
+                    "optional": true,
+                    "description": "Format for the downloaded file; options: 'xml', 'json', 'mat'."
+                },
+                {
+                    "name": "gzip",
+                    "type": "bool",
+                    "default": "True",
+                    "optional": true,
+                    "description": "Specify if the file should be gzipped."
+                },
+                {
+                    "name": "target",
+                    "type": "str",
+                    "default": "None",
+                    "optional": true,
+                    "description": "Path where the downloaded file will be stored."
+                }
+            ],
+            "Returns": {
+                "type": "None",
+                "description": "This function does not return a value but saves the downloaded file locally."
+            },
+            "Docstring": "Downloads a specified BiGG model dataset in the requested format and saves it locally.\n\nParameters:\n-----------\nmodel_id : str\n    Identifier of the BiGG model to download.\nformat_ : str\n    Format for the downloaded file; options include 'xml', 'json', and 'mat'.\ngzip : bool\n    Indicates whether the file should use gzip compression.\ntarget : str\n    Path where the file should be saved locally. Defaults to current directory with model ID as filename.\n\nReturns:\n--------\nNone\n    Saves the file to the given path if successful.\n\nExamples:\n--------\n>>> bigg.download('e_coli_core', format_='json', gzip=True, target='e_coli_core.json.gz')",
+            "api_type": "method",
+            "api_name": "bioservices.BiGG.download",
+            "api_calling": "bioservices.BiGG.download(model_id=$, format_=$, gzip=$, target=$)",
+            "example": "bioservices.BiGG.download(model_id='e_coli_core', format_='json', gzip=True, target='e_coli_core.json.gz')"
+        },
+        "genes": {
+            "Parameters": [
+                {
+                    "name": "model_id",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "The identifier of the model to retrieve genes from."
+                },
+                {
+                    "name": "ids",
+                    "type": "list[str]",
+                    "default": "None",
+                    "optional": true,
+                    "description": "Specific list of IDs to fetch information for."
+                }
+            ],
+            "Returns": {
+                "type": "list[dict]",
+                "description": "A list of details for genes associated with the provided model_id."
+            },
+            "Docstring": "Fetch gene information for a specified model.\n\nParameters:\n-----------\nmodel_id : string\n            The identifier of the model from which to retrieve genes.\nids : string or list of strings, optional\n            Specific gene ID or list of IDs to query for additional details.\n\nReturns:\n--------\nlist[dict]\n    Details of the genes associated with the given model.\n\nExamples:\n--------\n>>> bigg = BiGG()\n>>> bigg.genes(\"e_coli_core\")",
+            "api_type": "method",
+            "api_name": "bioservices.BiGG.genes",
+            "api_calling": "bioservices.BiGG.genes(model_id=$, ids=$)",
+            "example": "bioservices.BiGG.genes(model_id=\"e_coli_core\", ids=None)"
+        },
+        "metabolites": {
+            "Parameters": [
+                {
+                    "name": "model_id",
+                    "type": "str",
+                    "default": "None",
+                    "optional": true,
+                    "description": "The identifier of the model to query metabolites from; required when IDs are provided."
+                },
+                {
+                    "name": "ids",
+                    "type": "list[str]",
+                    "default": "None",
+                    "optional": true,
+                    "description": "A list of metabolite IDs to retrieve; if None, all metabolites are returned."
+                }
+            ],
+            "Returns": {
+                "type": "list[dict]",
+                "description": "A list of metabolite details, with each entry containing properties of a metabolite."
+            },
+            "Docstring": "Retrieve a list of metabolites for a specific model or universally available metabolites.\n\nParameters:\n-----------\nmodel_id : str\n    The identifier of the model to query metabolites from; required when IDs are provided.\nids : list[str]\n    A list of metabolite IDs to retrieve; if None, all metabolites are returned.\n\nReturns:\n--------\nlist[dict]\n    A list of metabolite details, with each entry containing properties of a metabolite.\n\nExamples:\n--------\n>>> bigg.metabolites(model_id=\"e_coli_core\", ids=[\"glc__D_e\", \"atp_c\"])",
+            "api_type": "method",
+            "api_name": "bioservices.BiGG.metabolites",
+            "api_calling": "bioservices.BiGG.metabolites(model_id=$, ids=$)",
+            "example": "bioservices.BiGG.metabolites(model_id=\"e_coli_core\", ids=[\"glc__D_e\", \"atp_c\"])"
+        },
+        "models": {
+            "Parameters": [],
+            "Returns": {
+                "type": "list[dict]",
+                "description": "A list of available models in the BiGG database, including metadata for each."
+            },
+            "Docstring": "Retrieve a list of available genome-scale metabolic models in the BiGG database.\n\nParameters:\n-----------\nNone\n\nReturns:\n--------\nlist[dict]\n    A list of models, each containing metadata such as `bigg_id`, organism information, and counts of associated genes, reactions, and metabolites.\n\nExamples:\n--------\n>>> bigg_instance = BiGG()\n>>> models_list = bigg_instance.models",
+            "api_type": "property",
+            "api_name": "bioservices.BiGG.models",
+            "api_calling": "bioservices.BiGG.models",
+            "example": "bioservices.BiGG.models"
+        },
+        "reactions": {
+            "Parameters": [
+                {
+                    "name": "model_id",
+                    "type": "str",
+                    "default": "None",
+                    "optional": true,
+                    "description": "The identifier of the metabolic model. If not provided, queries the universal reactions."
+                },
+                {
+                    "name": "ids",
+                    "type": "list[str]",
+                    "default": "None",
+                    "optional": true,
+                    "description": "Specific reaction identifiers to retrieve if available."
+                }
+            ],
+            "Returns": {
+                "type": "list[dict]",
+                "description": "A list of reactions matching the specified query parameters."
+            },
+            "Docstring": "Retrieve reaction information from a specified metabolic model.\n\nParameters:\n-----------\nmodel_id : str, optional\n           The identifier of the metabolic model. Defaults to None to query universal reactions.\nids : list[str], optional\n           Specific reaction identifier(s) to retrieve. Defaults to None.\n\nReturns:\n--------\nlist[dict]\n    A list containing reaction data based on the specified parameters.\n\nExamples:\n--------\n>>> bigg = BiGG()\n>>> bigg.reactions(model_id=\"e_coli_core\", ids=[\"ACALD\", \"GLNS\", \"ME1\", \"GLCpts\", \"AKGDH\"])",
+            "api_type": "method",
+            "api_name": "bioservices.BiGG.reactions",
+            "api_calling": "bioservices.BiGG.reactions(model_id=$, ids=$)",
+            "example": "bioservices.BiGG.reactions(model_id=\"e_coli_core\", ids=[\"ACALD\", \"GLNS\", \"ME1\", \"GLCpts\", \"AKGDH\"])"
+        },
+        "search": {
+            "Parameters": [
+                {
+                    "name": "query",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "The search term to query the BiGG Models database."
+                },
+                {
+                    "name": "type_",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "The category to search under; acceptable values include 'models', 'metabolites', 'reactions', and 'genes'."
+                }
+            ],
+            "Returns": {
+                "type": "list[dict]",
+                "description": "A list containing the search results, each represented as a dictionary of details."
+            },
+            "Docstring": "Search for items in the BiGG Models database matching the given query and type.\n\nParameters:\n-----------\nquery : str\n    The search term to query the BiGG Models database.\ntype_ : str\n    The category to search under; acceptable values include 'models', 'metabolites', 'reactions', and 'genes'.\n\nReturns:\n--------\nlist\n    A list containing the search results, each represented as a dictionary of details.\n\nExamples:\n---------\n>>> bigg = BiGG()\n>>> result = bigg.search(\"e coli\", \"models\")",
+            "api_type": "method",
+            "api_name": "bioservices.BiGG.search",
+            "api_calling": "bioservices.BiGG.search(query=$, type_=$)",
+            "example": "bioservices.BiGG.search(query=\"e coli\", type_=\"models\")"
+        },
+        "version": {
+            "Parameters": [],
+            "Returns": {
+                "type": "str",
+                "description": "The version of the BiGG API database."
+            },
+            "Docstring": "Retrieve the version of the BiGG API database.\n\nParameters:\n-----------\nNone\n\nReturns:\n--------\nstr\n    The version of the BiGG API database.\n\nExamples:\n--------\n>>> bigg.version",
+            "api_type": "property",
+            "api_name": "bioservices.BiGG.version",
+            "api_calling": "bioservices.BiGG.version",
+            "example": "bioservices.BiGG.version"
+        }
+    }
+}

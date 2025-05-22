@@ -1,0 +1,79 @@
+{
+    "intact_complex": {
+        "details": {
+            "Parameters": [
+                {
+                    "name": "query",
+                    "type": "str",
+                    "optional": false,
+                    "default": null,
+                    "description": "Complex identifier, e.g. 'EBI-1163476'"
+                }
+            ],
+            "Returns": {
+                "type": "dict",
+                "description": "Details about the specified complex in JSON format."
+            },
+            "Docstring": "Return details about a complex.",
+            "api_type": "method",
+            "api_name": "bioservices.IntactComplex.details",
+            "api_calling": "bioservices.HGNC.details(query=$)",
+            "example": "bioservices.IntactComplex.details('EBI-1163476')"
+        },
+        "search": {
+            "Parameters": [
+                {
+                    "name": "query",
+                    "type": "str",
+                    "optional": false,
+                    "default": null,
+                    "description": "The search query (e.g., 'ndc80')"
+                },
+                {
+                    "name": "frmt",
+                    "type": "str",
+                    "optional": true,
+                    "default": "json",
+                    "description": "Output format, 'json' by default or 'pandas' if Pandas is installed"
+                },
+                {
+                    "name": "facets",
+                    "type": "str",
+                    "optional": true,
+                    "default": "None",
+                    "description": "Comma-separated list of facets"
+                },
+                {
+                    "name": "first",
+                    "type": "int",
+                    "optional": true,
+                    "default": "None",
+                    "description": "Offset of the first record"
+                },
+                {
+                    "name": "number",
+                    "type": "int",
+                    "optional": true,
+                    "default": "None",
+                    "description": "Number of records to return"
+                },
+                {
+                    "name": "filters",
+                    "type": "str",
+                    "optional": true,
+                    "default": "None",
+                    "description": "Filter conditions string"
+                }
+            ],
+            "Returns": {
+                "type": "dict",
+                "description": "Search results for the complex in the specified format."
+            },
+            "Docstring": "Search for a complex inside IntactComplex.",
+            "api_type": "method",
+            "api_name": "bioservices.IntactComplex.search",
+            "api_calling": "bioservices.IntactComplex.search(query=$, frmt=$, facets=$, first=$, number=$, filters=$)",
+            "example": "bioservices.IntactComplex.search('ndc80')"
+        }
+    }
+}

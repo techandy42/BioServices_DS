@@ -1,0 +1,422 @@
+{
+    "psicquic": {
+        "activeDBs": {
+            "Parameters": [],
+            "Returns": {
+                "type": "list[str]",
+                "description": "List of active molecular interaction databases."
+            },
+            "Docstring": "Retrieves a list of active molecular interaction databases only.\n\nParameters:\n-----------\nNone\n\nReturns:\n--------\nlist\n    List of active molecular interaction databases.\n\nExamples:\n---------\n>>> s = PSICQUIC()\n>>> active_dbs = s.activeDBs\n>>> print(active_dbs)",
+            "api_type": "other",
+            "api_name": "bioservices.PSICQUIC.activeDBs",
+            "api_calling": "bioservices.PSICQUIC.activeDBs",
+            "example": "bioservices.PSICQUIC.activeDBs"
+        },
+        "formats": {
+            "Parameters": [],
+            "Returns": {
+                "type": "list",
+                "description": "A list of all supported output formats for PSICQUIC queries."
+            },
+            "Docstring": "Retrieve the supported output formats for the PSICQUIC service.\n\nParameters:\n-----------\nNone\n\nReturns:\n--------\nlist\n    A list of all supported output formats for PSICQUIC queries.\n\nExamples:\n---------\n>>> s = PSICQUIC()\n>>> formats = s.formats\n>>> print(formats)",
+            "api_type": "method",
+            "api_name": "bioservices.PSICQUIC.formats",
+            "api_calling": "bioservices.PSICQUIC.formats()",
+            "example": "s = PSICQUIC()\nformats = s.formats\nprint(formats)"
+        },
+        "getInteractionCounter": {
+            "Parameters": [
+                {
+                    "name": "query",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "A valid query string representing molecular interactions."
+                }
+            ],
+            "Returns": {
+                "type": "dict",
+                "description": "Dictionary with active databases as keys and the corresponding number of results as values."
+            },
+            "Docstring": "Fetches the interaction count from active molecular interaction databases for a given query.\n\nParameters:\n-----------\nquery : str\n    A valid query string representing molecular interactions.\n\nReturns:\n--------\ndict\n    Dictionary where the keys are active molecular interaction databases and the values represent the number of interactions found in each database.\n\nExamples:\n---------\n>>> psicquic = PSICQUIC()\n>>> results = psicquic.getInteractionCounter('intact:BRCA2')\n>>> print(results)\n{'IntAct': 5, 'BioGRID': 3}",
+            "api_type": "method",
+            "api_name": "bioservices.PSICQUIC.getInteractionCounter",
+            "api_calling": "bioservices.PSICQUIC.getInteractionCounter(query=$)",
+            "example": "bioservices.PSICQUIC.getInteractionCounter(query='Q9Y266')"
+        },
+        "mappingOneDB": {
+            "Parameters": [
+                {
+                    "name": "data",
+                    "type": "list",
+                    "default": null,
+                    "optional": false,
+                    "description": "The interaction data to be processed."
+                }
+            ],
+            "Returns": {
+                "type": "dict",
+                "description": "A dictionary mapping interaction identifiers to processed interaction data."
+            },
+            "Docstring": "Processes interaction data to extract and map identifiers to processed names.\n\nParameters:\n-----------\ndata : list\n    The interaction data to be processed.\n\nReturns:\n--------\ndict\n    A dictionary mapping interaction identifiers to processed interaction data.\n\nExamples:\n---------\n>>> PSICQUIC.mappingOneDB([('DB1:ID1','DB2:ID2')])\n{'ID1':'DB1:ID1'}",
+            "api_type": "method",
+            "api_name": "bioservices.PSICQUIC.mappingOneDB",
+            "api_calling": "bioservices.PSICQUIC.mappingOneDB(data=$)",
+            "example": "bioservices.PSICQUIC.mappingOneDB(data=[('DB1:ID1','DB2:ID2')])"
+        },
+        "postCleaning": {
+            "Parameters": [
+                {
+                    "name": "data",
+                    "type": "list",
+                    "default": null,
+                    "optional": false,
+                    "description": "Data to be processed, represented as a list of entries."
+                },
+                {
+                    "name": "keep_only",
+                    "type": "str",
+                    "default": "HUMAN",
+                    "optional": true,
+                    "description": "Restrict results to entries containing the specified pattern."
+                },
+                {
+                    "name": "remove_db",
+                    "type": "list",
+                    "default": [
+                        "chebi",
+                        "chembl"
+                    ],
+                    "optional": true,
+                    "description": "Databases to exclude from the results; specify as a list of strings."
+                },
+                {
+                    "name": "keep_self_loop",
+                    "type": "bool",
+                    "default": false,
+                    "optional": true,
+                    "description": "Whether to retain self-loop interactions in the results."
+                },
+                {
+                    "name": "verbose",
+                    "type": "bool",
+                    "default": true,
+                    "optional": true,
+                    "description": "Enable verbose output; display processing details."
+                }
+            ],
+            "Returns": {
+                "type": "list",
+                "description": "List of cleaned data entries after applying the restrictions."
+            },
+            "Docstring": "Performs post-processing and cleaning on the given dataset.\n\nParameters:\n-----------\ndata : list\n    Data to be processed, represented as a list of entries.\nkeep_only : str, optional\n    Restrict results to entries containing the specified pattern.\nremove_db : list, optional\n    Databases to exclude from the results; specify as a list of strings.\nkeep_self_loop : bool, optional\n    Whether to retain self-loop interactions in the results.\nverbose : bool, optional\n    Enable verbose output; display processing details.\n\nReturns:\n--------\nlist\n    List of cleaned data entries after applying the restrictions.\n\nExamples:\n---------\n>>> s = PSICQUIC()\n>>> data = [['item1','item2'],['item3',null]]\n>>> result = s.postCleaning(data, keep_only='HUMAN', verbose=True)",
+            "api_type": "method",
+            "api_name": "bioservices.PSICQUIC.postCleaning",
+            "api_calling": "bioservices.PSICQUIC.postCleaning(data=$, keep_only=$, remove_db=$, keep_self_loop=$, verbose=$)",
+            "example": "bioservices.PSICQUIC.postCleaning(data=[...], keep_only='HUMAN', remove_db=['chebi','chembl'], keep_self_loop=false, verbose=true)"
+        },
+        "postCleaningAll": {
+            "Parameters": [
+                {
+                    "name": "data",
+                    "type": "dict",
+                    "default": null,
+                    "optional": false,
+                    "description": "A dictionary keyed by source name to be cleaned."
+                },
+                {
+                    "name": "keep_only",
+                    "type": "str",
+                    "default": "HUMAN",
+                    "optional": true,
+                    "description": "A string indicating which entries to retain based on specific criteria."
+                },
+                {
+                    "name": "flatten",
+                    "type": "bool",
+                    "default": true,
+                    "optional": true,
+                    "description": "Boolean indicating if the final result should be consolidated into a flat structure."
+                },
+                {
+                    "name": "verbose",
+                    "type": "bool",
+                    "default": true,
+                    "optional": true,
+                    "description": "If true, detailed information during the process will be displayed."
+                }
+            ],
+            "Returns": {
+                "type": "list",
+                "description": "A cleaned and optionally flattened list of entries."
+            },
+            "Docstring": "Cleans provided data by ignoring specific details and focusing on unique interactions.\n\nParameters:\n-----------\ndata : dict\n    A dictionary keyed by source name to be cleaned.\nkeep_only : str, optional\n    A string indicating which entries to retain based on specific criteria.\nflatten : bool, optional\n    Boolean indicating if the final result should be consolidated into a flat structure.\nverbose : bool, optional\n    If true, detailed information during the process will be displayed.\n\nReturns:\n--------\nlist\n    A cleaned and optionally flattened list of entries after processing.\n\nExamples:\n---------\n>>> service = PSICQUIC()\n>>> result = service.postCleaningAll(data={'db':[ ['HUMAN:1234','HUMAN:5678'] ]}, keep_only='HUMAN', flatten=true, verbose=true)",
+            "api_type": "method",
+            "api_name": "bioservices.PSICQUIC.postCleaningAll",
+            "api_calling": "bioservices.PSICQUIC.postCleaningAll(data=$, keep_only=$, flatten=$, verbose=$)",
+            "example": "bioservices.PSICQUIC.postCleaningAll(data={'db': [['HUMAN:1234','HUMAN:5678']]}, keep_only='HUMAN', flatten=true, verbose=true)"
+        },
+        "preCleaning": {
+            "Parameters": [
+                {
+                    "name": "data",
+                    "type": "list",
+                    "default": null,
+                    "optional": false,
+                    "description": "A list containing interaction entries to be processed."
+                }
+            ],
+            "Returns": {
+                "type": "list",
+                "description": "A filtered list excluding entries with invalid identifiers."
+            },
+            "Docstring": "Filters out invalid entries from the provided data based on specific identifier criteria.\n\nParameters:\n-----------\ndata : list\n    A list containing interaction entries to be processed.\n\nReturns:\n--------\nlist\n    A filtered list excluding entries with invalid identifiers.\n\nExamples:\n---------\n>>> interaction_data = [[\"id1\",\"id2\"],[\"-\",\"id3\"],[\"id4\",\"-\"]]\n>>> result = preCleaning(interaction_data)\n>>> print(result)\n[[\"id1\",\"id2\"]]",
+            "api_type": "method",
+            "api_name": "bioservices.PSICQUIC.preCleaning",
+            "api_calling": "bioservices.PSICQUIC.preCleaning(data=$)",
+            "example": "bioservices.PSICQUIC.preCleaning(data=[[\"id1\",\"id2\"],[\"-\",\"id3\"],[\"id4\",\"-\"]])"
+        },
+        "print_status": {
+            "Parameters": [],
+            "Returns": {
+                "type": null,
+                "description": "Outputs the available services in a tabulated format."
+            },
+            "Docstring": "Prints the services that are available.\n\nParameters:\n-----------\nNone\n\nReturns:\n--------\nNone\n    Outputs the available services in a tabulated format.\n\nExamples:\n---------\n>>> s = PSICQUIC()\n>>> s.print_status()",
+            "api_type": "method",
+            "api_name": "bioservices.PSICQUIC.print_status",
+            "api_calling": "bioservices.PSICQUIC.print_status()",
+            "example": "s.print_status()"
+        },
+        "query": {
+            "Parameters": [
+                {
+                    "name": "service",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "A registered service name to query."
+                },
+                {
+                    "name": "query",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "A valid query string formatted according to the PSICQUIC specifications."
+                },
+                {
+                    "name": "output",
+                    "type": "str",
+                    "default": "tab25",
+                    "optional": true,
+                    "description": "Output format; valid formats include 'tab25', 'xml25', and others."
+                },
+                {
+                    "name": "version",
+                    "type": "str",
+                    "default": "current",
+                    "optional": true,
+                    "description": "Version of the PSICQUIC specification to use; default is 'current'."
+                },
+                {
+                    "name": "firstResult",
+                    "type": "int",
+                    "default": null,
+                    "optional": true,
+                    "description": "0-based index of the first result to fetch."
+                },
+                {
+                    "name": "maxResults",
+                    "type": "int",
+                    "default": null,
+                    "optional": true,
+                    "description": "Maximum number of results to fetch."
+                }
+            ],
+            "Returns": {
+                "type": "list",
+                "description": "A list of interaction entries retrieved based on the query."
+            },
+            "Docstring": "Sends a query to a specific PSICQUIC service database.\n\nParameters:\n-----------\nservice : str\n    A registered service name to query.\nquery : str\n    A valid query string formatted according to the PSICQUIC specifications.\noutput : str, optional\n    Output format; valid formats include 'tab25', 'xml25', and others.\nversion : str, optional\n    Version of the PSICQUIC specification to use; default is 'current'.\nfirstResult : int, optional\n    0-based index specifying the starting point of results to fetch.\nmaxResults : int, optional\n    Maximum number of results to fetch.\n\nReturns:\n--------\nlist\n    A list of interaction entries retrieved based on the query.\n\nExamples:\n---------\n>>> from bioservices import PSICQUIC\n>>> service = PSICQUIC()\n>>> result = service.query(\"intact\",\"BRCA2\", output=\"tab27\")\n>>> print(len(result))",
+            "api_type": "method",
+            "api_name": "bioservices.PSICQUIC.query",
+            "api_calling": "bioservices.PSICQUIC.query(service=$, query=$, output=$, version=$, firstResult=$, maxResults=$)",
+            "example": "bioservices.PSICQUIC.query(service=\"intact\", query=\"BRCA2\", output=\"tab27\", version=\"current\", firstResult=0, maxResults=100)"
+        },
+        "queryAll": {
+            "Parameters": [
+                {
+                    "name": "query",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "A valid query string for protein interactions."
+                },
+                {
+                    "name": "databases",
+                    "type": "list",
+                    "default": null,
+                    "optional": true,
+                    "description": "A list of databases to query. Queries all active databases if not provided."
+                },
+                {
+                    "name": "output",
+                    "type": "str",
+                    "default": "tab25",
+                    "optional": true,
+                    "description": "The output format for the query results, such as 'tab25', 'xml25'."
+                },
+                {
+                    "name": "version",
+                    "type": "str",
+                    "default": "current",
+                    "optional": true,
+                    "description": "The version of the database to query."
+                },
+                {
+                    "name": "firstResult",
+                    "type": "int",
+                    "default": null,
+                    "optional": true,
+                    "description": "Start index of results to retrieve."
+                },
+                {
+                    "name": "maxResults",
+                    "type": "int",
+                    "default": null,
+                    "optional": true,
+                    "description": "Maximum number of results."
+                }
+            ],
+            "Returns": {
+                "type": "dict",
+                "description": "A dictionary with database names as keys and query results as values."
+            },
+            "Docstring": "Executes a query on all active databases and returns the results.\n\nParameters:\n-----------\nquery : str\n    A valid query string for protein interactions.\ndatabases : list, optional\n    A list of databases to query. Defaults to all active databases.\noutput : str, optional\n    The output format, e.g., 'tab25'. Default is 'tab25'.\nversion : str, optional\n    Database version. Default is 'current'.\nfirstResult : int, optional\n    Start index of results to retrieve.\nmaxResults : int, optional\n    Maximum number of results.\n\nReturns:\n--------\ndict\n    Dictionary where keys correspond to databases and values correspond to query outputs.\n\nExamples:\n---------\n>>> res = service.queryAll(\"ZAP70 AND species:9606\")",
+            "api_type": "method",
+            "api_name": "bioservices.PSICQUIC.queryAll",
+            "api_calling": "bioservices.PSICQUIC.queryAll(query=$, databases=$, output=$, version=$, firstResult=$, maxResults=$)",
+            "example": "bioservices.PSICQUIC.queryAll(query=\"Q9Y266 AND species:9606\", databases=None, output='tab25', version='current', firstResult=0, maxResults=100)"
+        },
+        "read_registry": {
+            "Parameters": [],
+            "Returns": {
+                "type": "list[str]",
+                "description": "A list of active registry entries as strings."
+            },
+            "Docstring": "Reads and returns the active registry.\n\nParameters:\n-----------\nNone\n\nReturns:\n--------\nlist of str\n    A list of registry entries currently marked as active.",
+            "api_type": "method",
+            "api_name": "bioservices.PSICQUIC.read_registry",
+            "api_calling": "bioservices.PSICQUIC.read_registry()",
+            "example": "bioservices.PSICQUIC.read_registry()"
+        },
+        "registry": {
+            "Parameters": [],
+            "Returns": {
+                "type": "list",
+                "description": "List of all the active registry entries in PSICQUIC."
+            },
+            "Docstring": "Returns the registry containing all PSICQUIC services.\n\nParameters:\n-----------\nNone\n\nReturns:\n--------\nlist\n    List of active registry entries in PSICQUIC.\n\nExamples:\n---------\n>>> s = PSICQUIC()\n>>> s.registry",
+            "api_type": "method",
+            "api_name": "bioservices.PSICQUIC.registry",
+            "api_calling": "bioservices.PSICQUIC.registry()",
+            "example": "s.registry"
+        },
+        "registry_actives": {
+            "Parameters": [],
+            "Returns": {
+                "type": "list",
+                "description": "A list of booleans indicating the active state of each service in the registry."
+            },
+            "Docstring": "Retrieves the active state of each service in the registry.\n\nParameters:\n-----------\nNone\n\nReturns:\n--------\nlist\n    A list of booleans indicating the active state of each service.",
+            "api_type": "method",
+            "api_name": "bioservices.PSICQUIC.registry_actives",
+            "api_calling": "bioservices.PSICQUIC.registry_actives()",
+            "example": "psicquic_instance.registry_actives()"
+        },
+        "registry_counts": {
+            "Parameters": [],
+            "Returns": {
+                "type": "dict",
+                "description": "A dictionary with service names as keys and the number of registered entries as values."
+            },
+            "Docstring": "Returns a dictionary detailing the entry counts for each service in the registry.\n\nParameters:\n-----------\nNone\n\nReturns:\n--------\ndict\n    A dictionary with service names as keys and the number of entries.",
+            "api_type": "other",
+            "api_name": "bioservices.PSICQUIC.registry_counts",
+            "api_calling": "bioservices.PSICQUIC.registry_counts()",
+            "example": "bioservices.PSICQUIC.registry_counts()"
+        },
+        "registry_names": {
+            "Parameters": [],
+            "Returns": {
+                "type": "list",
+                "description": "A list of names for all available services."
+            },
+            "Docstring": "Returns all services available (names).\n\nParameters:\n-----------\nNone\n\nReturns:\n--------\nlist\n    A list of names for all available services.\n\nExamples:\n---------\n>>> instance = PSICQUIC()\n>>> print(instance.registry_names)",
+            "api_type": "method",
+            "api_name": "bioservices.PSICQUIC.registry_names",
+            "api_calling": "bioservices.PSICQUIC.registry_names()",
+            "example": "print(ps.registry_names)"
+        },
+        "registry_restexamples": {
+            "Parameters": [],
+            "Returns": {
+                "type": "dict",
+                "description": "A dictionary containing one REST example for each service."
+            },
+            "Docstring": "Returns a dictionary containing one REST example for each service.\n\nParameters:\n-----------\nNone\n\nReturns:\n--------\ndict\n    A dictionary with service names as keys and their respective REST example as values.\n\nExamples:\n---------\n>>> obj = PSICQUIC()\n>>> examples = obj.registry_restexamples",
+            "api_type": "other",
+            "api_name": "bioservices.PSICQUIC.registry_restexamples",
+            "api_calling": "bioservices.PSICQUIC.registry_restexamples()",
+            "example": "examples = ps.registry_restexamples"
+        },
+        "registry_restricted": {
+            "Parameters": [],
+            "Returns": {
+                "type": "list",
+                "description": "A list of restricted status of services."
+            },
+            "Docstring": "Retrieves and returns the restricted status of the available services via the PSICQUIC interface.\n\nParameters:\n-----------\nNone\n\nReturns:\n--------\nlist\n    A list of booleans indicating restricted status of each service.",
+            "api_type": "method",
+            "api_name": "bioservices.PSICQUIC.registry_restricted",
+            "api_calling": "bioservices.PSICQUIC.registry_restricted()",
+            "example": ""
+        },
+        "registry_resturls": {
+            "Parameters": [],
+            "Returns": {
+                "type": "list",
+                "description": "List of URLs corresponding to REST services accessible through the PSICQUIC API."
+            },
+            "Docstring": "Provides the REST service URLs of active PSICQUIC-registry services.\n\nParameters:\n-----------\nNone\n\nReturns:\n--------\nlist\n    List containing the URLs of REST services registered and active in PSICQUIC.\n\nExamples:\n---------\n>>> my_service = PSICQUIC()\n>>> print(my_service.registry_resturls)",
+            "api_type": "method",
+            "api_name": "bioservices.PSICQUIC.registry_resturls",
+            "api_calling": "bioservices.PSICQUIC.registry_resturls()",
+            "example": "bioservices.PSICQUIC.registry_resturls()"
+        },
+        "registry_soapurls": {
+            "Parameters": [],
+            "Returns": {
+                "type": "list",
+                "description": "A list containing the URLs of WSDL services."
+            },
+            "Docstring": "Retrieves the URLs of WSDL (SOAP) web services from the registry.\n\nParameters:\n-----------\nNone\n\nReturns:\n--------\nlist\n    A list of URLs corresponding to SOAP endpoints for available PSICQUIC services.\n\nExamples:\n---------\n>>> s = PSICQUIC()\n>>> soap_urls = s.registry_soapurls()",
+            "api_type": "other",
+            "api_name": "bioservices.PSICQUIC.registry_soapurls",
+            "api_calling": "bioservices.PSICQUIC.registry_soapurls()",
+            "example": "soap_urls = ps.registry_soapurls()"
+        },
+        "registry_versions": {
+            "Parameters": [],
+            "Returns": {
+                "type": "list",
+                "description": "A list containing the versions of each service available in the registry."
+            },
+            "Docstring": "Returns the version of each available service in the registry.\n\nParameters:\n-----------\nNone\n\nReturns:\n--------\nlist\n    A list containing the versions of the available services.",
+            "api_type": "method",
+            "api_name": "bioservices.PSICQUIC.registry_versions",
+            "api_calling": "bioservices.PSICQUIC.registry_versions()",
+            "example": "psicquic_instance.registry_versions()"
+        }
+    }
+}

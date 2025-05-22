@@ -1,0 +1,418 @@
+{
+    "pdbe": {
+        "get_assembly": {
+            "Parameters": [
+                {
+                    "name": "query",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "A 4-character PDB id code specifying the entry to query."
+                }
+            ],
+            "Returns": {
+                "type": "dict",
+                "description": "Information for each assembly, broken down at the entity level, including molecule name, type, class, chains of occurrence, and copy counts."
+            },
+            "Docstring": "Provides information for each assembly of a given PDB ID. This information is broken down at the entity level and includes the molecule name, type, class, chains of occurrence, and copy counts.\n\nParameters:\n-----------\nquery : str\n    A 4-character PDB id code specifying the entry to query.\n\nReturns:\n--------\ndict\n    Information for each assembly, broken down at the entity level, including molecule name, type, class, chains of occurrence, and copy counts.\n\nExamples:\n---------\n>>> pdbe.get_assembly('1cbs')",
+            "api_type": "method",
+            "api_name": "bioservices.PDBe.get_assembly",
+            "api_calling": "bioservices.PDBe.get_assembly(query=$)",
+            "example": "bioservices.PDBe.get_assembly(query='1cbs')"
+        },
+        "get_binding_sites": {
+            "Parameters": [
+                {
+                    "name": "query",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "A 4-character PDB id code specifying the entry to query."
+                }
+            ],
+            "Returns": {
+                "type": "dict",
+                "description": "A dictionary containing STRUCT_SITE records: ligand identifiers, residues in the site, descriptions, etc., for the specified PDB entry."
+            },
+            "Docstring": "Provides details on binding sites in the entry, corresponding to STRUCT_SITE records in PDB files or mmCIF equivalents, including ligands, residues in the site, and descriptions.\n\nParameters:\n-----------\nquery : str\n    A 4-character PDB id code specifying the entry to query.\n\nReturns:\n--------\ndict\n    A dictionary containing STRUCT_SITE records: ligand identifiers, residues in the site, and descriptions.\n\nExamples:\n---------\n>>> pdbe.get_binding_sites('1cbs')",
+            "api_type": "method",
+            "api_name": "bioservices.PDBe.get_binding_sites",
+            "api_calling": "bioservices.PDBe.get_binding_sites(query=$)",
+            "example": "bioservices.PDBe.get_binding_sites(query='1cbs')"
+        },
+        "get_drugbank_annotation": {
+            "Parameters": [
+                {
+                    "name": "query",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "A 4-character PDB id code specifying the entry to query."
+                }
+            ],
+            "Returns": {
+                "type": "dict",
+                "description": "A dictionary containing DrugBank annotations of all bound ligands in the specified PDB entry."
+            },
+            "Docstring": "Provides DrugBank annotation of all ligands (bound) within the entry.\n\nParameters:\n-----------\nquery : str\n    A 4-character PDB id code specifying the entry to query.\n\nReturns:\n--------\ndict\n    DrugBank annotation of all bound ligands in the entry.\n\nExamples:\n---------\n>>> pdbe.get_drugbank_annotation('5hht')",
+            "api_type": "method",
+            "api_name": "bioservices.PDBe.get_drugbank_annotation",
+            "api_calling": "bioservices.PDBe.get_drugbank_annotation(query=$)",
+            "example": "bioservices.PDBe.get_drugbank_annotation(query='5hht')"
+        },
+        "get_electron_density_statistics": {
+            "Parameters": [
+                {
+                    "name": "query",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "A 4-character PDB id code specifying the entry to query."
+                }
+            ],
+            "Returns": {
+                "type": "dict",
+                "description": "A dictionary containing detailed statistics for the electron density map of the specified PDB entry."
+            },
+            "Docstring": "Provides statistics for electron density maps for the specified PDB entry.\n\nParameters:\n-----------\nquery : str\n    A 4-character PDB id code specifying the entry to query.\n\nReturns:\n--------\ndict\n    Detailed statistics for the electron density map of the entry.\n\nExamples:\n---------\n>>> pdbe.get_electron_density_statistics('1cbs')",
+            "api_type": "method",
+            "api_name": "bioservices.PDBe.get_electron_density_statistics",
+            "api_calling": "bioservices.PDBe.get_electron_density_statistics(query=$)",
+            "example": "bioservices.PDBe.get_electron_density_statistics(query='1cbs')"
+        },
+        "get_experiment": {
+            "Parameters": [
+                {
+                    "name": "query",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "A 4-character PDB id code specifying the entry to query."
+                }
+            ],
+            "Returns": {
+                "type": "dict",
+                "description": "A dictionary with separate entries for each experiment: X-ray diffraction (resolution, spacegroup, cell dimensions, R and Rfree, refinement program), NMR (spectrometer, sample, spectra, refinement), and EM (specimen, imaging, acquisition, reconstruction, fitting)."
+            },
+            "Docstring": "Provides details of experiments carried out in determining the structure of the entry. Each experiment is described separately: for X-ray diffraction, resolution, spacegroup, cell dimensions, R/Rfree, refinement program; for NMR, spectrometer, sample, spectra, refinement; for EM, specimen, imaging, acquisition, reconstruction, and fitting details.\n\nParameters:\n-----------\nquery : str\n    A 4-character PDB id code specifying the entry to query.\n\nReturns:\n--------\ndict\n    Details of experiments for the specified PDB entry, organized by experiment type.\n\nExamples:\n---------\n>>> pdbe.get_experiment('1cbs')",
+            "api_type": "method",
+            "api_name": "bioservices.PDBe.get_experiment",
+            "api_calling": "bioservices.PDBe.get_experiment(query=$)",
+            "example": "bioservices.PDBe.get_experiment(query='1cbs')"
+        },
+        "get_files": {
+            "Parameters": [
+                {
+                    "name": "query",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "A 4-character PDB id code specifying the entry to query."
+                }
+            ],
+            "Returns": {
+                "type": "dict",
+                "description": "A dictionary containing URLs and labels for files related to the PDB entry, including mmCIF files, biological assemblies, FASTA sequences, SIFTS cross-reference XML, validation XML, structure factor files, NMR constraint files, etc."
+            },
+            "Docstring": "Provides URLs and brief descriptions (labels) for files related to a PDB entry, including mmCIF files, biological assembly files, FASTA sequences, SIFTS cross-reference XML, validation XML, X-ray structure factor files, and NMR experimental constraint files.\n\nParameters:\n-----------\nquery : str\n    A 4-character PDB id code specifying the entry to query.\n\nReturns:\n--------\ndict\n    URLs and labels for files related to the specified PDB entry.\n\nExamples:\n---------\n>>> pdbe.get_files('1cbs')",
+            "api_type": "method",
+            "api_name": "bioservices.PDBe.get_files",
+            "api_calling": "bioservices.PDBe.get_files(query=$)",
+            "example": "bioservices.PDBe.get_files(query='1cbs')"
+        },
+        "get_ligand_monomers": {
+            "Parameters": [
+                {
+                    "name": "query",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "A 4-character PDB id code specifying the entry to query."
+                }
+            ],
+            "Returns": {
+                "type": "dict",
+                "description": "A dictionary containing modeled instances of ligands (bound molecules that are not waters) for the specified PDB entry."
+            },
+            "Docstring": "Provides a list of modeled instances of ligands (bound molecules that are not waters) within the specified PDB entry.\n\nParameters:\n-----------\nquery : str\n    A 4-character PDB id code specifying the entry to query.\n\nReturns:\n--------\ndict\n    Modeled instances of ligands in the entry.\n\nExamples:\n---------\n>>> pdbe.get_ligand_monomers('1cbs')",
+            "api_type": "method",
+            "api_name": "bioservices.PDBe.get_ligand_monomers",
+            "api_calling": "bioservices.PDBe.get_ligand_monomers(query=$)",
+            "example": "bioservices.PDBe.get_ligand_monomers(query='1cbs')"
+        },
+        "get_modified_residues": {
+            "Parameters": [
+                {
+                    "name": "query",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "A 4-character PDB id code specifying the entry to query."
+                }
+            ],
+            "Returns": {
+                "type": "dict",
+                "description": "A dictionary containing modeled instances of modified residues (amino acids or nucleotides) in protein, DNA, or RNA chains for the specified PDB entry."
+            },
+            "Docstring": "Provides a list of modeled instances of modified residues (amino acids or nucleotides) in protein, DNA, or RNA chains associated with the specified PDB entry.\n\nParameters:\n-----------\nquery : str\n    A 4-character PDB id code specifying the entry to query.\n\nReturns:\n--------\ndict\n    Modified residues information for the entry.\n\nExamples:\n---------\n>>> pdbe.get_modified_residues('4v5j')",
+            "api_type": "method",
+            "api_name": "bioservices.PDBe.get_modified_residues",
+            "api_calling": "bioservices.PDBe.get_modified_residues(query=$)",
+            "example": "bioservices.PDBe.get_modified_residues(query='4v5j')"
+        },
+        "get_molecules": {
+            "Parameters": [
+                {
+                    "name": "query",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "A 4-character PDB id code specifying the entry to query."
+                }
+            ],
+            "Returns": {
+                "type": "dict",
+                "description": "A dictionary containing details of molecules (entities) modeled in the entry: entity id, description, type, polymer type, copy count, sample preparation method, source organism, etc."
+            },
+            "Docstring": "Retrieves details about molecules (entities) modeled in the specified PDB entry, including entity id, description, type, polymer type, number of copies, sample preparation method, and source organism.\n\nParameters:\n-----------\nquery : str\n    A 4-character PDB id code specifying the entry to query.\n\nReturns:\n--------\ndict\n    Molecule (entity) details for the entry.\n\nExamples:\n---------\n>>> pdbe.get_molecules('1cbs')",
+            "api_type": "method",
+            "api_name": "bioservices.PDBe.get_molecules",
+            "api_calling": "bioservices.PDBe.get_molecules(query=$)",
+            "example": "bioservices.PDBe.get_molecules(query='1cbs')"
+        },
+        "get_mutated_residues": {
+            "Parameters": [
+                {
+                    "name": "query",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "A 4-character PDB id code specifying the entry to query."
+                }
+            ],
+            "Returns": {
+                "type": "dict",
+                "description": "A dictionary containing modeled instances of mutated residues (amino acids or nucleotides) in protein, DNA, or RNA chains for the specified entry."
+            },
+            "Docstring": "Provides a list of modeled instances of mutated residues (amino acids or nucleotides) in protein, DNA, or RNA chains for the specified PDB entry.\n\nParameters:\n-----------\nquery : str\n    A 4-character PDB id code specifying the entry to query.\n\nReturns:\n--------\ndict\n    Mutated residues information for the entry.\n\nExamples:\n---------\n>>> pdbe.get_mutated_residues('1bgj')",
+            "api_type": "method",
+            "api_name": "bioservices.PDBe.get_mutated_residues",
+            "api_calling": "bioservices.PDBe.get_mutated_residues(query=$)",
+            "example": "bioservices.PDBe.get_mutated_residues(query='1bgj')"
+        },
+        "get_observed_ranges": {
+            "Parameters": [
+                {
+                    "name": "query",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "A 4-character PDB id code specifying the entry to query."
+                }
+            ],
+            "Returns": {
+                "type": "dict",
+                "description": "A dictionary containing observed ranges, i.e., segments of structural coverage of polymeric molecules, that are modeled fully or partly for the specified entry."
+            },
+            "Docstring": "Provides observed ranges, i.e., segments of structural coverage of polymeric molecules that are modeled fully or partly, for the specified PDB entry.\n\nParameters:\n-----------\nquery : str\n    A 4-character PDB id code specifying the entry to query.\n\nReturns:\n--------\ndict\n    Observed ranges data for the entry.\n\nExamples:\n---------\n>>> pdbe.get_observed_ranges('1cbs')",
+            "api_type": "method",
+            "api_name": "bioservices.PDBe.get_observed_ranges",
+            "api_calling": "bioservices.PDBe.get_observed_ranges(query=$)",
+            "example": "bioservices.PDBe.get_observed_ranges(query='1cbs')"
+        },
+        "get_observed_ranges_in_pdb_chain": {
+            "Parameters": [
+                {
+                    "name": "query",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "A 4-character PDB id code specifying the entry to query."
+                },
+                {
+                    "name": "chain_id",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "A single-character PDB chain ID identifying the chain within the entry."
+                }
+            ],
+            "Returns": {
+                "type": "dict",
+                "description": "A dictionary containing observed ranges for the specified chain of the PDB entry."
+            },
+            "Docstring": "Provides observed ranges, i.e., segments of structural coverage of polymeric molecules, for a specific chain in the PDB entry.\n\nParameters:\n-----------\nquery : str\n    A 4-character PDB id code specifying the entry to query.\nchain_id : str\n    A single-character PDB chain ID identifying the chain within the entry.\n\nReturns:\n--------\ndict\n    Observed ranges data for the specified chain.\n\nExamples:\n---------\n>>> pdbe.get_observed_ranges_in_pdb_chain('1cbs', 'A')",
+            "api_type": "method",
+            "api_name": "bioservices.PDBe.get_observed_ranges_in_pdb_chain",
+            "api_calling": "bioservices.PDBe.get_observed_ranges_in_pdb_chain(query=$, chain_id=$)",
+            "example": "bioservices.PDBe.get_observed_ranges_in_pdb_chain(query='1cbs', chain_id='A')"
+        },
+        "get_observed_residues_ratio": {
+            "Parameters": [
+                {
+                    "name": "query",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "A 4-character PDB id code specifying the entry to query."
+                }
+            ],
+            "Returns": {
+                "type": "dict",
+                "description": "A dictionary containing the ratio of observed residues for each chain in each molecule of the entry, sorted by observed_ratio (descending), partial_ratio (ascending), and number_residues (descending)."
+            },
+            "Docstring": "Provides the ratio of observed residues for each chain in each molecule of the specified PDB entry. The list of chains within an entity is sorted by observed_ratio (descending order), partial_ratio (ascending order), and number_residues (descending order).\n\nParameters:\n-----------\nquery : str\n    A 4-character PDB id code specifying the entry to query.\n\nReturns:\n--------\ndict\n    Observed residues ratio data for the entry.\n\nExamples:\n---------\n>>> pdbe.get_observed_residues_ratio('1cbs')",
+            "api_type": "method",
+            "api_name": "bioservices.PDBe.get_observed_residues_ratio",
+            "api_calling": "bioservices.PDBe.get_observed_residues_ratio(query=$)",
+            "example": "bioservices.PDBe.get_observed_residues_ratio(query='1cbs')"
+        },
+        "get_related_dataset": {
+            "Parameters": [
+                {
+                    "name": "query",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "A 4-character PDB id code specifying the entry to query."
+                }
+            ],
+            "Returns": {
+                "type": "dict",
+                "description": "A dictionary containing DOIs for related experimental datasets, including diffraction image data, small-angle scattering data, and electron micrographs."
+            },
+            "Docstring": "Provides DOIs for related raw experimental datasets, including diffraction image data, small-angle scattering data, and electron micrographs.\n\nParameters:\n-----------\nquery : str\n    A 4-character PDB id code specifying the entry to query.\n\nReturns:\n--------\ndict\n    DOIs for related experimental datasets.\n\nExamples:\n---------\n>>> pdbe.get_related_dataset('5o8b')",
+            "api_type": "method",
+            "api_name": "bioservices.PDBe.get_related_dataset",
+            "api_calling": "bioservices.PDBe.get_related_dataset(query=$)",
+            "example": "bioservices.PDBe.get_related_dataset(query='5o8b')"
+        },
+        "get_related_publications": {
+            "Parameters": [
+                {
+                    "name": "query",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "A 4-character PDB id code specifying the entry to query."
+                }
+            ],
+            "Returns": {
+                "type": "dict",
+                "description": "A dictionary containing publication details from EuroPMC and UniProt, including articles that cite or mention the specified PDB entry."
+            },
+            "Docstring": "Returns publications obtained from EuroPMC and UniProt for the specified PDB entry. These include articles that cite the entry's primary citation or mention the entry id without explicit citation.\n\nParameters:\n-----------\nquery : str\n    A 4-character PDB id code specifying the entry to query.\n\nReturns:\n--------\ndict\n    Publication details for the entry.\n\nExamples:\n---------\n>>> pdbe.get_related_publications('1cbs')",
+            "api_type": "method",
+            "api_name": "bioservices.PDBe.get_related_publications",
+            "api_calling": "bioservices.PDBe.get_related_publications(query=$)",
+            "example": "bioservices.PDBe.get_related_publications(query='1cbs')"
+        },
+        "get_release_status": {
+            "Parameters": [
+                {
+                    "name": "query",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "A 4-character PDB id code specifying the entry to query."
+                }
+            ],
+            "Returns": {
+                "type": "dict",
+                "description": "A dictionary containing status information (released, obsoleted, on-hold, etc.) and metadata such as authors, title, and experimental method for the specified entry."
+            },
+            "Docstring": "Provides status information of a PDB entry (released, obsoleted, on-hold, etc.) along with metadata such as authors, title, and experimental method.\n\nParameters:\n-----------\nquery : str\n    A 4-character PDB id code specifying the entry to query.\n\nReturns:\n--------\ndict\n    Status and metadata for the entry.\n\nExamples:\n---------\n>>> pdbe.get_release_status('1cbs')",
+            "api_type": "method",
+            "api_name": "bioservices.PDBe.get_release_status",
+            "api_calling": "bioservices.PDBe.get_release_status(query=$)",
+            "example": "bioservices.PDBe.get_release_status(query='1cbs')"
+        },
+        "get_residue_listing": {
+            "Parameters": [
+                {
+                    "name": "query",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "A 4-character PDB id code specifying the entry to query."
+                }
+            ],
+            "Returns": {
+                "type": "dict",
+                "description": "A dictionary listing all residues (modeled or otherwise) in the entry, excluding waters, with details on fraction of expected atoms modeled and alternate conformers."
+            },
+            "Docstring": "Provides a list of all residues (modeled or otherwise) within a PDB entry, excluding waters, along with details of fraction of expected atoms modeled and any alternate conformers.\n\nParameters:\n-----------\nquery : str\n    A 4-character PDB id code specifying the entry to query.\n\nReturns:\n--------\ndict\n    Residue listing with modeling completeness details.\n\nExamples:\n---------\n>>> pdbe.get_residue_listing('1cbs')",
+            "api_type": "method",
+            "api_name": "bioservices.PDBe.get_residue_listing",
+            "api_calling": "bioservices.PDBe.get_residue_listing(query=$)",
+            "example": "bioservices.PDBe.get_residue_listing(query='1cbs')"
+        },
+        "get_residue_listing_in_pdb_chain": {
+            "Parameters": [
+                {
+                    "name": "query",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "A 4-character PDB id code specifying the entry to query."
+                },
+                {
+                    "name": "chain_id",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "A single-character PDB chain ID identifying the chain within the entry."
+                }
+            ],
+            "Returns": {
+                "type": "dict",
+                "description": "A dictionary listing all residues in the specified chain, excluding waters, with details on fraction of expected atoms modeled and alternate conformers."
+            },
+            "Docstring": "Provides all residues (modeled or otherwise) in a specific chain of the PDB entry, excluding waters, along with details of fraction of expected atoms modeled and any alternate conformers.\n\nParameters:\n-----------\nquery : str\n    A 4-character PDB id code specifying the entry to query.\nchain_id : str\n    A single-character PDB chain ID identifying the chain within the entry.\n\nReturns:\n--------\ndict\n    Residue listing for the specified chain with modeling completeness details.\n\nExamples:\n---------\n>>> pdbe.get_residue_listing_in_pdb_chain('1cbs', 'A')",
+            "api_type": "method",
+            "api_name": "bioservices.PDBe.get_residue_listing_in_pdb_chain",
+            "api_calling": "bioservices.PDBe.get_residue_listing_in_pdb_chain(query=$, chain_id=$)",
+            "example": "bioservices.PDBe.get_residue_listing_in_pdb_chain(query='1cbs', chain_id='A')"
+        },
+        "get_secondary_structure": {
+            "Parameters": [
+                {
+                    "name": "query",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "A 4-character PDB id code specifying the entry to query."
+                }
+            ],
+            "Returns": {
+                "type": "dict",
+                "description": "A dictionary containing residue ranges of regular secondary structures (alpha helices and beta strands) in the protein chains of the entry. For beta strands, sheet ID identifies the sheet."
+            },
+            "Docstring": "Provides residue ranges of regular secondary structures (alpha helices and beta strands) found in the protein chains of the specified PDB entry. For beta strands, sheet ID identifies the beta sheet.\n\nParameters:\n-----------\nquery : str\n    A 4-character PDB id code specifying the entry to query.\n\nReturns:\n--------\ndict\n    Secondary structure residue ranges for the entry.\n\nExamples:\n---------\n>>> pdbe.get_secondary_structure('1cbs')",
+            "api_type": "method",
+            "api_name": "bioservices.PDBe.get_secondary_structure",
+            "api_calling": "bioservices.PDBe.get_secondary_structure(query=$)",
+            "example": "bioservices.PDBe.get_secondary_structure(query='1cbs')"
+        },
+        "get_summary": {
+            "Parameters": [
+                {
+                    "name": "query",
+                    "type": "str",
+                    "default": null,
+                    "optional": false,
+                    "description": "A 4-character PDB id code specifying the entry to query. Can be a comma-separated string of IDs or a list of PDB id strings."
+                }
+            ],
+            "Returns": {
+                "type": "dict",
+                "description": "A dictionary summarizing the PDB entry or entries, including title, depositor list, deposition date, release date, latest revision date, experimental method, and related entry list."
+            },
+            "Docstring": "Returns summary information for a PDB entry or entries, including title, list of depositors, date of deposition, date of release, date of latest revision, experimental method, and related entries.\n\nParameters:\n-----------\nquery : str\n    A 4-character PDB id code specifying the entry to query. Can be a comma-separated string of IDs or a list of PDB id strings.\n\nReturns:\n--------\ndict\n    Summary data for the specified PDB entries.\n\nExamples:\n---------\n>>> pdbe.get_summary('1cbs')\n>>> pdbe.get_summary('1cbs,2kv8')\n>>> pdbe.get_summary(['1cbs', '2kv8'])",
+            "api_type": "method",
+            "api_name": "bioservices.PDBe.get_summary",
+            "api_calling": "bioservices.PDBe.get_summary(query=$)",
+            "example": "bioservices.PDBe.get_summary(query='1cbs')"
+        }
+    }
+}
