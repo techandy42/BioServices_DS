@@ -14,11 +14,11 @@
                 "type": "dict",
                 "description": "Details about the specified complex in JSON format."
             },
-            "Docstring": "Return details about a complex.",
             "api_type": "method",
             "api_name": "bioservices.IntactComplex.details",
             "api_calling": "bioservices.HGNC.details(query=$)",
-            "example": "bioservices.IntactComplex.details('EBI-1163476')"
+            "example": "bioservices.IntactComplex.details('EBI-1163476')",
+            "description": "Return details about a complex."
         },
         "search": {
             "Parameters": [
@@ -69,11 +69,11 @@
                 "type": "dict",
                 "description": "Search results for the complex in the specified format."
             },
-            "Docstring": "Search for a complex inside IntactComplex.",
             "api_type": "method",
             "api_name": "bioservices.IntactComplex.search",
             "api_calling": "bioservices.IntactComplex.search(query=$, frmt=$, facets=$, first=$, number=$, filters=$)",
-            "example": "bioservices.IntactComplex.search('ndc80')"
+            "example": "bioservices.IntactComplex.search('ndc80')",
+            "description": "Search for a complex inside IntactComplex."
         }
     }
 }

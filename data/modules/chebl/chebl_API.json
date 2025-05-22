@@ -21,11 +21,11 @@
                 "type": "list[str]",
                 "description": "A list of strings containing database identifiers associated with the provided target."
             },
-            "Docstring": "Calls `getCompleteEntity` and retrieves the database identifier for a specific CheBI entry based on the given database target.\n\nParameters:\n-----------\nchebiId : str\n    A valid ChEBI identifier.\ntarget : str\n    The database target to retrieve identifiers from.\n\nReturns:\n--------\nlist\n    The relevant database identifiers based on the target provided.\n\nExamples:\n--------\n>>> ch.conv(\"CHEBI:10102\", \"KEGG COMPOUND accession\")\n['C07484']",
             "api_type": "method",
             "api_name": "bioservices.ChEBI.conv",
             "api_calling": "bioservices.ChEBI.conv(chebiId=$, target=$)",
-            "example": "bioservices.ChEBI.conv(chebiId=\"CHEBI:10102\", target=\"KEGG COMPOUND accession\")"
+            "example": "bioservices.ChEBI.conv(chebiId=\"CHEBI:10102\", target=\"KEGG COMPOUND accession\")",
+            "description": "Calls `getCompleteEntity` and retrieves the database identifier for a specific CheBI entry based on the given database target."
         },
         "getAllOntologyChildrenInPath": {
             "Parameters": [
@@ -55,11 +55,11 @@
                 "type": "suds.sudsobject.LiteEntityList",
                 "description": "A list (<class 'suds.sudsobject.LiteEntityList'>, treat it like a list of nested named tuples) of ontology children of the given entity based on the specified criteria."
             },
-            "Docstring": "Retrieves the ontology children of an entity including the specified relationship type.\n\nParameters:\n-----------\nchebiId : str\n          A valid ChEBI identifier string.\nrelationshipType : str\n          Specifies the type of relationship to consider when retrieving children. Supported values include \"is a\", \"has part\", \"has role\", \"is conjugate base of\", \"is conjugate acid of\", \"is tautomer of\", \"is enantiomer of\", \"has functional parent\", \"has parent hybride\", \"is substituent group of\".\nonlyWithChemicalStructure : bool, optional, default False\n          If True, restrict results to entities with chemical structure information.\n\nReturns:\n--------\nsuds.sudsobject.LiteEntityList\n    A list of ontology children of the given entity based on the specified criteria.\n\nExamples:\n--------\n>>> ch.getAllOntologyChildrenInPath(\"CHEBI:27732\", \"has part\")",
             "api_type": "method",
             "api_name": "bioservices.ChEBI.getAllOntologyChildrenInPath",
             "api_calling": "bioservices.ChEBI.getAllOntologyChildrenInPath(chebiId=$, relationshipType=$, onlyWithChemicalStructure=$)",
-            "example": "bioservices.ChEBI.getAllOntologyChildrenInPath(chebiId=\"CHEBI:27732\", relationshipType=\"has part\", onlyWithChemicalStructure=False)"
+            "example": "bioservices.ChEBI.getAllOntologyChildrenInPath(chebiId=\"CHEBI:27732\", relationshipType=\"has part\", onlyWithChemicalStructure=False)",
+            "description": "Retrieves the ontology children of an entity including the specified relationship type."
         },
         "getCompleteEntity": {
             "Parameters": [
@@ -75,11 +75,11 @@
                 "type": "suds.sudsobject.Entity",
                 "description": "A list (<class 'suds.sudsobject.Entity'>, treat it like a nested named tuple) containing fields like mass, names, and SMILES."
             },
-            "Docstring": "\"\"\"\nRetrieves the complete entity including synonyms, database links, and chemical structures, using the ChEBI identifier.\n\nParameters:\n-----------\nchebiId : str\n          A valid ChEBI identifier as a string.\n\nReturns:\n--------\nsuds.sudsobject.Entity\n    An object containing fields like mass, names, and SMILES.\n\nExamples:\n--------\n>>> from bioservices import *\n>>> ch = ChEBI()\n>>> res = ch.getCompleteEntity(\"CHEBI:27732\")\n>>> res.mass\n194.19076\n\"\"\"",
             "api_type": "method",
             "api_name": "bioservices.ChEBI.getCompleteEntity",
             "api_calling": "bioservices.ChEBI.getCompleteEntity(chebiId=$)",
-            "example": "bioservices.ChEBI.getCompleteEntity(chebiId=\"CHEBI:27732\")"
+            "example": "bioservices.ChEBI.getCompleteEntity(chebiId=\"CHEBI:27732\")",
+            "description": "\"\"\""
         },
         "getCompleteEntityByList": {
             "Parameters": [
@@ -95,11 +95,11 @@
                 "type": "list[suds.sudsobject.Entity]",
                 "description": "Result list of suds.sudsobject.Entity (<class 'suds.sudsobject.Entity'>, treat it like a nested named tuple) containing complete entity information corresponding to the provided ChEBI accession numbers."
             },
-            "Docstring": "Retrieve the complete entities for a list of ChEBI accession numbers.\n\nParameters:\n-----------\nchebiIdList : list\n             List of ChEBI accession numbers to retrieve, maximum size is 50.\n\nReturns:\n--------\nlist[suds.sudsobject.Entity]\n    Result object containing complete entity information corresponding to the provided ChEBI accession numbers.\n\nExamples:\n--------\n>>> from bioservices import *\n>>> ch = ChEBI()\n>>> res = ch.getCompleteEntityByList([\"CHEBI:27732\"])\n>>> res[0].mass\n194.19076",
             "api_type": "method",
             "api_name": "bioservices.ChEBI.getCompleteEntityByList",
             "api_calling": "bioservices.ChEBI.getCompleteEntityByList(chebiIdList=$)",
-            "example": "bioservices.ChEBI.getCompleteEntityByList(chebiIdList=[\"CHEBI:27732\"])"
+            "example": "bioservices.ChEBI.getCompleteEntityByList(chebiIdList=[\"CHEBI:27732\"])",
+            "description": "Retrieve the complete entities for a list of ChEBI accession numbers."
         },
         "getLiteEntity": {
             "Parameters": [
@@ -136,11 +136,11 @@
                 "type": "list[suds.sudsobject.LiteEntity]",
                 "description": "List of suds.sudsobject.LiteEntity (<class 'suds.sudsobject.LiteEntity'>, treat it like a nested named tuple) representing ChEBI entities matching the criteria."
             },
-            "Docstring": "Retrieves a list of entities containing the ChEBI ASCII name or identifier.\n\nParameters:\n-----------\nsearch : str\n    Search string or category.\nsearchCategory : str, optional\n    Filter with category such as ALL, SMILES, etc. Default is 'ALL'.\nmaximumResults : int, optional\n    Maximum number of results to retrieve. Default is 200.\nstars : str, optional\n    Filter by stars: TWO ONLY, ALL, THREE ONLY. Default is 'ALL'.\n\nReturns:\n--------\nlist\n    List of objects representing ChEBI entities matching the criteria.\n\nExamples:\n---------\n>>> ch.getLiteEntity(\"CHEBI:27732\")\n>>> ch.getLiteEntity(\"caffeine\")\n>>> ch.getLiteEntity(\"caffeine\", maximumResults=10)",
             "api_type": "method",
             "api_name": "bioservices.CheBI.getLiteEntity",
             "api_calling": "bioservices.CheBI.getLiteEntity(search=$, searchCategory=$, maximumResults=$, stars=$)",
-            "example": "bioservices.CheBI.getLiteEntity(search=\"CHEBI:27732\", searchCategory=\"ALL\", maximumResults=10, stars=\"ALL\")"
+            "example": "bioservices.CheBI.getLiteEntity(search=\"CHEBI:27732\", searchCategory=\"ALL\", maximumResults=10, stars=\"ALL\")",
+            "description": "Retrieves a list of entities containing the ChEBI ASCII name or identifier."
         },
         "getOntologyChildren": {
             "Parameters": [
@@ -156,11 +156,11 @@
                 "type": "suds.sudsobject.OntologyDataItemList",
                 "description": "suds.sudsobject.OntologyDataItemList (<class 'suds.sudsobject.OntologyDataItemList'>, treat it like a nested named tuples) representing the ontology children of the specified entity."
             },
-            "Docstring": "Retrieves the ontology children of an entity, including relationship type.\n\nParameters:\n-----------\nchebiId : str\n    A valid ChEBI identifier.\n\nReturns:\n--------\nsuds.sudsobject.OntologyDataItemList\n    An object representing the ontology children of the specified entity.\n\nExamples:\n--------\n>>> ch.getOntologyChildren(\"CHEBI:27732\")",
             "api_type": "method",
             "api_name": "bioservices.ChEBI.getOntologyChildren",
             "api_calling": "bioservices.ChEBI.getOntologyChildren(chebiId=$)",
-            "example": "bioservices.ChEBI.getOntologyChildren(chebiId=\"CHEBI:27732\")"
+            "example": "bioservices.ChEBI.getOntologyChildren(chebiId=\"CHEBI:27732\")",
+            "description": "Retrieves the ontology children of an entity, including relationship type."
         },
         "getOntologyParents": {
             "Parameters": [
@@ -176,11 +176,11 @@
                 "type": "suds.sudsobject.OntologyDataItemList",
                 "description": "suds.sudsobject.OntologyDataItemList (<class 'suds.sudsobject.OntologyDataItemList'>, treat it like a list of nested named tuples) representing the parent entities in the ontology."
             },
-            "Docstring": "Retrieves the ontology parents of an entity including the relationship type.\n\nParameters:\n-----------\nchebiId : str\n    A valid ChEBI identifier, e.g., 'CHEBI:27732'.\n\nReturns:\n--------\nsuds.sudsobject.OntologyDataItemList\n    An object representing the parent entities in the ontology.\n\nExamples:\n--------\n>>> ch.getOntologyParents(\"CHEBI:27732\")",
             "api_type": "method",
             "api_name": "bioservices.ChEBI.getOntologyParents",
             "api_calling": "bioservices.ChEBI.getOntologyParents(chebiId=$)",
-            "example": "bioservices.ChEBI.getOntologyParents(chebiId=\"CHEBI:27732\")"
+            "example": "bioservices.ChEBI.getOntologyParents(chebiId=\"CHEBI:27732\")",
+            "description": "Retrieves the ontology parents of an entity including the relationship type."
         },
         "getUpdatedPolymer": {
             "Parameters": [
@@ -196,11 +196,11 @@
                 "type": "suds.sudsobject.UpdatedPolymer",
                 "description": "suds.sudsobject.UpdatedPolymer (<class 'suds.sudsobject.UpdatedPolymer'>, treat it like a nested named tuple) containing updated polymer information, including 2D MolFile structure, formula, charge on repeating units, and a primary ID."
             },
-            "Docstring": "Returns the UpdatedPolymer object containing comprehensive information regarding a polymer in the ChEBI database.\n\nParameters:\n-----------\nchebiId : str\n           A valid ChEBI identifier representing the polymer.\n\nReturns:\n--------\nUpdatedPolymer\n    An object with details such as 2D structure, global formula, global charge, and associated identifiers.\n\nExamples:\n--------\n>>> ch = ChEBI()\n>>> polymer_info = ch.getUpdatedPolymer(\"CHEBI:12345\")",
             "api_type": "method",
             "api_name": "bioservices.chebi.getUpdatedPolymer",
             "api_calling": "bioservices.chebi.getUpdatedPolymer(chebiId=$)",
-            "example": "bioservices.chebi.getUpdatedPolymer(chebiId=\"CHEBI:27732\")"
+            "example": "bioservices.chebi.getUpdatedPolymer(chebiId=\"CHEBI:27732\")",
+            "description": "Returns the UpdatedPolymer object containing comprehensive information regarding a polymer in the ChEBI database."
         }
     }
 }

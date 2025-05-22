@@ -28,11 +28,11 @@
                 "type": "dict",
                 "description": "A JSON object with fields defined by the service’s storedFields (as returned by get_info())."
             },
-            "Docstring": "Retrieve particular records from a searchable field.\n\nReturned object is a JSON object with fields as in storedFields returned by get_info(). Only one query term at a time and no wildcards are accepted.\n\nParameters:\n    database : str\n        The top-level field to search within.\n    query : str\n        The search term; only one query term allowed and no wildcards are accepted.\n    frmt : str, optional\n        Format of the returned data. Defaults to 'json'.\n\nReturns:\n    dict\n        A JSON object with fields defined by the service’s storedFields (as returned by get_info()).\n\nExamples:\n    >>> h = HGNC()\n    >>> h.fetch('symbol', 'ZNF3')\n    >>> h.fetch('alias_name', 'A-kinase anchor protein, 350kDa')",
             "api_type": "method",
             "api_name": "bioservices.HGNC.fetch",
             "api_calling": "bioservices.HGNC.fetch(database=$, query=$, frmt=$)",
-            "example": "bioservices.HGNC.fetch('symbol', 'ZNF3')"
+            "example": "bioservices.HGNC.fetch('symbol', 'ZNF3')",
+            "description": "Retrieve particular records from a searchable field."
         },
         "get_info": {
             "Parameters": [
@@ -48,11 +48,11 @@
                 "type": "dict",
                 "description": "A JSON object containing service metadata, including 'lastModified', 'numDoc', 'searchableFields', and 'storedFields'."
             },
-            "Docstring": "Request information about the HGNC service.\n\nParameters:\n    frmt : str, optional\n        Format of the returned data. Defaults to 'json'.\n\nReturns:\n    dict\n        A JSON object containing service metadata: 'lastModified', 'numDoc', 'searchableFields', and 'storedFields'.\n\nExamples:\n    >>> hgnc = HGNC()\n    >>> info = hgnc.get_info()\n    >>> print(info)",
             "api_type": "method",
             "api_name": "bioservices.HGNC.get_info",
             "api_calling": "bioservices.HGNC.get_info(frmt=$)",
-            "example": "bioservices.HGNC.get_info()"
+            "example": "bioservices.HGNC.get_info()",
+            "description": "Request information about the HGNC service."
         },
         "search": {
             "Parameters": [
@@ -82,11 +82,11 @@
                 "type": "dict",
                 "description": "A JSON object containing search results with fields: 'hgnc_id', 'symbol', and 'score'."
             },
-            "Docstring": "Search a searchable field for a pattern.\n\nThe search request is more powerful than fetch for querying the database, but returns only 'hgnc_id', 'symbol', and 'score' fields.\n\nParameters:\n    database_or_query : str, optional\n        The database (field) to search in or the primary query string if only one argument is provided; if omitted, all searchable fields are searched.\n    query : str, optional\n        The query string to refine the search when specifying a database; optional if a primary query is provided as the first argument.\n    frmt : str, optional\n        Format of the returned data. Defaults to 'json'.\n\nReturns:\n    dict\n        A JSON object containing search results with fields: 'hgnc_id', 'symbol', and 'score'.\n\nExamples:\n    >>> h = HGNC()\n    >>> h.search('BRAF')\n    >>> h.search('symbol', 'ZNF*')\n    >>> h.search('symbol', 'ZNF*+AND+status:Approved')",
             "api_type": "method",
             "api_name": "bioservices.HGNC.search",
             "api_calling": "bioservices.HGNC.search(database_or_query=$, query=$, frmt=$)",
-            "example": "bioservices.HGNC.search('BRAF')\nbioservices.HGNC.search('symbol', 'ZNF*')\nbioservices.HGNC.search('symbol', 'ZNF*+AND+status:Approved')"
+            "example": "bioservices.HGNC.search('BRAF')\nbioservices.HGNC.search('symbol', 'ZNF*')\nbioservices.HGNC.search('symbol', 'ZNF*+AND+status:Approved')",
+            "description": "Search a searchable field for a pattern."
         }
     }
 }

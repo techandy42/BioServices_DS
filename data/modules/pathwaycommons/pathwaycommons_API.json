@@ -6,11 +6,11 @@
                 "type": "str",
                 "description": "The current default extension for data requests."
             },
-            "Docstring": "Returns the current default extension for data requests. Set the default extension using the '_set_default_ext' method.",
             "api_type": "property",
             "api_name": "bioservices.PathwayCommons.default_extension",
             "api_calling": "bioservices.PathwayCommons.default_extension",
-            "example": "bioservices.PathwayCommons.default_extension"
+            "example": "bioservices.PathwayCommons.default_extension",
+            "description": "Returns the current default extension for data requests. Set the default extension using the '_set_default_ext' method."
         },
         "_set_default_ext": {
             "Parameters": [
@@ -26,11 +26,11 @@
                 "type": "None",
                 "description": "Doesn't return anything. It's a setter method."
             },
-            "Docstring": "Sets the default extension for data requests. This method doesn't return anything.",
             "api_type": "method",
             "api_name": "bioservices.PathwayCommons._set_default_ext",
             "api_calling": "bioservices.PathwayCommons._set_default_ext(ext=$)",
-            "example": "bioservices.PathwayCommons._set_default_ext('xml')"
+            "example": "bioservices.PathwayCommons._set_default_ext('xml')",
+            "description": "Sets the default extension for data requests. This method doesn't return anything."
         },
         "get": {
             "Parameters": [
@@ -53,11 +53,11 @@
                 "type": "str",
                 "description": "A representation of the pathway information in the requested format."
             },
-            "Docstring": "Retrieves pathway information for given BioPAX element URIs.\n\nParameters:\n-----------\nuri : str or list[str]\n    A valid RDF ID URI or list of URIs for BioPAX elements.\nfrmt : str, optional\n    The desired output format (e.g., 'BIOPAX'). Defaults to 'BIOPAX'. Some formats may not be applicable and result in errors.\n\nReturns:\n--------\nstr\n    Pathway information in the requested format.\n\nExamples:\n---------\n>>> pc.get(uri='http://identifiers.org/uniprot/Q06609')\n>>> pc.get(uri=['http://identifiers.org/uniprot/Q06609', 'http://identifiers.org/uniprot/Q549Z0'], frmt='SIF')",
             "api_type": "method",
             "api_name": "bioservices.PathwayCommons.get",
             "api_calling": "bioservices.PathwayCommons.get(uri=$, frmt=$)",
-            "example": "bioservices.PathwayCommons.get(uri=\"http://identifiers.org/uniprot/Q06609\", frmt=\"BIOPAX\")"
+            "example": "bioservices.PathwayCommons.get(uri=\"http://identifiers.org/uniprot/Q06609\", frmt=\"BIOPAX\")",
+            "description": "Retrieves pathway information for given BioPAX element URIs."
         },
         "get_sifgraph_common_stream": {
             "Parameters": [
@@ -94,11 +94,11 @@
                 "type": "str",
                 "description": "The graph in SIF format: lines of relations separated by tabs, ready for visualization tools like Cytoscape."
             },
-            "Docstring": "Identifies the common stream within a sub-network extracted from the Pathway Commons SIF model.\n\nParameters:\n-----------\nsource : str or list[str]\n    Set of gene identifiers (HGNC symbols). Can be a list or a single string.\nlimit : int, optional\n    Graph traversal depth. Values > 1 may yield extensive data or errors. Default is 1.\ndirection : str, optional\n    Direction for traversal: 'DOWNSTREAM', 'UPSTREAM', 'BOTHSTREAM', or 'UNDIRECTED'. Default is 'DOWNSTREAM'.\npattern : str, optional\n    Filter by specific SIF edge types.\n\nReturns:\n--------\nstr\n    SIF-format graph where each line is a relation and items are tab-separated, suitable for Cytoscape.\n\nExamples:\n---------\n>>> pc.get_sifgraph_common_stream(source=['BRD4', 'MYC'], limit=1, direction='DOWNSTREAM')",
             "api_type": "method",
             "api_name": "bioservices.PathwayCommons.get_sifgraph_common_stream",
             "api_calling": "bioservices.PathwayCommons.get_sifgraph_common_stream(source=$, limit=$, direction=$, pattern=$)",
-            "example": "bioservices.PathwayCommons.get_sifgraph_common_stream(source=['BRD4', 'MYC'], limit=1, direction='DOWNSTREAM')"
+            "example": "bioservices.PathwayCommons.get_sifgraph_common_stream(source=['BRD4', 'MYC'], limit=1, direction='DOWNSTREAM')",
+            "description": "Identifies the common stream within a sub-network extracted from the Pathway Commons SIF model."
         },
         "get_sifgraph_neighborhood": {
             "Parameters": [
@@ -135,11 +135,11 @@
                 "type": "str",
                 "description": "The graph in SIF format: lines of relations separated by tabs, suitable for Cytoscape."
             },
-            "Docstring": "Retrieves the neighborhood sub-network from the Pathway Commons SIF graph.\n\nParameters:\n-----------\nsource : str or list[str]\n    Set of gene identifiers (HGNC symbols). Can be a list or a single string.\nlimit : int, optional\n    Graph traversal depth. Values > 1 may yield large data or errors. Default is 1.\ndirection : str, optional\n    Direction for traversal: 'BOTHSTREAM', 'UPSTREAM', 'DOWNSTREAM', or 'UNDIRECTED'. Default is 'BOTHSTREAM'.\npattern : str, optional\n    Filter by specific SIF edge types.\n\nReturns:\n--------\nstr\n    SIF-format graph where each line is a relation and items are tab-separated, suitable for Cytoscape.\n\nExamples:\n---------\n>>> pc.get_sifgraph_neighborhood(source='BRD4', limit=1)",
             "api_type": "method",
             "api_name": "bioservices.PathwayCommons.get_sifgraph_neighborhood",
             "api_calling": "bioservices.PathwayCommons.get_sifgraph_neighborhood(source=$, limit=$, direction=$, pattern=$)",
-            "example": "bioservices.PathwayCommons.get_sifgraph_neighborhood(source='BRD4', limit=1)"
+            "example": "bioservices.PathwayCommons.get_sifgraph_neighborhood(source='BRD4', limit=1)",
+            "description": "Retrieves the neighborhood sub-network from the Pathway Commons SIF graph."
         },
         "get_sifgraph_pathsbetween": {
             "Parameters": [
@@ -176,11 +176,11 @@
                 "type": "str",
                 "description": "The graph in SIF format: lines of relations separated by tabs, suitable for Cytoscape."
             },
-            "Docstring": "Identifies paths between gene identifiers within the Pathway Commons SIF graph.\n\nParameters:\n-----------\nsource : str or list[str]\n    Set of gene identifiers (HGNC symbols). Can be a list or a single string.\nlimit : int, optional\n    Graph traversal depth. Values > 1 may yield extensive data or errors. Default is 1.\ndirected : bool, optional\n    Consider directionality: True for directed, False for undirected. Default is False.\npattern : str, optional\n    Filter by specific SIF edge types.\n\nReturns:\n--------\nstr\n    SIF-format graph where each line is a relation and items are tab-separated, suitable for Cytoscape.\n\nExamples:\n---------\n>>> pc.get_sifgraph_pathsbetween(source=['BRD4', 'MYC'], limit=2, directed=True)",
             "api_type": "method",
             "api_name": "bioservices.PathwayCommons.get_sifgraph_pathsbetween",
             "api_calling": "bioservices.PathwayCommons.get_sifgraph_pathsbetween(source=$, limit=$, directed=$, pattern=$)",
-            "example": "bioservices.PathwayCommons.get_sifgraph_pathsbetween(source=['BRD4', 'MYC'], limit=2, directed=True)"
+            "example": "bioservices.PathwayCommons.get_sifgraph_pathsbetween(source=['BRD4', 'MYC'], limit=2, directed=True)",
+            "description": "Identifies paths between gene identifiers within the Pathway Commons SIF graph."
         },
         "get_sifgraph_pathsfromto": {
             "Parameters": [
@@ -217,11 +217,11 @@
                 "type": "str",
                 "description": "The graph in SIF format: lines of relations separated by tabs, suitable for Cytoscape."
             },
-            "Docstring": "Finds paths from source to target gene identifiers, extracting a sub-network in SIF format.\n\nParameters:\n-----------\nsource : str or list[str]\n    Set of starting gene identifiers (HGNC symbols). Can be a list or a single string.\ntarget : str or list[str]\n    Target gene identifiers. Can be a list or a single string.\nlimit : int, optional\n    Graph traversal depth. Values > 1 may yield extensive data or errors. Default is 1.\npattern : str, optional\n    Filter by specific SIF edge types.\n\nReturns:\n--------\nstr\n    SIF-format graph where each line is a relation and items are tab-separated, suitable for Cytoscape.\n\nExamples:\n---------\n>>> pc.get_sifgraph_pathsfromto(source=['BRD4'], target=['MYC'], limit=2, pattern='DOWNSTREAM')",
             "api_type": "method",
             "api_name": "bioservices.PathwayCommons.get_sifgraph_pathsfromto",
             "api_calling": "bioservices.PathwayCommons.get_sifgraph_pathsfromto(source=$, target=$, limit=$, pattern=$)",
-            "example": "bioservices.PathwayCommons.get_sifgraph_pathsfromto(source=['BRD4'], target=['MYC'], limit=2, pattern='INTERACTS_WITH')"
+            "example": "bioservices.PathwayCommons.get_sifgraph_pathsfromto(source=['BRD4'], target=['MYC'], limit=2, pattern='INTERACTS_WITH')",
+            "description": "Finds paths from source to target gene identifiers, extracting a sub-network in SIF format."
         }
     }
 }

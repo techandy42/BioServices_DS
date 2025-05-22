@@ -14,11 +14,11 @@
                 "type": "dict",
                 "description": "A dictionary representing metabolites and their stoichiometry in the reaction."
             },
-            "Docstring": "Retrieve participant metabolites from a Rhea reaction ID.\n\nParameters:\n-----------\nrxn_id : str\n    Rhea reaction identifier.\n\nReturns:\n--------\ndict\n    A dictionary with metabolites as keys and their stoichiometry as values.\n\nExample:\n--------\n>>> r = Rhea()\n>>> r.get_metabolites('RHEA:12345')",
             "api_type": "method",
             "api_name": "bioservices.Rhea.get_metabolites",
             "api_calling": "bioservices.Rhea.get_metabolites(rxn_id=$)",
-            "example": "r.get_metabolites('RHEA:12345')"
+            "example": "r.get_metabolites('RHEA:12345')",
+            "description": "Retrieve participant metabolites from a Rhea reaction ID."
         },
         "query": {
             "Parameters": [
@@ -55,11 +55,11 @@
                 "type": "pandas.DataFrame",
                 "description": "A DataFrame containing the query result."
             },
-            "Docstring": "Retrieve a reaction for the given query in a specified format.\n\nParameters:\n-----------\nquery : str\n    The entry to retrieve in the database.\ncolumns : str, optional\n    Comma-separated list of valid columns to include in the output (e.g., 'rhea-id,equation').\nfrmt : str, optional\n    The format of the returned results; only 'tsv' is currently supported.\nlimit : int, optional\n    Maximum number of records to retrieve.\n\nReturns:\n--------\npandas.DataFrame\n    A DataFrame containing the query result.\n\nExample:\n--------\n>>> r = Rhea()\n>>> r.query(\"\", columns=\"rhea-id,equation\", limit=10)",
             "api_type": "method",
             "api_name": "bioservices.Rhea.query",
             "api_calling": "bioservices.Rhea.query(query=$, columns=$, frmt=$, limit=$)",
-            "example": "r.query(\"\", columns=\"rhea-id,equation\", limit=10)"
+            "example": "r.query(\"\", columns=\"rhea-id,equation\", limit=10)",
+            "description": "Retrieve a reaction for the given query in a specified format."
         },
         "search": {
             "Parameters": [
@@ -96,11 +96,11 @@
                 "type": "pandas.DataFrame",
                 "description": "A pandas DataFrame containing the search results."
             },
-            "Docstring": "Search for reactions in the Rhea database.\n\nParameters:\n-----------\nquery : str\n    The search term used to query the Rhea database.\ncolumns : str, optional\n    Comma-separated list of valid columns to include in the output (e.g., 'rhea-id,equation').\nlimit : int, optional\n    Maximum number of search results to retrieve.\nfrmt : str, optional\n    The format of the search results; options include 'tsv' (default), 'biopax2', and 'cmlreact'.\n\nReturns:\n--------\npandas.DataFrame\n    A DataFrame containing the search results.\n\nExample:\n--------\n>>> r = Rhea()\n>>> df = r.search(\"caffeine\", columns=\"rhea-id,equation\")",
             "api_type": "method",
             "api_name": "bioservices.Rhea.search",
             "api_calling": "bioservices.Rhea.search(query=$, columns=$, limit=$, frmt=$)",
-            "example": "r.search(\"caffeine\", columns=\"rhea-id,equation\")"
+            "example": "r.search(\"caffeine\", columns=\"rhea-id,equation\")",
+            "description": "Search for reactions in the Rhea database."
         }
     }
 }

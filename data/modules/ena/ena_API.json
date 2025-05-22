@@ -49,11 +49,11 @@
                 "type": "str",
                 "description": "The retrieved data in the requested format (e.g., XML, text)."
             },
-            "Docstring": "Retrieve data from the ENA database in the desired format and configuration.\n\nParameters:\n-----------\nidentifier : str\n    The identifier of the data to retrieve, e.g., sequence ID.\nfrmt : str\n    The format of the retrieved data, e.g., xml, text, fasta etc.\nfasta_range : Optional[list], optional\n    Subsequence ranges for fasta data, e.g., bases [3, 63].\nexpanded : Optional[bool], optional\n    Whether to retrieve expanded CON records.\nheader : Optional[bool], optional\n    If set, retrieves the sequence header.\ndownload : Optional[bool], optional\n    Determines if the data should be downloaded directly.\n\nReturns:\n--------\nstr\n    The retrieved data in the requested format (e.g., XML, text).\n\nExamples:\n--------\n>>> from bioservices import ENA\n>>> e = ENA()\n>>> e.get_data('ERA000092', 'xml')",
             "api_type": "method",
             "api_name": "bioservices.ENA.get_data",
             "api_calling": "bioservices.ENA.get_data(identifier=$, frmt=$, fasta_range=$, expanded=$, header=$, download=$)",
-            "example": "bioservices.ENA.get_data(identifier='ERA000092', frmt='xml', fasta_range=None, expanded=None, header=None, download=None)"
+            "example": "bioservices.ENA.get_data(identifier='ERA000092', frmt='xml', fasta_range=None, expanded=None, header=None, download=None)",
+            "description": "Retrieve data from the ENA database in the desired format and configuration."
         }
     }
 }

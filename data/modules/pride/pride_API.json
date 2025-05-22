@@ -14,11 +14,11 @@
                 "type": "dict",
                 "description": "A dictionary containing project information, or an empty dictionary if the identifier is invalid."
             },
-            "Docstring": "Retrieve project information based on a given accession identifier.\n\nParameters:\n-----------\nidentifier : str\n              A valid PRIDE identifier (e.g., PRD000001).\n\nReturns:\n--------\ndict\n    Dictionary with project information. Returns an empty dictionary for invalid identifiers.\n\nExamples:\n--------\n>>> from bioservices import PRIDE\n>>> p = PRIDE()\n>>> res = p.get_project(\"PRD000001\")\n>>> res['title']\n'COFRADIC proteome of unstimulated human blood platelets'",
             "api_type": "method",
             "api_name": "bioservices.PRIDE.get_project",
             "api_calling": "bioservices.PRIDE.get_project(identifier=$)",
-            "example": "bioservices.PRIDE.get_project(identifier=\"PRD000001\")"
+            "example": "bioservices.PRIDE.get_project(identifier=\"PRD000001\")",
+            "description": "Retrieve project information based on a given accession identifier."
         },
         "get_project_files": {
             "Parameters": [
@@ -69,11 +69,11 @@
                 "type": "list",
                 "description": "A list containing project files meeting the specified criteria."
             },
-            "Docstring": "Retrieve files associated with a specific project.\n\nParameters:\n-----------\naccession : str\n           The accession number to look for.\npageSize : int\n           How many results to return per page.\npage : int\n           Which page (starting from 0) of the result to return.\nsortConditions : str\n           Fields for sorting, separated by commas (e.g., submission_date,project_title).\nsortDirection : str\n           The sorting order, either ASC or DESC.\nfilters : str\n           Criteria to filter the search results in the format field1==value1,field2==value2 (e.g., accession==PRD000001).\n\nReturns:\n--------\nlist\n    A list containing project files meeting the specified criteria.\n\nExamples:\n--------\n>>> p = PRIDE()\n>>> results = p.get_project_files(accession=\"PRD000001\", pageSize=10, page=1)\n>>> len(results)",
             "api_type": "method",
             "api_name": "bioservices.PRIDE.get_project_files",
             "api_calling": "bioservices.PRIDE.get_project_files(accession=$, pageSize=$, page=$, sortConditions=$, sortDirection=$, filters=$)",
-            "example": "bioservices.PRIDE.get_project_files(accession=\"PRD000001\", pageSize=10, page=1, sortConditions=None, sortDirection='DESC', filters='accession==PRD000001')"
+            "example": "bioservices.PRIDE.get_project_files(accession=\"PRD000001\", pageSize=10, page=1, sortConditions=None, sortDirection='DESC', filters='accession==PRD000001')",
+            "description": "Retrieve files associated with a specific project."
         },
         "get_stats": {
             "Parameters": [
@@ -89,11 +89,11 @@
                 "type": "list",
                 "description": "A dictionary containing the retrieved statistics information."
             },
-            "Docstring": "Retrieve statistics related to PRIDE.\n\nParameters:\n-----------\nname : str\n       Name of the statistics to retrieve; leave None to fetch all statistics.\n\nReturns:\n--------\ndict\n    A dictionary containing the requested statistics information or all available statistics if name is None.\n\nExamples:\n--------\n>>> p.get_stats()\n>>> p.get_stats(\"SUBMISSIONS_PER_YEAR\")",
             "api_type": "method",
             "api_name": "bioservices.PRIDE.get_stats",
             "api_calling": "bioservices.PRIDE.get_stats(name=$)",
-            "example": "p.get_stats(name=\"SUBMISSIONS_PER_YEAR\")"
+            "example": "p.get_stats(name=\"SUBMISSIONS_PER_YEAR\")",
+            "description": "Retrieve statistics related to PRIDE."
         }
     }
 }
