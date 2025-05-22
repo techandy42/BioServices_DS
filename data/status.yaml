@@ -1,0 +1,47 @@
+modules:
+  - bigg:
+    status:
+  - biodbnet:
+    status:
+  - biogrid:
+    status:
+  - chebl:
+    status:
+  - chembl:
+    status:
+  - cog:
+    status:
+  - ena:
+    status:
+  - eutils:
+    status:
+  - quickgo:
+    status:
+  - kegg:
+    status:
+  - hgnc:
+    status:
+  - intact_complex:
+    status:
+  - omnipath:
+    status:
+  - pathwaycommons:
+    status:
+  - pdbe:
+    status:
+  - pride:
+    status:
+  - psicquic:
+    status:
+  - rhea:
+    status:
+  - reactome:
+    status:
+  - unichem:
+    status:
+  - uniprot:
+    status:
+  - dbfetch:
+    status:
+  - wikipathways:
+    status:
