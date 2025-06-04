@@ -1,2 +1,9 @@
+# Environment variables
+.env
+
 # Data processing scripts
 scripts/
+
+# Installed external packages
+external_packages/
+bioservices

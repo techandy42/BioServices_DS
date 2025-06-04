@@ -1,47 +1,47 @@
 modules:
   - bigg:
-    status:
+    status: Finished, no issues
   - biodbnet:
-    status:
+    status: Finished, no issues
   - biogrid:
-    status:
-  - chebl:
-    status:
+    status: Server issue while initializing the class
+  - chebi:
+    status: Finished, issues with - "getStructureSearch"
   - chembl:
-    status:
+    status: Finished, issues with - "get_document_term" (no valid queries), "get_image", "get_target_prediction" (no valid queries)
   - cog:
-    status:
+    status: Finished, issues with - "get_cog_definition_by_name" (no valid queries), "get_cogs_by_assembly_id" (no valid queries), "get_cogs_by_category" (no valid queries), "get_cogs_by_gene" (no valid queries), "get_cogs_by_id_and_category" (no valid queries), "get_cogs_by_protein_name" (no valid queries)
   - ena:
-    status:
+    status: Finished, issues with - "get_taxon" (deprecated)
   - eutils:
-    status:
+    status: Finished, issues with - "ECitMatch" (no valid queries), "EGQuery" (timeout issue), "help"
   - quickgo:
-    status:
+    status: Server issues
   - kegg:
-    status:
+    status: No extracted value
   - hgnc:
-    status:
+    status: Finished, no issues
   - intact_complex:
-    status:
+    status: Finished, no issues
   - omnipath:
-    status:
+    status: Finished, issues with - "get_info" (cannot fetch HTML page)
   - pathwaycommons:
-    status:
+    status: Finished, issues with - "graph" (error), "search" (error), "top_searchways" (error), "traverse" (error)
   - pdbe:
-    status:
+    status: Finished, issues with - "get_functional_annotation" (error), "get_nmr_resources" (error)
   - pride:
-    status:
+    status: Finished, issues with - "get_projects_count" (error), "get_protein_evidences" (error)
   - psicquic:
-    status:
+    status: Finished, further refinement on inputs for API is recommended
   - rhea:
-    status:
+    status: Finished, further refinement on inputs for API is recommended
   - reactome:
-    status:
+    status: Finished, further refinement on inputs for API is recommended
   - unichem:
-    status:
+    status: Finished, further refinement on inputs for API is recommended
   - uniprot:
-    status:
+    status: Finished, further refinement on inputs for API is recommended
   - dbfetch:
-    status:
+    status: Finished, further refinement on inputs for API is recommended
   - wikipathways:
-    status:
+    status: Finished, further refinement on inputs for API is recommended
